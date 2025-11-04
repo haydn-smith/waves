@@ -5,7 +5,7 @@ import { Player } from 'common/objects/player';
 import { Tilemap as TilemapObject } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
 import { logEvent } from 'common/utils/log';
-import { Depth, Scene, Sprite, Tilemap } from 'constants';
+import { Depth, Scene, Shader, Sprite, Tilemap } from 'constants';
 import { Audio, SpatialAudio } from 'systems/audio';
 import { camera, Camera } from 'systems/camera';
 import { collision } from 'systems/collision';
@@ -43,10 +43,18 @@ export class SpringJetty extends Phaser.Scene {
 
     const map = new TilemapObject(this, Tilemap.SpringJetty);
 
-    map.forPoints('Snow 1', (v) => this.ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow1)));
-    map.forPoints('Snow 2', (v) => this.ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow2)));
-    map.forPoints('Snow 3', (v) => this.ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow3)));
-    map.forPoints('Snow 4', (v) => this.ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow4)));
+    map.forPoints('Snow 1', (v) =>
+      this.ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow1).setPipeline(Shader.Outline))
+    );
+    map.forPoints('Snow 2', (v) =>
+      this.ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow2).setPipeline(Shader.Outline))
+    );
+    map.forPoints('Snow 3', (v) =>
+      this.ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow3).setPipeline(Shader.Outline))
+    );
+    map.forPoints('Snow 4', (v) =>
+      this.ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow4).setPipeline(Shader.Outline))
+    );
 
     map.forPoints('Jetty', (v) => this.add.sprite(v.x, v.y, Sprite.Jetty).setDepth(Depth.Main - 1));
 
@@ -90,8 +98,8 @@ export class SpringJetty extends Phaser.Scene {
         runCallback(() => this.player.runnningAround()),
         runCallback(() => this.player.enableUserInput()),
       ])
-      .destroyWhenComplete()
-      .start();
+      .destroyWhenComplete();
+    // .start();
   }
 
   update() {}

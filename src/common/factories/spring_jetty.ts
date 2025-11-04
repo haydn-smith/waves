@@ -5,7 +5,7 @@ import { Tilemap } from 'common/objects/tilemap';
 import { MoveToTarget } from 'common/sequenceables/move_to_target';
 import { PlayDialog } from 'common/sequenceables/play_dialog';
 import { scaled } from 'common/utils/scaled';
-import { Action, Animation, Depth, Scene, Sprite } from 'constants';
+import { Action, Animation, Depth, Scene, Shader, Sprite } from 'constants';
 import { DialogBox } from 'scenes/dialog_box';
 import { Camera } from 'systems/camera';
 import { Collision, collision } from 'systems/collision';
@@ -29,7 +29,8 @@ export const createOtherPenguinCutscene = (
   const downArrow = scene.add
     .sprite(penguin.x, penguin.y - scaled(24), Sprite.DownArrow)
     .play(Animation.DownArrow)
-    .setDepth(Depth.Main + 1);
+    .setDepth(Depth.Main + 1)
+    .setPipeline(Shader.Outline);
 
   const cutscene = sequence(scene)
     .of([

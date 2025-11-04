@@ -1,6 +1,7 @@
 import { Antialias } from 'common/objects/shaders/anti_alias';
 import { Glow } from 'common/objects/shaders/glow';
 import { Noise } from 'common/objects/shaders/noise';
+import { Outline } from 'common/objects/shaders/outline';
 import { SoftLight } from 'common/objects/shaders/soft_light';
 import { Vignette } from 'common/objects/shaders/vignette';
 import { logEvent } from 'common/utils/log';
@@ -119,6 +120,7 @@ export class Preloader extends Phaser.Scene {
 
     // Register global shaders.
     if (this.sys.renderer instanceof Phaser.Renderer.WebGL.WebGLRenderer) {
+      this.sys.renderer.pipelines.add(Shader.Outline, new Outline(this.game));
       this.sys.renderer.pipelines.addPostPipeline(Shader.Glow, Glow);
       this.sys.renderer.pipelines.addPostPipeline(Shader.Vignette, Vignette);
       this.sys.renderer.pipelines.addPostPipeline(Shader.Noise, Noise);
@@ -163,6 +165,6 @@ export class Preloader extends Phaser.Scene {
 
     // Start game.
     this.scene.run(Scene.DialogBox);
-    this.scene.start(Scene.MainMenu);
+    this.scene.start(Scene.SpringJetty);
   }
 }

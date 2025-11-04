@@ -36,6 +36,7 @@ export const Shader = {
   Noise: 'Noise',
   SoftLight: 'Soft Light',
   AntiAlias: 'Anti-alias',
+  Outline: 'Outline',
 } as const;
 export type KeyOfShader = keyof typeof Shader;
 export type TypeOfShader = (typeof Shader)[KeyOfShader];

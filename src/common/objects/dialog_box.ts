@@ -1,6 +1,6 @@
 import { actionInput } from 'common/factories/input';
 import { scaled } from 'common/utils/scaled';
-import { Action, Animation, Sprite, TypeOfSprite } from 'constants';
+import { Action, Animation, Shader, Sprite, TypeOfSprite } from 'constants';
 import { Input } from 'systems/input';
 import { states, States } from 'systems/states';
 import { Typewriter } from './typewriter';
@@ -42,7 +42,6 @@ export class DialogBox extends Phaser.GameObjects.Container {
     this.inputs = actionInput(scene);
 
     this.sprite = this.scene.add.sprite(this.scene.renderer.width / -2 + scaled(32), 0, Sprite.PlayerIdle).setAlpha(0);
-
     this.add(this.sprite);
 
     this.typewriter = this.scene.add
@@ -59,7 +58,8 @@ export class DialogBox extends Phaser.GameObjects.Container {
     const downArrow = scene.add
       .sprite(this.scene.renderer.width / 2 - scaled(32), scaled(16), Sprite.DownArrow)
       .play(Animation.DownArrow)
-      .setDepth(1);
+      .setDepth(1)
+      .setPipeline(Shader.Outline);
 
     this.add(downArrow);
 

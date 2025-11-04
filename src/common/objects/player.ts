@@ -1,7 +1,7 @@
 import { directionalInputs } from 'common/factories/input';
 import { rect } from 'common/factories/phaser';
 import { scaled } from 'common/utils/scaled';
-import { Action, CollisionTag, Sprite } from 'constants';
+import { Action, CollisionTag, Shader, Sprite } from 'constants';
 import { collision, Collision } from 'systems/collision';
 import { Input } from 'systems/input';
 import { movement, Movement } from 'systems/movement';
@@ -32,8 +32,7 @@ export class Player extends Phaser.GameObjects.Container {
 
     this.add(this.collision.toGameObject());
 
-    this.sprite = this.scene.add.sprite(0, scaled(-8), Sprite.PlayerIdle);
-
+    this.sprite = this.scene.add.sprite(0, scaled(-8), Sprite.PlayerIdle).setPipeline(Shader.Outline);
     this.add(this.sprite);
   }
 

@@ -72,6 +72,7 @@ export const Sprite = {
   DeadPlant3: 'sprites/plants/dead_plant_3.png',
   SpringIcon: 'sprites/spring_icon.png',
   Jetty: 'sprites/jetty.png',
+  DialogBox: 'sprites/dialog_box.png',
 } as const;
 export type KeyOfSprite = keyof typeof Sprite;
 export type TypeOfSprite = (typeof Sprite)[KeyOfSprite];
@@ -88,6 +89,7 @@ export const Animation = {
   DebugPlayer: 'Debug Player',
   ZButton: 'Z Button',
   DownArrow: 'Down Arrow',
+  DialogBox: 'Dialog Box',
 } as const;
 export type KeyOfAnimation = keyof typeof Animation;
 export type TypeOfAnimation = (typeof Animation)[KeyOfAnimation];

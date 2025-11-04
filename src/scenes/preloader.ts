@@ -95,6 +95,10 @@ export class Preloader extends Phaser.Scene {
     this.load.image(Sprite.DeadPlant2, Sprite.DeadPlant2);
     this.load.image(Sprite.DeadPlant3, Sprite.DeadPlant3);
     this.load.image(Sprite.SpringIcon, Sprite.SpringIcon);
+    this.load.spritesheet(Sprite.DialogBox, Sprite.DialogBox, {
+      frameWidth: 160,
+      frameHeight: 32,
+    });
     this.load.spritesheet(Sprite.DebugPlayer, Sprite.DebugPlayer, {
       frameWidth: 16,
     });
@@ -141,6 +145,12 @@ export class Preloader extends Phaser.Scene {
       frameRate: 6,
       repeat: -1,
     });
+    this.anims.create({
+      key: Animation.DialogBox,
+      frames: Sprite.DialogBox,
+      frameRate: 3,
+      repeat: -1,
+    });
 
     // Start management scenes.
     startUI(this, {
@@ -152,6 +162,6 @@ export class Preloader extends Phaser.Scene {
     this.sound.unlock();
 
     // Start game.
-    this.scene.start(Scene.SpringTitle);
+    this.scene.start(Scene.SpringJetty);
   }
 }

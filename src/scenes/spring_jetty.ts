@@ -1,5 +1,6 @@
 import { actionInput } from 'common/factories/input';
 import { createOtherPenguinCutscene } from 'common/factories/spring_jetty';
+import { DialogBox } from 'common/objects/dialog_box';
 import { OtherPenguin } from 'common/objects/other_penguin';
 import { Player } from 'common/objects/player';
 import { Tilemap as TilemapObject } from 'common/objects/tilemap';
@@ -69,6 +70,23 @@ export class SpringJetty extends Phaser.Scene {
 
     this.camera = camera(this).follow(this.player).zoom(1);
 
+    const dialogBox = this.add.existing(new DialogBox(this)).setDepth(Depth.UI + 1);
+
+    dialogBox
+      .setDialog([
+        {
+          image: Sprite.PlayerSleep,
+          line1: ['Hello... ', '...this... '],
+          line2: ['...is cool!'],
+        },
+        {
+          image: Sprite.MainPlant,
+          line1: ['...', '...hell... '],
+          line2: ['...yea it is!'],
+        },
+      ])
+      .play();
+
     createOtherPenguinCutscene(this, this.player, this.otherPenguin, this.camera, map);
 
     sequence(this)
@@ -88,8 +106,8 @@ export class SpringJetty extends Phaser.Scene {
         runCallback(() => this.player.runnningAround()),
         runCallback(() => this.player.enableUserInput()),
       ])
-      .destroyWhenComplete()
-      .start();
+      .destroyWhenComplete();
+    // .start();
   }
 
   update() {}

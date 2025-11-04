@@ -1,10 +1,14 @@
+import { otherPenguinGoodbye, otherPenguinHello } from 'common/conversations/spring';
 import { OtherPenguin } from 'common/objects/other_penguin';
 import { Player } from 'common/objects/player';
 import { Tilemap } from 'common/objects/tilemap';
+import { MoveToTarget } from 'common/sequenceables/move_to_target';
+import { PlayDialog } from 'common/sequenceables/play_dialog';
 import { scaled } from 'common/utils/scaled';
-import { Action, Animation, Depth, Sprite } from 'constants';
+import { Action, Animation, Depth, Scene, Sprite } from 'constants';
+import { DialogBox } from 'scenes/dialog_box';
 import { Camera } from 'systems/camera';
-import { collision } from 'systems/collision';
+import { Collision, collision } from 'systems/collision';
 import { runCallback, sequence, wait } from 'systems/sequence';
 import { states } from 'systems/states';
 import { ui } from 'systems/ui';
@@ -15,7 +19,8 @@ export const createOtherPenguinCutscene = (
   player: Player,
   penguin: OtherPenguin,
   camera: Camera,
-  map: Tilemap
+  map: Tilemap,
+  blockPlayerFromExit: Collision
 ) => {
   const trigger = collision(scene, map.getArea('Other Penguin Conversation Trigger')).notSolid();
 
@@ -28,16 +33,22 @@ export const createOtherPenguinCutscene = (
 
   const cutscene = sequence(scene)
     .of([
+      runCallback(() => blockPlayerFromExit.destroy()),
       runCallback(() => player.disableUserInput()),
       runCallback(() => ui(scene).showLetterbox()),
       runCallback(() => camera.zoom(2, 800)),
       wait(800),
-      runCallback(() => player.movement.moveTo(map.getPoint('Player Spot for Conversation'))),
+      new MoveToTarget(player.movement, map.getPoint('Player Spot for Conversation')),
       runCallback(() => player.movement.faceDirection(Phaser.Math.Vector2.LEFT)),
-      // dialog
-      // walk to jetty
-      // dialog again
-      // swim away
+      new PlayDialog(DialogBox.get(scene), otherPenguinHello),
+      new MoveToTarget(penguin.movement, map.getPoint('Other Penguin Nav 1')),
+      new MoveToTarget(penguin.movement, map.getPoint('Other Penguin Nav 2')),
+      new MoveToTarget(penguin.movement, map.getPoint('Other Penguin Nav 3')),
+      new MoveToTarget(penguin.movement, map.getPoint('Other Penguin Nav 4')),
+      runCallback(() => player.movement.moveTo(map.getPoint('Player Start'))),
+      new MoveToTarget(penguin.movement, map.getPoint('Other Penguin Nav 5')),
+      new PlayDialog(DialogBox.get(scene), otherPenguinGoodbye),
+      // TODO: Swim away.
       wait(1000),
       runCallback(() => camera.zoom(1, 800)),
       runCallback(() => ui(scene).hideLetterbox()),
@@ -72,4 +83,22 @@ export const createOtherPenguinCutscene = (
         change('idle');
       }
     });
+};
+
+export const createNextAreaTrigger = (scene: Phaser.Scene, map: Tilemap, player: Player) => {
+  const trigger = collision(scene, map.getArea('Ice Cube Area Trigger')).notSolid();
+
+  states(scene, 'not triggered').add('not triggered', () => {
+    if (trigger.intersects(player.collision)) {
+      sequence(scene)
+        .of([
+          runCallback(() => player.disableUserInput()),
+          runCallback(() => player.movement.moveTo(new Phaser.Math.Vector2(player.x - 100, player.y))),
+          runCallback(() => ui(scene).fadeOut(1000)),
+          wait(3000),
+          runCallback(() => scene.scene.start(Scene.SpringTitle)),
+        ])
+        .start();
+    }
+  });
 };

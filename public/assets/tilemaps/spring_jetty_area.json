@@ -73,7 +73,7 @@
          "name":"map",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":64,
          "x":0,
          "y":0
@@ -232,7 +232,7 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":232,
+                 "x":236,
                  "y":256
                 }, 
                 {
@@ -246,6 +246,66 @@
                  "width":0,
                  "x":175,
                  "y":279
+                }, 
+                {
+                 "height":0,
+                 "id":16,
+                 "name":"Other Penguin Nav 1",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":216,
+                 "y":256
+                }, 
+                {
+                 "height":0,
+                 "id":17,
+                 "name":"Other Penguin Nav 2",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":224,
+                 "y":245
+                }, 
+                {
+                 "height":0,
+                 "id":18,
+                 "name":"Other Penguin Nav 3",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":243,
+                 "y":245
+                }, 
+                {
+                 "height":0,
+                 "id":19,
+                 "name":"Other Penguin Nav 4",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":260,
+                 "y":256
+                }, 
+                {
+                 "height":0,
+                 "id":20,
+                 "name":"Other Penguin Nav 5",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":392,
+                 "y":256
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -254,7 +314,7 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":16,
+ "nextobjectid":21,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

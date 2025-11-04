@@ -82,7 +82,7 @@ export class DialogBox extends Phaser.GameObjects.Container {
         if (this.inputs.wasJustActive(Action.Action)) {
           this.scene.tweens.add({
             targets: this,
-            y: this.scene.renderer.height - scaled(52),
+            y: this.scene.renderer.height - scaled(42),
             duration: 50,
             repeat: 1,
             yoyo: true,
@@ -106,13 +106,17 @@ export class DialogBox extends Phaser.GameObjects.Container {
 
     this.scene.tweens.add({
       targets: this,
-      y: this.scene.renderer.height - scaled(48),
+      y: this.scene.renderer.height - scaled(36),
       ease: Phaser.Math.Easing.Back.Out,
       duration: 400,
       onComplete: () => this.states.change('next line'),
     });
 
     return this;
+  }
+
+  public isComplete(): boolean {
+    return this.states.current() === 'idle';
   }
 
   private resolveCurrentLine1(): string {
@@ -158,7 +162,10 @@ export class DialogBox extends Phaser.GameObjects.Container {
       this.currentLine++;
     }
 
-    if (this.currentLine > 1) {
+    const newCurrentLine =
+      this.currentLine === 0 ? this.dialog[this.currentDialog].line1 : this.dialog[this.currentDialog].line2;
+
+    if (this.currentLine > 1 || newCurrentLine.length === 0) {
       this.currentLine = 0;
       this.currentDialog++;
     }

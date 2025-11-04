@@ -25,6 +25,7 @@ export const Scene = {
   SpringJetty: 'Spring Jetty',
   UserInterface: 'User Interface',
   Debug: 'Debug',
+  DialogBox: 'Dialog Box',
 } as const;
 export type KeyOfScene = keyof typeof Scene;
 export type TypeOfScene = (typeof Scene)[KeyOfScene];
@@ -102,6 +103,7 @@ export type TypeOfCollisionTag = (typeof CollisionTag)[KeyOfCollisionTag];
 
 export const CollisionMask = {
   Default: 0x1111,
+  Yolo: 0x0000,
 } as const;
 export type KeyOfCollisionMask = keyof typeof CollisionMask;
 export type TYPE_OF_COLLISION_MASK = (typeof CollisionMask)[KeyOfCollisionMask];

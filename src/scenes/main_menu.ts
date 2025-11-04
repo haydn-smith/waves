@@ -2,10 +2,9 @@ import { actionInput } from 'common/factories/input';
 import { Typewriter } from 'common/objects/typewriter';
 import { logEvent } from 'common/utils/log';
 import { scaled } from 'common/utils/scaled';
-import { Action, Animation, Depth, Flag, Scene, Sound } from 'constants';
+import { Action, Animation, Depth, Scene, Sound } from 'constants';
 import { audio } from 'systems/audio';
 import { camera } from 'systems/camera';
-import { setFlag } from 'systems/flags';
 import { Input } from 'systems/input';
 import { runCallback, runTween, sequence, wait, waitForInput } from 'systems/sequence';
 import { ui, UserInterface } from 'systems/ui';
@@ -62,12 +61,10 @@ export class MainMenu extends Phaser.Scene {
         }),
         runCallback(() => this.ui.fadeOut(1000)),
         wait(1000),
-        runCallback(() => this.scene.start(Scene.Debug)),
+        runCallback(() => this.scene.start(Scene.SpringTitle)),
       ])
       .start()
       .destroyWhenComplete();
-
-    setFlag(Flag.SkipMainMenu);
   }
 
   update() {

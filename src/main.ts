@@ -3,6 +3,7 @@ import 'phaser';
 
 import { Boot } from 'scenes/boot';
 import { Debug } from 'scenes/debug';
+import { DialogBox } from 'scenes/dialog_box';
 import { MainMenu } from 'scenes/main_menu';
 import { Preloader } from 'scenes/preloader';
 import { SpringJetty } from 'scenes/spring_jetty';
@@ -49,7 +50,7 @@ const config: Phaser.Types.Core.GameConfig = {
   input: {
     gamepad: true,
   },
-  scene: [Boot, Preloader, MainMenu, Debug, SpringTitle, SpringJetty],
+  scene: [Boot, Preloader, MainMenu, Debug, SpringTitle, SpringJetty, DialogBox],
 };
 
 export default new Phaser.Game(config);

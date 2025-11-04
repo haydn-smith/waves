@@ -162,6 +162,7 @@ export class Preloader extends Phaser.Scene {
     this.sound.unlock();
 
     // Start game.
-    this.scene.start(Scene.SpringJetty);
+    this.scene.run(Scene.DialogBox);
+    this.scene.start(Scene.MainMenu);
   }
 }

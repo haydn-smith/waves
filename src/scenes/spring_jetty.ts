@@ -1,6 +1,5 @@
 import { actionInput } from 'common/factories/input';
-import { createOtherPenguinCutscene } from 'common/factories/spring_jetty';
-import { DialogBox } from 'common/objects/dialog_box';
+import { createNextAreaTrigger, createOtherPenguinCutscene } from 'common/factories/spring_jetty';
 import { OtherPenguin } from 'common/objects/other_penguin';
 import { Player } from 'common/objects/player';
 import { Tilemap as TilemapObject } from 'common/objects/tilemap';
@@ -51,7 +50,7 @@ export class SpringJetty extends Phaser.Scene {
 
     map.forPoints('Jetty', (v) => this.add.sprite(v.x, v.y, Sprite.Jetty).setDepth(Depth.Main - 1));
 
-    map.forAreas('Block Player From Exit', (r) => collision(this, r));
+    const blockPlayerFromExit = collision(this, map.getArea('Block Player From Exit'));
 
     this.player = new Player(this)
       .setPosition(map.getPoint('Player Start').x, map.getPoint('Player Start').y)
@@ -70,24 +69,9 @@ export class SpringJetty extends Phaser.Scene {
 
     this.camera = camera(this).follow(this.player).zoom(1);
 
-    const dialogBox = this.add.existing(new DialogBox(this)).setDepth(Depth.UI + 1);
+    createNextAreaTrigger(this, map, this.player);
 
-    dialogBox
-      .setDialog([
-        {
-          image: Sprite.PlayerSleep,
-          line1: ['Hello... ', '...this... '],
-          line2: ['...is cool!'],
-        },
-        {
-          image: Sprite.MainPlant,
-          line1: ['...', '...hell... '],
-          line2: ['...yea it is!'],
-        },
-      ])
-      .play();
-
-    createOtherPenguinCutscene(this, this.player, this.otherPenguin, this.camera, map);
+    createOtherPenguinCutscene(this, this.player, this.otherPenguin, this.camera, map, blockPlayerFromExit);
 
     sequence(this)
       .of([
@@ -106,8 +90,8 @@ export class SpringJetty extends Phaser.Scene {
         runCallback(() => this.player.runnningAround()),
         runCallback(() => this.player.enableUserInput()),
       ])
-      .destroyWhenComplete();
-    // .start();
+      .destroyWhenComplete()
+      .start();
   }
 
   update() {}

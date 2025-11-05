@@ -96,6 +96,12 @@ export class DialogBox extends Phaser.GameObjects.Container {
   public setDialog(dialog: Dialog): DialogBox {
     this.dialog = dialog;
 
+    this.currentDialog = 0;
+
+    this.currentLine = 0;
+
+    this.currentSection = 0;
+
     return this;
   }
 

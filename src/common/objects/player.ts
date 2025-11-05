@@ -56,6 +56,12 @@ export class Player extends Phaser.GameObjects.Container {
     return this;
   }
 
+  public water(): Player {
+    this.sprite.setTexture(Sprite.PlayerWater);
+
+    return this;
+  }
+
   public runnningAround(): Player {
     this.sprite.setTexture(Sprite.PlayerIdle);
 

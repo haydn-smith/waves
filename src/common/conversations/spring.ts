@@ -1,3 +1,4 @@
+import { Dialog } from 'common/objects/dialog_box';
 import { Sprite } from 'constants';
 
 export const otherPenguinHello = [
@@ -48,5 +49,65 @@ export const otherPenguinGoodbye = [
     image: Sprite.PlayerIdle,
     line1: ['Good luck!'],
     line2: [],
+  },
+];
+
+export const iceCube1: Dialog = [
+  {
+    image: Sprite.PlayerIdle,
+    line1: ['This ice cube seems to have frozen in a prefect cube.'],
+    line2: ['...'],
+  },
+  {
+    image: Sprite.PlayerIdle,
+    line1: ["It's..."],
+    line2: ['... an ice cube.'],
+  },
+];
+
+export const iceCube2: Dialog = [
+  {
+    image: Sprite.PlayerIdle,
+    line1: ["This ice cube looks like it's been"],
+    line2: ['frozen here for a while.'],
+  },
+  {
+    image: Sprite.PlayerIdle,
+    line1: ['Perhaps the warmer months will free'],
+    line2: ['it up a bit!'],
+  },
+];
+
+export const iceCube3: Dialog = [
+  {
+    image: Sprite.PlayerIdle,
+    line1: ['Yep.'],
+    line2: ["It's still a very frozen ice cube."],
+  },
+];
+
+export const snowCaveIn1: Dialog = [
+  {
+    image: Sprite.PlayerIdle,
+    line1: ['The snow appears to have caved in here.'],
+    line2: ['...'],
+  },
+  {
+    image: Sprite.PlayerIdle,
+    line1: ['Maybe the warmer months will clear the snow.'],
+    line2: ['...'],
+  },
+];
+
+export const springFlower: Dialog = [
+  {
+    image: Sprite.PlayerIdle,
+    line1: ['This plant ', '...'],
+    line2: ['...', 'is still alive.'],
+  },
+  {
+    image: Sprite.PlayerIdle,
+    line1: ['... ', 'Just barely.'],
+    line2: ['It looks like it needs some water.'],
   },
 ];

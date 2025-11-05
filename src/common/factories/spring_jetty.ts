@@ -5,10 +5,11 @@ import { Tilemap } from 'common/objects/tilemap';
 import { MoveToTarget } from 'common/sequenceables/move_to_target';
 import { PlayDialog } from 'common/sequenceables/play_dialog';
 import { scaled } from 'common/utils/scaled';
-import { Action, Animation, Depth, Scene, Shader, Sprite } from 'constants';
+import { Action, Animation, Depth, Flag, Shader, Sprite } from 'constants';
 import { DialogBox } from 'scenes/dialog_box';
 import { Camera } from 'systems/camera';
 import { Collision, collision } from 'systems/collision';
+import { setFlag } from 'systems/flags';
 import { runCallback, sequence, wait } from 'systems/sequence';
 import { states } from 'systems/states';
 import { ui } from 'systems/ui';
@@ -35,6 +36,7 @@ export const createOtherPenguinCutscene = (
   const cutscene = sequence(scene)
     .of([
       runCallback(() => blockPlayerFromExit.destroy()),
+      runCallback(() => setFlag(Flag.OtherPenguinCutsceneWatched)),
       runCallback(() => player.disableUserInput()),
       runCallback(() => ui(scene).showLetterbox()),
       runCallback(() => camera.zoom(2, 800)),
@@ -84,22 +86,4 @@ export const createOtherPenguinCutscene = (
         change('idle');
       }
     });
-};
-
-export const createNextAreaTrigger = (scene: Phaser.Scene, map: Tilemap, player: Player) => {
-  const trigger = collision(scene, map.getArea('Ice Cube Area Trigger')).notSolid();
-
-  states(scene, 'not triggered').add('not triggered', () => {
-    if (trigger.intersects(player.collision)) {
-      sequence(scene)
-        .of([
-          runCallback(() => player.disableUserInput()),
-          runCallback(() => player.movement.moveTo(new Phaser.Math.Vector2(player.x - 100, player.y))),
-          runCallback(() => ui(scene).fadeOut(1000)),
-          wait(3000),
-          runCallback(() => scene.scene.start(Scene.SpringTitle)),
-        ])
-        .start();
-    }
-  });
 };

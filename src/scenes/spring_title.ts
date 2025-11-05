@@ -1,9 +1,8 @@
 import { Typewriter } from 'common/objects/typewriter';
 import { logEvent } from 'common/utils/log';
 import { scaled } from 'common/utils/scaled';
-import { Depth, Flag, Scene, Sprite } from 'constants';
+import { Depth, Scene, Sprite } from 'constants';
 import { camera } from 'systems/camera';
-import { setFlag } from 'systems/flags';
 import { runCallback, runTween, sequence, wait } from 'systems/sequence';
 import { ui, UserInterface } from 'systems/ui';
 
@@ -56,8 +55,6 @@ export class SpringTitle extends Phaser.Scene {
       ])
       .start()
       .destroyWhenComplete();
-
-    setFlag(Flag.SkipMainMenu);
   }
 
   update() {

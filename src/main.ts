@@ -6,12 +6,14 @@ import { Debug } from 'scenes/debug';
 import { DialogBox } from 'scenes/dialog_box';
 import { MainMenu } from 'scenes/main_menu';
 import { Preloader } from 'scenes/preloader';
+import { SpringFlower } from 'scenes/spring_flower';
+import { SpringIceCube } from 'scenes/spring_ice_cube';
 import { SpringJetty } from 'scenes/spring_jetty';
 import { SpringTitle } from 'scenes/spring_title';
 import { setDebug } from 'systems/flags';
 
 // @ts-expect-error Injected environment variable.
-setDebug(false); // process.env.PHASER_DEBUG === 'true');
+setDebug(true); // process.env.PHASER_DEBUG === 'true');
 
 // @ts-expect-error Injected environment variable.
 if (process.env.PHASER_SENTRY_DSN) {
@@ -50,7 +52,7 @@ const config: Phaser.Types.Core.GameConfig = {
   input: {
     gamepad: true,
   },
-  scene: [Boot, Preloader, MainMenu, Debug, SpringTitle, SpringJetty, DialogBox],
+  scene: [Boot, Preloader, MainMenu, Debug, SpringTitle, SpringJetty, DialogBox, SpringIceCube, SpringFlower],
 };
 
 export default new Phaser.Game(config);

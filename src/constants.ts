@@ -23,6 +23,8 @@ export const Scene = {
   MainMenu: 'Main Menu',
   SpringTitle: 'Spring Title',
   SpringJetty: 'Spring Jetty',
+  SpringIceCube: 'Spring Ice Cube',
+  SpringFlower: 'Spring Flower',
   UserInterface: 'User Interface',
   Debug: 'Debug',
   DialogBox: 'Dialog Box',
@@ -44,6 +46,8 @@ export type TypeOfShader = (typeof Shader)[KeyOfShader];
 export const Tilemap = {
   Test: 'tilemaps/test.json',
   SpringJetty: 'tilemaps/spring_jetty_area.json',
+  SpringIceCube: 'tilemaps/spring_ice_cube_area.json',
+  SpringFlower: 'tilemaps/spring_flower_area.json',
 } as const;
 export type KeyOfTilemap = keyof typeof Tilemap;
 export type TypeOfTilemap = (typeof Tilemap)[KeyOfTilemap];
@@ -113,6 +117,9 @@ export const GlobalScale = 1;
 
 export const Flag = {
   SkipMainMenu: 'skip_main_menu',
+  OpeningCutsceneWatched: 'opening_cutscene_watched',
+  OtherPenguinCutsceneWatched: 'other_penguin_cutscene_watched',
+  SpringWaterFlowerCutsceneWatched: 'spring_water_flower_cutscene_watched',
 } as const;
 export type KeyOfFlag = keyof typeof Flag;
 export type TypeOfFlag = (typeof Flag)[KeyOfFlag];

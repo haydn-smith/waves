@@ -46,4 +46,8 @@ export class UserInterface {
 
     return this;
   }
+
+  public toScene(): Phaser.Scene {
+    return this.ui;
+  }
 }

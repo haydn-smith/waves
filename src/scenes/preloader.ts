@@ -78,6 +78,8 @@ export class Preloader extends Phaser.Scene {
     this.load.image(Tileset.Snow, Tileset.Snow);
     this.load.tilemapTiledJSON(Tilemap.Test, Tilemap.Test);
     this.load.tilemapTiledJSON(Tilemap.SpringJetty, Tilemap.SpringJetty);
+    this.load.tilemapTiledJSON(Tilemap.SpringIceCube, Tilemap.SpringIceCube);
+    this.load.tilemapTiledJSON(Tilemap.SpringFlower, Tilemap.SpringFlower);
 
     // Sprites.
     this.load.image(Sprite.Black1px, Sprite.Black1px);
@@ -163,8 +165,15 @@ export class Preloader extends Phaser.Scene {
     // Allow the sound to play.
     this.sound.unlock();
 
+    // Debug setup.
+    localStorage.clear();
+    // setDebug(true);
+    // setFlag(Flag.OtherPenguinCutsceneWatched);
+    // setFlag(Flag.OpeningCutsceneWatched);
+    // setData('previousScene', Scene.SpringIceCube);
+
     // Start game.
     this.scene.run(Scene.DialogBox);
-    this.scene.start(Scene.SpringJetty);
+    this.scene.start(Scene.MainMenu);
   }
 }

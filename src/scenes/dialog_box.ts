@@ -30,6 +30,9 @@ export class DialogBox extends Phaser.Scene {
   }
 
   update() {
+    this.scene.moveAbove(ui(this).toScene());
+    this.scene.moveBelow(ui(this).toScene());
+
     if (this.ui.isLetterboxShown() && !this.isLetterboxShown) {
       this.tweens.add({
         targets: this.container,

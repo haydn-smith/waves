@@ -25,6 +25,9 @@ export const Scene = {
   SpringJetty: 'Spring Jetty',
   SpringIceCube: 'Spring Ice Cube',
   SpringFlower: 'Spring Flower',
+  SummerTitle: 'Summer Title',
+  SummerJetty: 'Summer Jetty',
+  SummerIceCube: 'Summer Ice Cube',
   UserInterface: 'User Interface',
   Debug: 'Debug',
   DialogBox: 'Dialog Box',
@@ -48,6 +51,8 @@ export const Tilemap = {
   SpringJetty: 'tilemaps/spring_jetty_area.json',
   SpringIceCube: 'tilemaps/spring_ice_cube_area.json',
   SpringFlower: 'tilemaps/spring_flower_area.json',
+  SummerJetty: 'tilemaps/summer_jetty_area.json',
+  SummerIceCube: 'tilemaps/summer_ice_cube_area.json',
 } as const;
 export type KeyOfTilemap = keyof typeof Tilemap;
 export type TypeOfTilemap = (typeof Tilemap)[KeyOfTilemap];
@@ -77,6 +82,7 @@ export const Sprite = {
   DeadPlant2: 'sprites/plants/dead_plant_2.png',
   DeadPlant3: 'sprites/plants/dead_plant_3.png',
   SpringIcon: 'sprites/spring_icon.png',
+  SummerIcon: 'sprites/spring_icon.png',
   Jetty: 'sprites/jetty.png',
   DialogBox: 'sprites/dialog_box.png',
 } as const;
@@ -120,6 +126,7 @@ export const Flag = {
   OpeningCutsceneWatched: 'opening_cutscene_watched',
   OtherPenguinCutsceneWatched: 'other_penguin_cutscene_watched',
   SpringWaterFlowerCutsceneWatched: 'spring_water_flower_cutscene_watched',
+  SummerWakeUpCutsceneWatched: 'summer_wake_up_cutscene_watched',
 } as const;
 export type KeyOfFlag = keyof typeof Flag;
 export type TypeOfFlag = (typeof Flag)[KeyOfFlag];

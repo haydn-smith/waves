@@ -7,6 +7,7 @@ import { Vignette } from 'common/objects/shaders/vignette';
 import { logEvent } from 'common/utils/log';
 import { scaled } from 'common/utils/scaled';
 import { Animation, Depth, Font, Scene, Shader, Sound, Sprite, Tilemap, Tileset } from 'constants';
+import { setDebug } from 'systems/flags';
 import { startUI } from 'systems/ui';
 
 export class Preloader extends Phaser.Scene {
@@ -80,6 +81,8 @@ export class Preloader extends Phaser.Scene {
     this.load.tilemapTiledJSON(Tilemap.SpringJetty, Tilemap.SpringJetty);
     this.load.tilemapTiledJSON(Tilemap.SpringIceCube, Tilemap.SpringIceCube);
     this.load.tilemapTiledJSON(Tilemap.SpringFlower, Tilemap.SpringFlower);
+    this.load.tilemapTiledJSON(Tilemap.SummerJetty, Tilemap.SummerJetty);
+    this.load.tilemapTiledJSON(Tilemap.SummerIceCube, Tilemap.SummerIceCube);
 
     // Sprites.
     this.load.image(Sprite.Black1px, Sprite.Black1px);
@@ -167,13 +170,13 @@ export class Preloader extends Phaser.Scene {
 
     // Debug setup.
     localStorage.clear();
-    // setDebug(true);
+    setDebug(true);
     // setFlag(Flag.OtherPenguinCutsceneWatched);
     // setFlag(Flag.OpeningCutsceneWatched);
     // setData('previousScene', Scene.SpringIceCube);
 
     // Start game.
     this.scene.run(Scene.DialogBox);
-    this.scene.start(Scene.MainMenu);
+    this.scene.start(Scene.SummerTitle);
   }
 }

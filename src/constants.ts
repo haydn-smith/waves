@@ -147,6 +147,10 @@ export const Flag = {
   SummerIceCubeFan3Activated: 'SummerIceCubeFan3Activated',
   SummerWaterFlowerCutsceneWatched: 'summer_water_flower_cutscene_watched',
   AutumnWakeUpCutsceneWatched: 'autumn_wake_up_cutscene_watched',
+  AutumnSnowmanSnow1Completed: 'AutumnSnowmanSnow1Completed',
+  AutumnSnowmanSnow2Completed: 'AutumnSnowmanSnow2Completed',
+  AutumnSnowmanSnow3Completed: 'AutumnSnowmanSnow3Completed',
+  AutumnSnowmanCompleted: 'AutumnSnowmanCompleted',
 } as const;
 export type KeyOfFlag = keyof typeof Flag;
 export type TypeOfFlag = (typeof Flag)[KeyOfFlag];

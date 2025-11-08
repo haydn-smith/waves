@@ -77,3 +77,65 @@ export const snowmanNoSnow = [
     line2: ['Jolly good, then!'],
   },
 ];
+
+export const snowmanWithOneSnow = [
+  {
+    image: Sprite.Unknown,
+    line1: ['... ', 'Ah!'],
+    line2: ["Thank you for the snow ol' chap!"],
+  },
+  {
+    image: Sprite.Unknown,
+    line1: ['...'],
+    line2: ['But I will be needing bit more than that!'],
+  },
+];
+
+export const snowmanWithTwoSnow = [
+  {
+    image: Sprite.Unknown,
+    line1: ['... ', 'Splendid!'],
+    line2: ['Even more snow!'],
+  },
+  {
+    image: Sprite.Unknown,
+    line1: ['...'],
+    line2: ['But I will be needing bit more than that!'],
+  },
+];
+
+export const snowmanWithThreeSnow = [
+  {
+    image: Sprite.Unknown,
+    line1: ['... ', 'Perfect!'],
+    line2: ['Snow!'],
+  },
+  {
+    image: Sprite.Unknown,
+    line1: ['...'],
+    line2: ['I am complete!'],
+  },
+];
+
+export const completeSnowman = [
+  {
+    image: Sprite.Unknown,
+    line1: ['Aha!'],
+    line2: ['As you can see...'],
+  },
+  {
+    image: Sprite.Unknown,
+    line1: ['I am a majestic, magical snowman.'],
+    line2: ['And also did I mention...'],
+  },
+  {
+    image: Sprite.Unknown,
+    line1: ['I have magical snow magic!'],
+    line2: ['...'],
+  },
+  {
+    image: Sprite.Unknown,
+    line1: ['For example...'],
+    line2: ['come this way and watch!'],
+  },
+];

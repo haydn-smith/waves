@@ -7,8 +7,8 @@ import { Vignette } from 'common/objects/shaders/vignette';
 import { setData } from 'common/utils/data';
 import { logEvent } from 'common/utils/log';
 import { scaled } from 'common/utils/scaled';
-import { Animation, Depth, Font, Scene, Shader, Sound, Sprite, Tilemap, Tileset } from 'constants';
-import { setDebug } from 'systems/flags';
+import { Animation, Depth, Flag, Font, Scene, Shader, Sound, Sprite, Tilemap, Tileset } from 'constants';
+import { setDebug, setFlag } from 'systems/flags';
 import { startUI } from 'systems/ui';
 
 export class Preloader extends Phaser.Scene {
@@ -177,7 +177,8 @@ export class Preloader extends Phaser.Scene {
     localStorage.clear();
     setDebug(true);
     // setFlag(Flag.SummerWakeUpCutsceneWatched);
-    // setFlag(Flag.SummerIceCubeIntroWatched);
+    setFlag(Flag.AutumnSnowmanSnow2Completed);
+    setFlag(Flag.AutumnSnowmanSnow3Completed);
     setData('previousScene', Scene.AutumnIceCube);
 
     // Start game.

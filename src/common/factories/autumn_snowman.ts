@@ -1,28 +1,39 @@
 import { snowmanNoSnow } from 'common/conversations/autumn';
 import { Player } from 'common/objects/player';
+import { Snowman } from 'common/objects/snowman';
 import { Tilemap } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
 import { Repeater } from 'common/utils/repeater';
 import { CollisionMask, CollisionTag, Shader, Sprite } from 'constants';
 import { collision } from 'systems/collision';
 import { movement } from 'systems/movement';
+import { states } from 'systems/states';
 import { rect } from './phaser';
 import { createDialogBoxStates } from './state_machine';
 
-export const createSnowman = (scene: Phaser.Scene, player: Player, map: Tilemap, ySort: YSortObjects) => {
+export const createSnowman = (
+  scene: Phaser.Scene,
+  player: Player,
+  map: Tilemap,
+  ySort: YSortObjects,
+  isDialogActive: () => void
+) => {
   const position = map.getPoint('Snowman');
-
-  const sprite = scene.add.sprite(0, 0, Sprite.Unknown).setPipeline(Shader.Outline);
-
-  const coll = collision(scene, rect(-4, -4, 8, 8));
 
   const trigger = collision(scene, map.getArea('Snowman Trigger')).notSolid();
 
-  const container = scene.add.container(position.x, position.y, [sprite, coll.toGameObject()]);
+  const container = scene.add.existing(new Snowman(scene).setPosition(position.x, position.y));
 
   const repeater = new Repeater([snowmanNoSnow], 'repeat last');
 
-  const states = createDialogBoxStates(scene, player, trigger, position, () => repeater.currentItemThenNext());
+  const states = createDialogBoxStates(
+    scene,
+    player,
+    trigger,
+    position,
+    () => repeater.currentItemThenNext(),
+    isDialogActive
+  );
 
   container.on('destroy', () => {
     states.destroy();
@@ -34,8 +45,14 @@ export const createSnowman = (scene: Phaser.Scene, player: Player, map: Tilemap,
   return container;
 };
 
-export const createSnow1 = (scene: Phaser.Scene, player: Player, map: Tilemap, ySort: YSortObjects) => {
-  const position = map.getPoint('Snowman Piece One');
+export const createSnow1 = (
+  scene: Phaser.Scene,
+  player: Player,
+  map: Tilemap,
+  ySort: YSortObjects,
+  onActivate: () => void
+) => {
+  const position = map.getPoint('Snowman Piece 1');
 
   const sprite = scene.add.sprite(0, 0, Sprite.Unknown).setPipeline(Shader.Outline);
 
@@ -43,6 +60,85 @@ export const createSnow1 = (scene: Phaser.Scene, player: Player, map: Tilemap, y
     .tag(CollisionTag.Pushable)
     .mask(CollisionMask.Default | CollisionMask.Pushable);
 
+  const container = scene.add.container(position.x, position.y, [sprite, coll.toGameObject()]);
+
+  const move = movement(scene, container, coll).moveWithoutVelocity().setSpeed(32);
+
+  const trigger = collision(scene, map.getArea('Snowman Piece Trigger')).notSolid().mask(CollisionMask.Pushable);
+
+  const state = states(scene, 'idle').add('idle', () => {
+    if (trigger.intersects(coll)) {
+      onActivate();
+      state.destroy();
+    }
+  });
+
+  coll.toGameObject().movement = move;
+
+  ySort.add(container);
+
+  return container;
+};
+
+export const createSnow2 = (
+  scene: Phaser.Scene,
+  player: Player,
+  map: Tilemap,
+  ySort: YSortObjects,
+
+  onActivate: () => void
+) => {
+  const position = map.getPoint('Snowman Piece 2');
+
+  const sprite = scene.add.sprite(0, 0, Sprite.Unknown).setPipeline(Shader.Outline);
+
+  const coll = collision(scene, rect(-4, -4, 8, 8))
+    .tag(CollisionTag.Pushable)
+    .mask(CollisionMask.Default | CollisionMask.Pushable);
+
+  const trigger = collision(scene, map.getArea('Snowman Piece Trigger')).notSolid();
+
+  const state = states(scene, 'idle').add('idle', () => {
+    if (trigger.intersects(coll)) {
+      onActivate();
+      state.destroy();
+    }
+  });
+
+  const container = scene.add.container(position.x, position.y, [sprite, coll.toGameObject()]);
+
+  const move = movement(scene, container, coll).moveWithoutVelocity().setSpeed(32);
+
+  coll.toGameObject().movement = move;
+
+  ySort.add(container);
+
+  return container;
+};
+
+export const createSnow3 = (
+  scene: Phaser.Scene,
+  player: Player,
+  map: Tilemap,
+  ySort: YSortObjects,
+  onActivate: () => void
+) => {
+  const position = map.getPoint('Snowman Piece 3');
+
+  const sprite = scene.add.sprite(0, 0, Sprite.Unknown).setPipeline(Shader.Outline);
+
+  const coll = collision(scene, rect(-4, -4, 8, 8))
+    .tag(CollisionTag.Pushable)
+    .mask(CollisionMask.Default | CollisionMask.Pushable);
+
+  const trigger = collision(scene, map.getArea('Snowman Piece Trigger')).notSolid();
+
+  const state = states(scene, 'idle').add('idle', () => {
+    if (trigger.intersects(coll)) {
+      onActivate();
+      state.destroy();
+    }
+  });
   const container = scene.add.container(position.x, position.y, [sprite, coll.toGameObject()]);
 
   const move = movement(scene, container, coll).moveWithoutVelocity().setSpeed(32);

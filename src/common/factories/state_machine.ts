@@ -27,7 +27,8 @@ export const createDialogBoxStates = (
   player: Player,
   trigger: Collision,
   position: Phaser.Math.Vector2,
-  resolveDialog: () => Dialog
+  resolveDialog: () => Dialog,
+  shouldRunDialog?: () => boolean
 ) => {
   const arrow = scene.add
     .sprite(position.x, position.y - 16, Sprite.DownArrow)
@@ -52,14 +53,18 @@ export const createDialogBoxStates = (
       if (trigger.intersects(player.collision)) change('active');
     })
     .add('active', ({ change }) => {
-      arrow.setAlpha(1);
+      if (shouldRunDialog?.() ?? true) {
+        arrow.setAlpha(1);
 
-      if (!trigger.intersects(player.collision)) change('idle');
+        if (!trigger.intersects(player.collision)) change('idle');
 
-      if (inputs.isActive(Action.Action)) {
-        dialog().start().destroyWhenComplete();
+        if (inputs.isActive(Action.Action)) {
+          dialog().start().destroyWhenComplete();
+          arrow.setAlpha(0);
+          change('dialog');
+        }
+      } else {
         arrow.setAlpha(0);
-        change('dialog');
       }
     });
 

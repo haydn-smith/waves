@@ -1,7 +1,7 @@
 import { directionalInputs } from 'common/factories/input';
-import { rect } from 'common/factories/phaser';
+import { rect, vec2 } from 'common/factories/phaser';
 import { scaled } from 'common/utils/scaled';
-import { Action, CollisionTag, Shader, Sprite } from 'constants';
+import { Action, CollisionMask, CollisionTag, Shader, Sprite } from 'constants';
 import { collision, Collision } from 'systems/collision';
 import { Input } from 'systems/input';
 import { movement, Movement } from 'systems/movement';
@@ -20,13 +20,20 @@ export class Player extends Phaser.GameObjects.Container {
   constructor(scene: Phaser.Scene) {
     super(scene);
 
-    this.collision = collision(this.scene, rect(scaled(-4), scaled(-4), scaled(8), scaled(2))).tag(CollisionTag.Player);
+    this.collision = collision(this.scene, rect(scaled(-4), scaled(-4), scaled(8), scaled(2)))
+      .tag(CollisionTag.Player)
+      .mask(CollisionMask.Default);
 
     this.movement = movement(this.scene, this, this.collision)
       .setSpeed(scaled(32))
       .setAcceleration(scaled(128))
       .moveWithVelocity()
-      .setMovementEase(Phaser.Math.Easing.Sine.In);
+      .setMovementEase(Phaser.Math.Easing.Sine.In)
+      .onCollide((collision, velocity, isX, delta) => {
+        if (collision.hasTag(CollisionTag.Pushable)) {
+          this.pushInDirection(collision, velocity, isX, delta);
+        }
+      });
 
     this.inputs = directionalInputs(this.scene);
 
@@ -78,5 +85,13 @@ export class Player extends Phaser.GameObjects.Container {
     this.isUserInputDisabled = false;
 
     return this;
+  }
+
+  private pushInDirection(collision: Collision, velocity: Phaser.Math.Vector2, isX: boolean, delta: number): void {
+    const move = vec2(isX ? velocity.x : 0, !isX ? velocity.y : 0);
+
+    collision.toGameObject().movement.moveInDirection(move.normalize(), delta);
+
+    this.movement.setVelocity(velocity);
   }
 }

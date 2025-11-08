@@ -1,3 +1,4 @@
+import { Collision } from 'systems/collision';
 import { Movement as ObjectsMovement } from 'systems/movement/objects/movement';
 import { linearMovement } from 'systems/movement/utils/linear_movement';
 import { velocityMovement } from 'systems/movement/utils/velocity_movement';
@@ -76,8 +77,22 @@ export class Movement {
     return this.movement.getVelocity();
   }
 
+  public setVelocity(velocity: Phaser.Math.Vector2): Movement {
+    this.movement.setVelocity(velocity);
+
+    return this;
+  }
+
   public position(): Phaser.Math.Vector2 {
     return this.movement.currentPosition();
+  }
+
+  public onCollide(
+    onCollide: (collision: Collision, velocity: Phaser.Math.Vector2, isX: boolean, delta: number) => void
+  ): Movement {
+    this.movement.setOnCollide(onCollide);
+
+    return this;
   }
 
   public stop(): Movement {

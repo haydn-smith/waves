@@ -1,3 +1,4 @@
+import { vec2 } from 'common/factories/phaser';
 import { Collision } from 'systems/collision';
 import { debugDepth, isDebug } from 'systems/flags';
 import { linearMovement } from 'systems/movement/utils/linear_movement';
@@ -35,6 +36,11 @@ export class Movement extends Phaser.GameObjects.GameObject {
   private easeFn: (v: number) => number = Phaser.Math.Easing.Linear;
 
   private movementFn: MovementFn = linearMovement;
+
+  private onCollide?: (collision: Collision, velocity: Phaser.Math.Vector2, isX: boolean, delta: number) => void;
+
+  private hasMovedInDirectionXThisTick: boolean = false;
+  private hasMovedInDirectionYThisTick: boolean = false;
 
   constructor(
     scene: Phaser.Scene,
@@ -102,6 +108,14 @@ export class Movement extends Phaser.GameObjects.GameObject {
         );
     }
 
+    if (this.movementFn === linearMovement && !this.hasMovedInDirectionXThisTick) {
+      this.velocity = vec2(0, this.velocity.y);
+    }
+
+    if (this.movementFn === linearMovement && !this.hasMovedInDirectionYThisTick) {
+      this.velocity = vec2(this.velocity.x, 0);
+    }
+
     if (
       this.movementFn === velocityMovement &&
       this.prevVelocity.x === this.velocity.x &&
@@ -119,6 +133,9 @@ export class Movement extends Phaser.GameObjects.GameObject {
     }
 
     this.doMove(delta);
+
+    this.hasMovedInDirectionXThisTick = false;
+    this.hasMovedInDirectionYThisTick = false;
   }
 
   public destroy() {
@@ -128,6 +145,10 @@ export class Movement extends Phaser.GameObjects.GameObject {
   }
 
   public moveInDirection(direction: Phaser.Math.Vector2, delta: number, crossZero = true): Movement {
+    this.hasMovedInDirectionXThisTick = direction.x !== 0;
+
+    this.hasMovedInDirectionYThisTick = direction.y !== 0;
+
     const velocity = this.movementFn(this.velocity.clone(), direction, delta, this.speed, this.acceleration);
 
     const xCrossedZero = (velocity.x > 0 && this.velocity.x < 0) || (velocity.x < 0 && this.velocity.x > 0);
@@ -164,9 +185,17 @@ export class Movement extends Phaser.GameObjects.GameObject {
         y: this.speed * eased,
       });
 
-    const moveY = this.collision.moveY(this.easedVelocity.y * (delta * 0.001), () => (this.velocity.y = 0));
+    const moveY = this.collision.moveY(this.easedVelocity.y * (delta * 0.001), (collision: Collision) => {
+      const v = this.velocity.clone();
+      this.velocity.y = 0;
+      this.onCollide?.(collision, v, false, delta);
+    });
 
-    const moveX = this.collision.moveX(this.easedVelocity.x * (delta * 0.001), () => (this.velocity.x = 0));
+    const moveX = this.collision.moveX(this.easedVelocity.x * (delta * 0.001), (collision: Collision) => {
+      const v = this.velocity.clone();
+      this.velocity.x = 0;
+      this.onCollide?.(collision, v, true, delta);
+    });
 
     this.actor.setPosition(this.actor.x, this.actor.y + moveY);
 
@@ -262,6 +291,14 @@ export class Movement extends Phaser.GameObjects.GameObject {
 
   public setMovementStrategy(movementFn: MovementFn): Movement {
     this.movementFn = movementFn;
+
+    return this;
+  }
+
+  public setOnCollide(
+    onCollide: (collision: Collision, velocity: Phaser.Math.Vector2, isX: boolean, delta: number) => void
+  ) {
+    this.onCollide = onCollide;
 
     return this;
   }

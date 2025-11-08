@@ -62,6 +62,7 @@ export const Tilemap = {
   SummerFlower: 'tilemaps/summer_flower_area.json',
   AutumnJetty: 'tilemaps/autumn_jetty_area.json',
   AutumnIceCube: 'tilemaps/autumn_ice_cube_area.json',
+  AutumnSnowman: 'tilemaps/autumn_snowman_area.json',
   AutumnFlower: 'tilemaps/autumn_flower_area.json',
 } as const;
 export type KeyOfTilemap = keyof typeof Tilemap;
@@ -118,13 +119,15 @@ export type KeyOfAnimation = keyof typeof Animation;
 export type TypeOfAnimation = (typeof Animation)[KeyOfAnimation];
 
 export const CollisionTag = {
-  Player: 'player',
+  Player: 'Player',
+  Pushable: 'Pushable',
 } as const;
 export type KeyOfCollisionTag = keyof typeof CollisionTag;
 export type TypeOfCollisionTag = (typeof CollisionTag)[KeyOfCollisionTag];
 
 export const CollisionMask = {
-  Default: 0x1111,
+  Default: 0x1000,
+  Pushable: 0x0100,
   Yolo: 0x0000,
 } as const;
 export type KeyOfCollisionMask = keyof typeof CollisionMask;

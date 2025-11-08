@@ -54,3 +54,26 @@ export const snowBarrier = [
     line2: ['Snow is in the way again.'],
   },
 ];
+
+export const snowmanNoSnow = [
+  {
+    image: Sprite.Unknown,
+    line1: ['... ', 'Oh dear.'],
+    line2: ['I seem to be in a spot of bother.'],
+  },
+  {
+    image: Sprite.Unknown,
+    line1: ['Do you think... ', 'per-chance...'],
+    line2: ['You could help me out.'],
+  },
+  {
+    image: Sprite.Unknown,
+    line1: ['I seem to have run our of snow.'],
+    line2: ['...Can you find me some?'],
+  },
+  {
+    image: Sprite.Unknown,
+    line1: ['...'],
+    line2: ['Jolly good, then!'],
+  },
+];

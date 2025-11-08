@@ -4,6 +4,7 @@ import { Noise } from 'common/objects/shaders/noise';
 import { Outline } from 'common/objects/shaders/outline';
 import { SoftLight } from 'common/objects/shaders/soft_light';
 import { Vignette } from 'common/objects/shaders/vignette';
+import { setData } from 'common/utils/data';
 import { logEvent } from 'common/utils/log';
 import { scaled } from 'common/utils/scaled';
 import { Animation, Depth, Font, Scene, Shader, Sound, Sprite, Tilemap, Tileset } from 'constants';
@@ -86,6 +87,7 @@ export class Preloader extends Phaser.Scene {
     this.load.tilemapTiledJSON(Tilemap.SummerFlower, Tilemap.SummerFlower);
     this.load.tilemapTiledJSON(Tilemap.AutumnJetty, Tilemap.AutumnJetty);
     this.load.tilemapTiledJSON(Tilemap.AutumnIceCube, Tilemap.AutumnIceCube);
+    this.load.tilemapTiledJSON(Tilemap.AutumnSnowman, Tilemap.AutumnSnowman);
 
     // Sprites.
     this.load.image(Sprite.Black1px, Sprite.Black1px);
@@ -176,10 +178,10 @@ export class Preloader extends Phaser.Scene {
     setDebug(true);
     // setFlag(Flag.SummerWakeUpCutsceneWatched);
     // setFlag(Flag.SummerIceCubeIntroWatched);
-    // setData('previousScene', Scene.MainMenu);
+    setData('previousScene', Scene.AutumnIceCube);
 
     // Start game.
     this.scene.run(Scene.DialogBox);
-    this.scene.start(Scene.AutumnTitle);
+    this.scene.start(Scene.AutumnSnowman);
   }
 }

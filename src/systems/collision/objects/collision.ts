@@ -1,5 +1,6 @@
 import { getAllChildren } from 'systems/collision/utils/get_all_children';
 import { debugDepth, isDebug } from 'systems/flags';
+import { Movement } from 'systems/movement';
 
 export class Collision extends Phaser.GameObjects.Zone {
   private graphics: Phaser.GameObjects.Graphics;
@@ -13,6 +14,8 @@ export class Collision extends Phaser.GameObjects.Zone {
   public isSolid: boolean = true;
 
   public collisionMask: number = 0x1111;
+
+  public movement: Movement;
 
   constructor(scene: Phaser.Scene, x: number, y: number, width: number, height: number) {
     super(scene, x, y, width, height);

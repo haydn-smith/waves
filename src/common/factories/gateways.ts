@@ -15,7 +15,8 @@ export const createGateway = (
   camera: Camera,
   direction: Phaser.Math.Vector2,
   nextScene: TypeOfScene,
-  currScene: TypeOfScene
+  currScene: TypeOfScene,
+  onEnteredGateway?: () => void
 ) => {
   const trigger = collision(scene, rectangle).notSolid();
 
@@ -47,6 +48,7 @@ export const createGateway = (
             wait(500),
             runCallback(() => player.enableUserInput()),
             runCallback(() => change('not active')),
+            runCallback(() => onEnteredGateway?.()),
           ])
           .destroyWhenComplete()
           .start();

@@ -28,6 +28,8 @@ export const Scene = {
   SummerTitle: 'Summer Title',
   SummerJetty: 'Summer Jetty',
   SummerIceCube: 'Summer Ice Cube',
+  SummerFlower: 'Summer Flower',
+  AutumnTitle: 'Autumn Title',
   UserInterface: 'User Interface',
   Debug: 'Debug',
   DialogBox: 'Dialog Box',
@@ -53,6 +55,7 @@ export const Tilemap = {
   SpringFlower: 'tilemaps/spring_flower_area.json',
   SummerJetty: 'tilemaps/summer_jetty_area.json',
   SummerIceCube: 'tilemaps/summer_ice_cube_area.json',
+  SummerFlower: 'tilemaps/summer_flower_area.json',
 } as const;
 export type KeyOfTilemap = keyof typeof Tilemap;
 export type TypeOfTilemap = (typeof Tilemap)[KeyOfTilemap];
@@ -64,6 +67,7 @@ export type KeyOfTileset = keyof typeof Tileset;
 export type TypeOfTileset = (typeof Tileset)[KeyOfTileset];
 
 export const Sprite = {
+  Unknown: 'sprites/unknown.png',
   Black1px: 'sprites/black_pixel.png',
   White1px: 'sprites/white_pixel.png',
   DebugPlayer: 'sprites/debug_player.png',
@@ -127,6 +131,11 @@ export const Flag = {
   OtherPenguinCutsceneWatched: 'other_penguin_cutscene_watched',
   SpringWaterFlowerCutsceneWatched: 'spring_water_flower_cutscene_watched',
   SummerWakeUpCutsceneWatched: 'summer_wake_up_cutscene_watched',
+  SummerIceCubeIntroWatched: 'SummerIceCubeIntroWatched',
+  SummerIceCubeFan1Activated: 'SummerIceCubeFan1Activated',
+  SummerIceCubeFan2Activated: 'SummerIceCubeFan2Activated',
+  SummerIceCubeFan3Activated: 'SummerIceCubeFan3Activated',
+  SummerWaterFlowerCutsceneWatched: 'summer_water_flower_cutscene_watched',
 } as const;
 export type KeyOfFlag = keyof typeof Flag;
 export type TypeOfFlag = (typeof Flag)[KeyOfFlag];

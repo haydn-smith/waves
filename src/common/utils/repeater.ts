@@ -43,6 +43,14 @@ export class Repeater<T> {
     return this.items[this.current];
   }
 
+  public currentItemThenNext(): null | T {
+    const item = this.currentItem();
+
+    this.next();
+
+    return item;
+  }
+
   public onNext(index: number, fn: () => void): Repeater<T> {
     this.onNextHandlers.push([index, fn]);
 

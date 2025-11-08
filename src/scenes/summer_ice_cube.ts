@@ -1,11 +1,17 @@
+import { iceCubeIntro } from 'common/conversations/summer';
 import { createGateway } from 'common/factories/gateways';
+import { createFan1, createFan2, createFan3, createIceCube, createIceWall } from 'common/factories/summer_ice_cube';
 import { Player } from 'common/objects/player';
 import { Tilemap as TilemapObject } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
+import { PlayDialog } from 'common/sequenceables/play_dialog';
 import { logEvent } from 'common/utils/log';
-import { Depth, Scene, Shader, Sprite, Tilemap } from 'constants';
+import { Depth, Flag, Scene, Shader, Sprite, Tilemap } from 'constants';
 import { camera } from 'systems/camera';
+import { checkFlag, setFlag } from 'systems/flags';
+import { runCallback, sequence, wait } from 'systems/sequence';
 import { ui } from 'systems/ui';
+import { DialogBox } from './dialog_box';
 
 export class SummerIceCube extends Phaser.Scene {
   constructor() {
@@ -40,6 +46,41 @@ export class SummerIceCube extends Phaser.Scene {
       ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow4).setPipeline(Shader.Outline))
     );
 
+    const introCutscene = sequence(this).of([
+      runCallback(() => {
+        setFlag(Flag.SummerIceCubeIntroWatched);
+        player.disableUserInput();
+        userInterface.showLetterbox();
+        cam.zoom(2, 1000);
+        cam.pauseFollow();
+        cam.move(map.getPoint('Ice Cube'), 2000);
+      }),
+      wait(2000),
+      new PlayDialog(DialogBox.get(this), iceCubeIntro),
+      wait(500),
+      runCallback(() => {
+        userInterface.showLetterbox();
+        cam.zoom(1, 1000);
+        cam.resumeFollow();
+      }),
+      wait(1000),
+      runCallback(() => {
+        player.enableUserInput();
+      }),
+    ]);
+
+    const iceCube = createIceCube(this, player, map, ySortObjects);
+
+    const iceWall = createIceWall(this, player, map, ySortObjects);
+
+    createFan1(this, player, map, ySortObjects, cam);
+
+    createFan2(this, player, map, ySortObjects, cam);
+
+    createFan3(this, player, map, ySortObjects, cam, iceCube, iceWall);
+
+    // createSnowBarrier();
+
     createGateway(
       this,
       map.getArea('Jetty Area Gateway'),
@@ -47,6 +88,19 @@ export class SummerIceCube extends Phaser.Scene {
       cam,
       Phaser.Math.Vector2.LEFT,
       Scene.SummerJetty,
+      Scene.SummerIceCube,
+      () => {
+        if (!checkFlag(Flag.SummerIceCubeIntroWatched)) introCutscene.destroyWhenComplete().start();
+      }
+    );
+
+    createGateway(
+      this,
+      map.getArea('Flower Area Gateway'),
+      player,
+      cam,
+      Phaser.Math.Vector2.RIGHT,
+      Scene.SummerFlower,
       Scene.SummerIceCube
     );
 

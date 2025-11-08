@@ -139,3 +139,29 @@ export const completeSnowman = [
     line2: ['come this way and watch!'],
   },
 ];
+
+export const iceCubeAboutSnowmanAndPlant = [
+  {
+    image: Sprite.Unknown,
+    line1: ['Yoooo!'],
+    line2: ['How cool was that!'],
+  },
+  {
+    image: Sprite.Unknown,
+    line1: ['...'],
+    line2: ['...Hey...'],
+  },
+  {
+    image: Sprite.Unknown,
+    line1: ["I hope you're little plant is alright."],
+    line2: ['...'],
+  },
+];
+
+export const iceCubeAboutPlant = [
+  {
+    image: Sprite.Unknown,
+    line1: ["I hope you're little plant is alright."],
+    line2: ['...'],
+  },
+];

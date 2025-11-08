@@ -87,6 +87,7 @@ export class Preloader extends Phaser.Scene {
     this.load.tilemapTiledJSON(Tilemap.SummerFlower, Tilemap.SummerFlower);
     this.load.tilemapTiledJSON(Tilemap.AutumnJetty, Tilemap.AutumnJetty);
     this.load.tilemapTiledJSON(Tilemap.AutumnIceCube, Tilemap.AutumnIceCube);
+    this.load.tilemapTiledJSON(Tilemap.AutumnIceCubeWithSnowman, Tilemap.AutumnIceCubeWithSnowman);
     this.load.tilemapTiledJSON(Tilemap.AutumnSnowman, Tilemap.AutumnSnowman);
 
     // Sprites.

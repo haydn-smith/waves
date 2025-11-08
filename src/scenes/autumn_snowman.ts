@@ -41,7 +41,7 @@ export class AutumnSnowman extends Phaser.Scene {
 
     const cam = camera(this);
 
-    createGateway(
+    const gateway = createGateway(
       this,
       map.getArea('Ice Cube Area Gateway'),
       player,
@@ -103,9 +103,19 @@ export class AutumnSnowman extends Phaser.Scene {
             }),
             wait(1000),
             runCallback(() => {
+              gateway.destroy();
               snowman.destroy();
               this.isSnowmanDialogActive = true;
               player.enableUserInput();
+              createGateway(
+                this,
+                map.getArea('Ice Cube Area Gateway'),
+                player,
+                cam,
+                Phaser.Math.Vector2.UP,
+                Scene.AutumnIceCubeWithSnowman,
+                Scene.AutumnSnowman
+              );
             }),
           ])
           .destroyWhenComplete();

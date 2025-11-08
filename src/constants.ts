@@ -34,6 +34,7 @@ export const Scene = {
   AutumnIceCube: 'Autumn Ice Cube',
   AutumnFlower: 'Autumn Flower',
   AutumnSnowman: 'Autumn Snowman',
+  AutumnIceCubeWithSnowman: 'Autumn Ice Cube With Snowman',
   UserInterface: 'User Interface',
   Debug: 'Debug',
   DialogBox: 'Dialog Box',
@@ -62,6 +63,7 @@ export const Tilemap = {
   SummerFlower: 'tilemaps/summer_flower_area.json',
   AutumnJetty: 'tilemaps/autumn_jetty_area.json',
   AutumnIceCube: 'tilemaps/autumn_ice_cube_area.json',
+  AutumnIceCubeWithSnowman: 'tilemaps/autumn_ice_cube_with_snowman_area.json',
   AutumnSnowman: 'tilemaps/autumn_snowman_area.json',
   AutumnFlower: 'tilemaps/autumn_flower_area.json',
 } as const;

@@ -28,9 +28,9 @@ export const createGateway = (
 
   const prevScene = getData('previousScene');
 
-  ui(scene).black();
+  // ui(scene).black();
 
-  states(scene, 'initial')
+  const state = states(scene, 'initial')
     .add('initial', ({ change }) => {
       if (prevScene === nextScene) {
         sequence(scene)
@@ -75,4 +75,6 @@ export const createGateway = (
           .start();
       }
     });
+
+  return state;
 };

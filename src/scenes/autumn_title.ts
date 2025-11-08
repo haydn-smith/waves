@@ -51,7 +51,7 @@ export class AutumnTitle extends Phaser.Scene {
         }),
         runCallback(() => this.ui.fadeOut(1000)),
         wait(1000),
-        runCallback(() => this.scene.start(Scene.SpringJetty)),
+        runCallback(() => this.scene.start(Scene.AutumnJetty)),
       ])
       .start()
       .destroyWhenComplete();

@@ -30,6 +30,10 @@ export const Scene = {
   SummerIceCube: 'Summer Ice Cube',
   SummerFlower: 'Summer Flower',
   AutumnTitle: 'Autumn Title',
+  AutumnJetty: 'Autumn Jetty',
+  AutumnIceCube: 'Autumn Ice Cube',
+  AutumnFlower: 'Autumn Flower',
+  AutumnSnowman: 'Autumn Snowman',
   UserInterface: 'User Interface',
   Debug: 'Debug',
   DialogBox: 'Dialog Box',
@@ -56,6 +60,9 @@ export const Tilemap = {
   SummerJetty: 'tilemaps/summer_jetty_area.json',
   SummerIceCube: 'tilemaps/summer_ice_cube_area.json',
   SummerFlower: 'tilemaps/summer_flower_area.json',
+  AutumnJetty: 'tilemaps/autumn_jetty_area.json',
+  AutumnIceCube: 'tilemaps/autumn_ice_cube_area.json',
+  AutumnFlower: 'tilemaps/autumn_flower_area.json',
 } as const;
 export type KeyOfTilemap = keyof typeof Tilemap;
 export type TypeOfTilemap = (typeof Tilemap)[KeyOfTilemap];
@@ -136,6 +143,7 @@ export const Flag = {
   SummerIceCubeFan2Activated: 'SummerIceCubeFan2Activated',
   SummerIceCubeFan3Activated: 'SummerIceCubeFan3Activated',
   SummerWaterFlowerCutsceneWatched: 'summer_water_flower_cutscene_watched',
+  AutumnWakeUpCutsceneWatched: 'autumn_wake_up_cutscene_watched',
 } as const;
 export type KeyOfFlag = keyof typeof Flag;
 export type TypeOfFlag = (typeof Flag)[KeyOfFlag];

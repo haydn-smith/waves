@@ -1,5 +1,7 @@
 import * as Sentry from '@sentry/browser';
 import 'phaser';
+import { AutumnIceCube } from 'scenes/autumn_ice_cube';
+import { AutumnJetty } from 'scenes/autumn_jetty';
 import { AutumnTitle } from 'scenes/autumn_title';
 
 import { Boot } from 'scenes/boot';
@@ -72,6 +74,8 @@ const config: Phaser.Types.Core.GameConfig = {
     SummerIceCube,
     SummerFlower,
     AutumnTitle,
+    AutumnJetty,
+    AutumnIceCube,
   ],
 };
 

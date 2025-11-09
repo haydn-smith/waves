@@ -196,3 +196,11 @@ export const snowmanAfterLifingBarrier2 = [
     line2: ['Thank ye for helping me out!'],
   },
 ];
+
+export const autumnFlower = [
+  {
+    image: Sprite.Unknown,
+    line1: ['...'],
+    line2: ['...Still hanging in there.'],
+  },
+];

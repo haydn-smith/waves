@@ -1,0 +1,222 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "spring_flower_area.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "": {
+            "scaleInDock": 4,
+            "scaleInEditor": 11
+        },
+        "autumn_flower_area.tmx": {
+            "scale": 2,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 314.5,
+                "y": 203.5
+            }
+        },
+        "autumn_flower_area.tmx#snow": {
+            "scaleInDock": 1
+        },
+        "autumn_ice_cube_area.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 4,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 258,
+                "y": 257
+            }
+        },
+        "autumn_ice_cube_area.tmx#snow": {
+            "scaleInDock": 5.5
+        },
+        "autumn_ice_cube_with_snowman_area.tmx": {
+            "scale": 1.4064453125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 253.1203999444522,
+                "y": 251.69837522566309
+            }
+        },
+        "autumn_ice_cube_with_snowman_area.tmx#snow": {
+            "scaleInDock": 1
+        },
+        "autumn_jetty_area.tmx": {
+            "scale": 4,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 242.5,
+                "y": 260
+            }
+        },
+        "autumn_jetty_area.tmx#snow": {
+            "scaleInDock": 1
+        },
+        "autumn_snowman_area.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 16,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 240.6875,
+                "y": 286.4375
+            }
+        },
+        "autumn_snowman_area.tmx#snow": {
+            "scaleInDock": 5.5
+        },
+        "debug.tmx": {
+            "scale": 2.6956249999999997,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 159.8887085555298,
+                "y": 159.8887085555298
+            }
+        },
+        "debug.tmx#debug": {
+            "scaleInDock": 1
+        },
+        "debug.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 11
+        },
+        "snow.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 11
+        },
+        "spring_flower_area.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 8,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 224.5,
+                "y": 216.375
+            }
+        },
+        "spring_flower_area.tmx#snow": {
+            "scaleInDock": 5.5
+        },
+        "spring_ice_cube_area.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 4,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 256,
+                "y": 256
+            }
+        },
+        "spring_ice_cube_area.tmx#snow": {
+            "scaleInDock": 5.5,
+            "scaleInEditor": 11
+        },
+        "spring_jetty_area.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 3,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 256,
+                "y": 255.99999999999997
+            }
+        },
+        "spring_jetty_area.tmx#snow": {
+            "scaleInDock": 5.5
+        },
+        "summer_flower_area.tmx": {
+            "scale": 4,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 298,
+                "y": 247
+            }
+        },
+        "summer_flower_area.tmx#snow": {
+            "scaleInDock": 1
+        },
+        "summer_ice_cube_area.tmx": {
+            "scale": 5.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 124.54545454545455,
+                "y": 301.45454545454544
+            }
+        },
+        "summer_ice_cube_area.tmx#snow": {
+            "scaleInDock": 1
+        },
+        "summer_jetty_area.tmx": {
+            "scale": 5.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 252.9090909090909,
+                "y": 268.54545454545456
+            }
+        },
+        "summer_jetty_area.tmx#snow": {
+            "scaleInDock": 1
+        },
+        "test.tmx": {
+            "scale": 2,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 512,
+                "y": 509
+            }
+        },
+        "test.tmx#snow": {
+            "scaleInDock": 4
+        }
+    },
+    "last.exportedFilePath": "/Users/haydnsmith/src/waves/public/assets/tilemaps",
+    "last.imagePath": "/Users/haydnsmith/src/waves/public/assets/tilemaps",
+    "map.height": 64,
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 8,
+    "map.tileWidth": 8,
+    "map.width": 64,
+    "openFiles": [
+        "test.tmx",
+        "snow.tsx",
+        "debug.tsx",
+        "debug.tmx",
+        "spring_jetty_area.tmx",
+        "spring_ice_cube_area.tmx",
+        "spring_flower_area.tmx"
+    ],
+    "project": "waves.tiled-project",
+    "property.type": "bool",
+    "recentFiles": [
+        "spring_flower_area.tmx",
+        "test.tmx",
+        "snow.tsx",
+        "debug.tsx",
+        "debug.tmx",
+        "spring_jetty_area.tmx",
+        "spring_ice_cube_area.tmx",
+        "autumn_ice_cube_area.tmx",
+        "summer_flower_area.tmx",
+        "summer_jetty_area.tmx",
+        "summer_ice_cube_area.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.margin": 16,
+    "tileset.spacing": 16,
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}

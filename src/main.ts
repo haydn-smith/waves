@@ -1,5 +1,6 @@
 import * as Sentry from '@sentry/browser';
 import 'phaser';
+import { AutumnFlower } from 'scenes/autumn_flower';
 import { AutumnIceCube } from 'scenes/autumn_ice_cube';
 import { AutumnIceCubeWithSnowman } from 'scenes/autumn_ice_cube_with_snowman';
 import { AutumnJetty } from 'scenes/autumn_jetty';
@@ -80,6 +81,7 @@ const config: Phaser.Types.Core.GameConfig = {
     AutumnIceCube,
     AutumnIceCubeWithSnowman,
     AutumnSnowman,
+    AutumnFlower,
   ],
 };
 

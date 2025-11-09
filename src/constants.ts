@@ -154,6 +154,7 @@ export const Flag = {
   AutumnSnowmanSnow3Completed: 'AutumnSnowmanSnow3Completed',
   AutumnSnowmanCompleted: 'AutumnSnowmanCompleted',
   AutumnSnowBarrierLiftCutsceneWatched: 'AutumnSnowBarrierLiftCutsceneWatched',
+  AutumnWaterFlowerCutsceneWatched: 'autumn_water_flower_cutscene_watched',
 } as const;
 export type KeyOfFlag = keyof typeof Flag;
 export type TypeOfFlag = (typeof Flag)[KeyOfFlag];

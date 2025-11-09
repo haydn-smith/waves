@@ -165,3 +165,34 @@ export const iceCubeAboutPlant = [
     line2: ['...'],
   },
 ];
+
+export const snowmanAfterLifingBarrier1 = [
+  {
+    image: Sprite.Unknown,
+    line1: ['See! There you go! ', 'Magic!'],
+    line2: ['...'],
+  },
+  {
+    image: Sprite.Unknown,
+    line1: ["Listen ol' chap, ", 'winter is coming up presently.'],
+    line2: ['...', 'And it can get rough.'],
+  },
+  {
+    image: Sprite.Unknown,
+    line1: ['You need to be prepared for the worst.'],
+    line2: ['...'],
+  },
+  {
+    image: Sprite.Unknown,
+    line1: ['All the same...'],
+    line2: ['Thank ye for helping me out!'],
+  },
+];
+
+export const snowmanAfterLifingBarrier2 = [
+  {
+    image: Sprite.Unknown,
+    line1: ['...'],
+    line2: ['Thank ye for helping me out!'],
+  },
+];

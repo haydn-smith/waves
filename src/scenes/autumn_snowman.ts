@@ -41,15 +41,25 @@ export class AutumnSnowman extends Phaser.Scene {
 
     const cam = camera(this);
 
-    const gateway = createGateway(
-      this,
-      map.getArea('Ice Cube Area Gateway'),
-      player,
-      cam,
-      Phaser.Math.Vector2.UP,
-      Scene.AutumnIceCube,
-      Scene.AutumnSnowman
-    );
+    const gateway = checkFlag(Flag.AutumnSnowmanCompleted)
+      ? createGateway(
+          this,
+          map.getArea('Ice Cube Area Gateway'),
+          player,
+          cam,
+          Phaser.Math.Vector2.UP,
+          Scene.AutumnIceCubeWithSnowman,
+          Scene.AutumnSnowman
+        )
+      : createGateway(
+          this,
+          map.getArea('Ice Cube Area Gateway'),
+          player,
+          cam,
+          Phaser.Math.Vector2.UP,
+          Scene.AutumnIceCube,
+          Scene.AutumnSnowman
+        );
 
     collisionBorder(this, map.getArea('Push Area')).forEach((c) => c.mask(CollisionMask.Pushable));
 

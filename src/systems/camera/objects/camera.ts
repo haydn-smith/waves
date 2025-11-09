@@ -104,6 +104,12 @@ export class Camera extends Phaser.GameObjects.GameObject {
       this.pauseFollow();
     }
 
+    if (duration === 0) {
+      this.position = position.clone();
+
+      return this;
+    }
+
     this.scene.tweens.add({
       targets: this.position,
       ease: 'Cubic',

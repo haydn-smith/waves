@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "spring_flower_area.tmx",
+    "activeFile": "summer_flower_area.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -16,8 +16,8 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 314.5,
-                "y": 203.5
+                "x": 256,
+                "y": 256
             }
         },
         "autumn_flower_area.tmx#snow": {
@@ -41,7 +41,7 @@
             "scale": 1.4064453125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 253.1203999444522,
+                "x": 255.96444938203027,
                 "y": 251.69837522566309
             }
         },
@@ -99,8 +99,8 @@
             "scale": 8,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 224.5,
-                "y": 216.375
+                "x": 256,
+                "y": 256
             }
         },
         "spring_flower_area.tmx#snow": {
@@ -136,11 +136,11 @@
             "scaleInDock": 5.5
         },
         "summer_flower_area.tmx": {
-            "scale": 4,
+            "scale": 2,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 298,
-                "y": 247
+                "x": 395.5,
+                "y": 244.5
             }
         },
         "summer_flower_area.tmx#snow": {
@@ -189,18 +189,18 @@
     "map.tileWidth": 8,
     "map.width": 64,
     "openFiles": [
-        "test.tmx",
-        "snow.tsx",
-        "debug.tsx",
-        "debug.tmx",
-        "spring_jetty_area.tmx",
-        "spring_ice_cube_area.tmx",
-        "spring_flower_area.tmx"
+        "autumn_ice_cube_with_snowman_area.tmx",
+        "autumn_flower_area.tmx",
+        "spring_flower_area.tmx",
+        "summer_flower_area.tmx"
     ],
     "project": "waves.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "autumn_ice_cube_with_snowman_area.tmx",
+        "autumn_flower_area.tmx",
         "spring_flower_area.tmx",
+        "summer_flower_area.tmx",
         "test.tmx",
         "snow.tsx",
         "debug.tsx",
@@ -208,9 +208,7 @@
         "spring_jetty_area.tmx",
         "spring_ice_cube_area.tmx",
         "autumn_ice_cube_area.tmx",
-        "summer_flower_area.tmx",
-        "summer_jetty_area.tmx",
-        "summer_ice_cube_area.tmx"
+        "summer_jetty_area.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.margin": 16,

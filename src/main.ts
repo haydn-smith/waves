@@ -20,6 +20,8 @@ import { SummerFlower } from 'scenes/summer_flower';
 import { SummerIceCube } from 'scenes/summer_ice_cube';
 import { SummerJetty } from 'scenes/summer_jetty';
 import { SummerTitle } from 'scenes/summer_title';
+import { WinterIceCube } from 'scenes/winter_ice_cube';
+import { WinterTitle } from 'scenes/winter_title';
 import { setDebug } from 'systems/flags';
 
 // @ts-expect-error Injected environment variable.
@@ -82,6 +84,8 @@ const config: Phaser.Types.Core.GameConfig = {
     AutumnIceCubeWithSnowman,
     AutumnSnowman,
     AutumnFlower,
+    WinterTitle,
+    WinterIceCube,
   ],
 };
 

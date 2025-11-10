@@ -35,6 +35,8 @@ export const Scene = {
   AutumnFlower: 'Autumn Flower',
   AutumnSnowman: 'Autumn Snowman',
   AutumnIceCubeWithSnowman: 'Autumn Ice Cube With Snowman',
+  WinterTitle: 'Winter Title',
+  WinterIceCube: 'Winter Ice Cube',
   UserInterface: 'User Interface',
   Debug: 'Debug',
   DialogBox: 'Dialog Box',
@@ -66,6 +68,7 @@ export const Tilemap = {
   AutumnIceCubeWithSnowman: 'tilemaps/autumn_ice_cube_with_snowman_area.json',
   AutumnSnowman: 'tilemaps/autumn_snowman_area.json',
   AutumnFlower: 'tilemaps/autumn_flower_area.json',
+  WinterIceCube: 'tilemaps/winter_ice_cube_area.json',
 } as const;
 export type KeyOfTilemap = keyof typeof Tilemap;
 export type TypeOfTilemap = (typeof Tilemap)[KeyOfTilemap];

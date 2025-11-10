@@ -4,11 +4,10 @@ import { Noise } from 'common/objects/shaders/noise';
 import { Outline } from 'common/objects/shaders/outline';
 import { SoftLight } from 'common/objects/shaders/soft_light';
 import { Vignette } from 'common/objects/shaders/vignette';
-import { setData } from 'common/utils/data';
 import { logEvent } from 'common/utils/log';
 import { scaled } from 'common/utils/scaled';
-import { Animation, Depth, Flag, Font, Scene, Shader, Sound, Sprite, Tilemap, Tileset } from 'constants';
-import { setDebug, setFlag } from 'systems/flags';
+import { Animation, Depth, Font, Scene, Shader, Sound, Sprite, Tilemap, Tileset } from 'constants';
+import { setDebug } from 'systems/flags';
 import { startUI } from 'systems/ui';
 
 export class Preloader extends Phaser.Scene {
@@ -90,6 +89,7 @@ export class Preloader extends Phaser.Scene {
     this.load.tilemapTiledJSON(Tilemap.AutumnIceCubeWithSnowman, Tilemap.AutumnIceCubeWithSnowman);
     this.load.tilemapTiledJSON(Tilemap.AutumnSnowman, Tilemap.AutumnSnowman);
     this.load.tilemapTiledJSON(Tilemap.AutumnFlower, Tilemap.AutumnFlower);
+    this.load.tilemapTiledJSON(Tilemap.WinterIceCube, Tilemap.WinterIceCube);
 
     // Sprites.
     this.load.image(Sprite.Black1px, Sprite.Black1px);
@@ -179,12 +179,12 @@ export class Preloader extends Phaser.Scene {
     localStorage.clear();
     setDebug(true);
     // setFlag(Flag.SummerWakeUpCutsceneWatched);
-    setFlag(Flag.AutumnSnowmanSnow2Completed);
-    setFlag(Flag.AutumnSnowmanCompleted);
-    setData('previousScene', Scene.AutumnSnowman);
+    // setFlag(Flag.AutumnSnowmanSnow2Completed);
+    // setFlag(Flag.AutumnSnowmanCompleted);
+    // setData('previousScene', Scene.AutumnSnowman);
 
     // Start game.
     this.scene.run(Scene.DialogBox);
-    this.scene.start(Scene.AutumnIceCubeWithSnowman);
+    this.scene.start(Scene.WinterTitle);
   }
 }

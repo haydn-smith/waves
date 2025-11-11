@@ -22,6 +22,33 @@ export const callbackOnEnterOnce = (scene: Phaser.Scene, trigger: Collision, pla
   return state;
 };
 
+export const createCallbackOnEnterAndExit = (
+  scene: Phaser.Scene,
+  trigger: Collision,
+  other: Collision,
+  enterFn: () => void,
+  exitFn?: () => void,
+  collidingFn?: (delta: number) => void
+) => {
+  const state = states(scene, 'idle')
+    .add('idle', ({ change }) => {
+      if (trigger.intersects(other)) {
+        enterFn();
+        change('active');
+      }
+    })
+    .add('active', ({ change, delta }) => {
+      collidingFn?.(delta);
+
+      if (!trigger.intersects(other)) {
+        exitFn?.();
+        change('idle');
+      }
+    });
+
+  return state;
+};
+
 export const createDialogBoxStates = (
   scene: Phaser.Scene,
   player: Player,

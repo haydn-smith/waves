@@ -1,4 +1,5 @@
 import { createGateway } from 'common/factories/gateways';
+import { createIceCube, createSnowman, createStorm } from 'common/factories/winter_ice_cube';
 import { Player } from 'common/objects/player';
 import { Tilemap as TilemapObject } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
@@ -83,6 +84,12 @@ export class WinterIceCube extends Phaser.Scene {
       ])
       .destroyWhenComplete()
       .start();
+
+    createSnowman(this, this.player, map, this.ySortObjects);
+
+    createIceCube(this, this.player, map, this.ySortObjects);
+
+    createStorm(this, this.player, map, this.camera);
   }
 
   update() {}

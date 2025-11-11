@@ -209,6 +209,17 @@
                  "width":0,
                  "x":343,
                  "y":296
+                }, 
+                {
+                 "height":143,
+                 "id":26,
+                 "name":"Storm Area",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":208,
+                 "x":112,
+                 "y":217
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -217,7 +228,7 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":26,
+ "nextobjectid":27,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

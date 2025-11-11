@@ -177,6 +177,8 @@ export class Movement extends Phaser.GameObjects.GameObject {
 
     const eased = this.easeFn(normalized);
 
+    this.velocity.limit(this.speed);
+
     this.easedVelocity = this.velocity
       .clone()
       .normalize()

@@ -38,6 +38,8 @@ export const Scene = {
   WinterTitle: 'Winter Title',
   WinterIceCube: 'Winter Ice Cube',
   WinterFlower: 'Winter Flower',
+  SpringAgainTitle: 'Spring Again Title',
+  SpringAgainJetty: 'Spring Again Jetty',
   UserInterface: 'User Interface',
   Debug: 'Debug',
   DialogBox: 'Dialog Box',
@@ -71,6 +73,7 @@ export const Tilemap = {
   AutumnFlower: 'tilemaps/autumn_flower_area.json',
   WinterIceCube: 'tilemaps/winter_ice_cube_area.json',
   WinterFlower: 'tilemaps/winter_flower_area.json',
+  SpringAgainJetty: 'tilemaps/spring_again_jetty_area.json',
 } as const;
 export type KeyOfTilemap = keyof typeof Tilemap;
 export type TypeOfTilemap = (typeof Tilemap)[KeyOfTilemap];

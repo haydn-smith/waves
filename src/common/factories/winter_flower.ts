@@ -42,7 +42,7 @@ export const createFlower = (
       wait(3000),
       runCallback(() => ui(scene).fadeOut(3000)),
       wait(3000),
-      runCallback(() => scene.scene.start(Scene.AutumnTitle)),
+      runCallback(() => scene.scene.start(Scene.SpringAgainTitle)),
     ])
     .destroyWhenComplete();
 

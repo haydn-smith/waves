@@ -12,6 +12,8 @@ import { Debug } from 'scenes/debug';
 import { DialogBox } from 'scenes/dialog_box';
 import { MainMenu } from 'scenes/main_menu';
 import { Preloader } from 'scenes/preloader';
+import { SpringAgainJetty } from 'scenes/spring_again_jetty';
+import { SpringAgainTitle } from 'scenes/spring_again_title';
 import { SpringFlower } from 'scenes/spring_flower';
 import { SpringIceCube } from 'scenes/spring_ice_cube';
 import { SpringJetty } from 'scenes/spring_jetty';
@@ -88,6 +90,8 @@ const config: Phaser.Types.Core.GameConfig = {
     WinterTitle,
     WinterIceCube,
     WinterFlower,
+    SpringAgainTitle,
+    SpringAgainJetty,
   ],
 };
 

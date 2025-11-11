@@ -92,6 +92,17 @@
             "scaleInDock": 1,
             "scaleInEditor": 11
         },
+        "spring_again_jetty_area.tmx": {
+            "scale": 5.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 347.81818181818187,
+                "y": 255.45454545454544
+            }
+        },
+        "spring_again_jetty_area.tmx#snow": {
+            "scaleInDock": 1
+        },
         "spring_flower_area.tmx": {
             "expandedObjectLayers": [
                 2
@@ -180,11 +191,11 @@
             "scaleInDock": 4
         },
         "winter_flower_area.tmx": {
-            "scale": 1.4064453125,
-            "selectedLayer": 0,
+            "scale": 1.5,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 308.5793639772254,
-                "y": 260.94153589779205
+                "x": 331.33333333333337,
+                "y": 237.33333333333337
             }
         },
         "winter_flower_area.tmx#snow": {

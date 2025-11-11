@@ -81,7 +81,6 @@
         {
          "draworder":"topdown",
          "id":2,
-         "locked":true,
          "name":"objects",
          "objects":[
                 {
@@ -93,7 +92,7 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":376,
+                 "x":249,
                  "y":256
                 }, 
                 {
@@ -117,8 +116,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":244,
-                 "y":234
+                 "x":257,
+                 "y":236
                 }, 
                 {
                  "height":0,
@@ -129,8 +128,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":258,
-                 "y":277
+                 "x":244,
+                 "y":286
                 }, 
                 {
                  "height":0,
@@ -141,8 +140,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":292,
-                 "y":235
+                 "x":284,
+                 "y":229
                 }, 
                 {
                  "height":0,
@@ -153,8 +152,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":295,
-                 "y":271
+                 "x":290,
+                 "y":290
                 }, 
                 {
                  "height":0,
@@ -166,41 +165,7 @@
                  "visible":true,
                  "width":0,
                  "x":218,
-                 "y":270
-                }, 
-                {
-                 "height":0,
-                 "id":8,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":136,
-                 "y":248
-                }, 
-                {
-                 "height":16,
-                 "id":10,
-                 "name":"Ice Cube Area Trigger",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":160,
-                 "y":249
-                }, 
-                {
-                 "height":0,
-                 "id":11,
-                 "name":"Other Penguin",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":208,
-                 "y":256
+                 "y":278
                 }, 
                 {
                  "height":17,
@@ -214,99 +179,85 @@
                  "y":248
                 }, 
                 {
-                 "height":29,
-                 "id":13,
-                 "name":"Other Penguin Conversation Trigger",
+                 "height":47,
+                 "id":21,
+                 "name":"Snow Barrier Interaction",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":26,
+                 "x":208,
+                 "y":225
+                }, 
+                {
+                 "height":24,
+                 "id":22,
+                 "name":"Snowman Interaction",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
-                 "x":208,
-                 "y":242
+                 "x":312,
+                 "y":217
                 }, 
                 {
                  "height":0,
-                 "id":14,
-                 "name":"Player Spot for Conversation",
+                 "id":23,
+                 "name":"Snowman",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":236,
-                 "y":256
+                 "x":324,
+                 "y":229
                 }, 
                 {
                  "height":0,
-                 "id":15,
-                 "name":"",
+                 "id":24,
+                 "name":"Snowman Swim To",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":175,
-                 "y":279
+                 "x":388,
+                 "y":228
+                }, 
+                {
+                 "height":24,
+                 "id":25,
+                 "name":"Ice Cube Interaction",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":24,
+                 "x":312,
+                 "y":272
                 }, 
                 {
                  "height":0,
-                 "id":16,
-                 "name":"Other Penguin Nav 1",
+                 "id":26,
+                 "name":"Ice Cube",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":216,
-                 "y":256
+                 "x":324,
+                 "y":284
                 }, 
                 {
                  "height":0,
-                 "id":17,
-                 "name":"Other Penguin Nav 2",
+                 "id":27,
+                 "name":"Ice Cube Swim To",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":224,
-                 "y":245
-                }, 
-                {
-                 "height":0,
-                 "id":18,
-                 "name":"Other Penguin Nav 3",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":243,
-                 "y":245
-                }, 
-                {
-                 "height":0,
-                 "id":19,
-                 "name":"Other Penguin Nav 4",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":260,
-                 "y":256
-                }, 
-                {
-                 "height":0,
-                 "id":20,
-                 "name":"Other Penguin Nav 5",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":392,
-                 "y":256
+                 "x":388,
+                 "y":283
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -315,7 +266,7 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":21,
+ "nextobjectid":28,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

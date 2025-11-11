@@ -56,7 +56,7 @@ export class WinterIceCube extends Phaser.Scene {
       this.camera,
       Phaser.Math.Vector2.RIGHT,
       Scene.AutumnFlower,
-      Scene.AutumnIceCube
+      Scene.WinterIceCube
     );
 
     ui(this).black();

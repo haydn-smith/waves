@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "summer_flower_area.tmx",
+    "activeFile": "winter_ice_cube_area.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -178,6 +178,17 @@
         },
         "test.tmx#snow": {
             "scaleInDock": 4
+        },
+        "winter_ice_cube_area.tmx": {
+            "scale": 5.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 367.81818181818187,
+                "y": 287.0909090909091
+            }
+        },
+        "winter_ice_cube_area.tmx#snow": {
+            "scaleInDock": 1
         }
     },
     "last.exportedFilePath": "/Users/haydnsmith/src/waves/public/assets/tilemaps",
@@ -192,7 +203,8 @@
         "autumn_ice_cube_with_snowman_area.tmx",
         "autumn_flower_area.tmx",
         "spring_flower_area.tmx",
-        "summer_flower_area.tmx"
+        "summer_flower_area.tmx",
+        "winter_ice_cube_area.tmx"
     ],
     "project": "waves.tiled-project",
     "property.type": "bool",
@@ -201,14 +213,14 @@
         "autumn_flower_area.tmx",
         "spring_flower_area.tmx",
         "summer_flower_area.tmx",
+        "winter_ice_cube_area.tmx",
         "test.tmx",
         "snow.tsx",
         "debug.tsx",
         "debug.tmx",
         "spring_jetty_area.tmx",
         "spring_ice_cube_area.tmx",
-        "autumn_ice_cube_area.tmx",
-        "summer_jetty_area.tmx"
+        "autumn_ice_cube_area.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.margin": 16,

@@ -81,9 +81,11 @@ export const createStorm = (scene: Phaser.Scene, player: Player, map: Tilemap, c
       camera.shake(2, 0, -1, 200);
     },
     (delta: number) => {
-      player.movement.setVelocity(
-        vec2(player.movement.velocity().x + 16 * delta * 0.001, player.movement.velocity().y)
-      );
+      if (player.movement.velocity().x >= 0) {
+        player.movement.setVelocity(
+          vec2(player.movement.velocity().x + 16 * delta * 0.001, player.movement.velocity().y)
+        );
+      }
     }
   );
 };

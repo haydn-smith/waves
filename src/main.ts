@@ -20,6 +20,7 @@ import { SummerFlower } from 'scenes/summer_flower';
 import { SummerIceCube } from 'scenes/summer_ice_cube';
 import { SummerJetty } from 'scenes/summer_jetty';
 import { SummerTitle } from 'scenes/summer_title';
+import { WinterFlower } from 'scenes/winter_flower';
 import { WinterIceCube } from 'scenes/winter_ice_cube';
 import { WinterTitle } from 'scenes/winter_title';
 import { setDebug } from 'systems/flags';
@@ -86,6 +87,7 @@ const config: Phaser.Types.Core.GameConfig = {
     AutumnFlower,
     WinterTitle,
     WinterIceCube,
+    WinterFlower,
   ],
 };
 

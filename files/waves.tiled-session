@@ -139,8 +139,8 @@
             "scale": 2,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 256,
-                "y": 256
+                "x": 395.5,
+                "y": 244.5
             }
         },
         "summer_flower_area.tmx#snow": {
@@ -179,12 +179,26 @@
         "test.tmx#snow": {
             "scaleInDock": 4
         },
+        "winter_flower_area.tmx": {
+            "scale": 1.4064453125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 308.5793639772254,
+                "y": 260.94153589779205
+            }
+        },
+        "winter_flower_area.tmx#snow": {
+            "scaleInDock": 1
+        },
         "winter_ice_cube_area.tmx": {
-            "scale": 5.5,
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 3,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 367.81818181818187,
-                "y": 287.0909090909091
+                "x": 211.33333333333331,
+                "y": 316
             }
         },
         "winter_ice_cube_area.tmx#snow": {

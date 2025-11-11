@@ -37,6 +37,7 @@ export const Scene = {
   AutumnIceCubeWithSnowman: 'Autumn Ice Cube With Snowman',
   WinterTitle: 'Winter Title',
   WinterIceCube: 'Winter Ice Cube',
+  WinterFlower: 'Winter Flower',
   UserInterface: 'User Interface',
   Debug: 'Debug',
   DialogBox: 'Dialog Box',
@@ -69,6 +70,7 @@ export const Tilemap = {
   AutumnSnowman: 'tilemaps/autumn_snowman_area.json',
   AutumnFlower: 'tilemaps/autumn_flower_area.json',
   WinterIceCube: 'tilemaps/winter_ice_cube_area.json',
+  WinterFlower: 'tilemaps/winter_flower_area.json',
 } as const;
 export type KeyOfTilemap = keyof typeof Tilemap;
 export type TypeOfTilemap = (typeof Tilemap)[KeyOfTilemap];
@@ -158,6 +160,8 @@ export const Flag = {
   AutumnSnowmanCompleted: 'AutumnSnowmanCompleted',
   AutumnSnowBarrierLiftCutsceneWatched: 'AutumnSnowBarrierLiftCutsceneWatched',
   AutumnWaterFlowerCutsceneWatched: 'autumn_water_flower_cutscene_watched',
+  WinterIntroCutsceneWatched: 'WinterIntroCutsceneWatched',
+  WinterWaterFlowerCutsceneWatched: 'WinterWaterCutsceneWatched',
 } as const;
 export type KeyOfFlag = keyof typeof Flag;
 export type TypeOfFlag = (typeof Flag)[KeyOfFlag];

@@ -7,7 +7,6 @@ import { Vignette } from 'common/objects/shaders/vignette';
 import { logEvent } from 'common/utils/log';
 import { scaled } from 'common/utils/scaled';
 import { Animation, Depth, Font, Scene, Shader, Sound, Sprite, Tilemap, Tileset } from 'constants';
-import { setDebug } from 'systems/flags';
 import { startUI } from 'systems/ui';
 
 export class Preloader extends Phaser.Scene {
@@ -180,7 +179,7 @@ export class Preloader extends Phaser.Scene {
 
     // Debug setup.
     localStorage.clear();
-    setDebug(true);
+    // setDebug(true);
     // setFlag(Flag.SummerWakeUpCutsceneWatched);
     // setFlag(Flag.AutumnSnowmanSnow2Completed);
     // setFlag(Flag.AutumnSnowmanCompleted);
@@ -188,6 +187,6 @@ export class Preloader extends Phaser.Scene {
 
     // Start game.
     this.scene.run(Scene.DialogBox);
-    this.scene.start(Scene.SpringAgainJetty);
+    this.scene.start(Scene.MainMenu);
   }
 }

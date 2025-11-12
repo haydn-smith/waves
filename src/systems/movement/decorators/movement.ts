@@ -104,4 +104,8 @@ export class Movement {
   public destroy(): void {
     this.movement.destroy();
   }
+
+  public toGameObject() {
+    return this.movement;
+  }
 }

@@ -82,3 +82,16 @@ export const snowBarrier2 = [
     line2: ['(you wonder if the little plant is doing okay)'],
   },
 ];
+
+export const playerLeaves = [
+  {
+    image: Sprite.Unknown,
+    line1: ['...'],
+    line2: ['(it seems your time here is done)'],
+  },
+  {
+    image: Sprite.Unknown,
+    line1: ['...'],
+    line2: ['(the next adventure awaits)'],
+  },
+];

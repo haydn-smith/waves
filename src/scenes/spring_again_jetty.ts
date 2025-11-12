@@ -1,4 +1,9 @@
-import { createIceCube, createSnowBarrier, createSnowman } from 'common/factories/spring_again_jetty';
+import {
+  createFinalCutscene,
+  createIceCube2,
+  createSnowBarrier,
+  createSnowman2,
+} from 'common/factories/spring_again_jetty';
 import { Player } from 'common/objects/player';
 import { Tilemap as TilemapObject } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
@@ -85,11 +90,13 @@ export class SpringAgainJetty extends Phaser.Scene {
       .start()
       .destroyWhenComplete();
 
-    const snowman = createSnowman(this, this.player, map, this.camera);
+    const snowman = createSnowman2(this, this.player, map, this.camera);
 
-    const iceCube = createIceCube(this, this.player, map, this.camera);
+    const iceCube = createIceCube2(this, this.player, map, this.camera);
 
     createSnowBarrier(this, this.player, map);
+
+    createFinalCutscene(this, map, this.camera, this.player, snowman, iceCube);
 
     this.ySortObjects.add(snowman);
     this.ySortObjects.add(iceCube);

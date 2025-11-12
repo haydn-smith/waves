@@ -27,8 +27,8 @@ export class Camera {
     return this;
   }
 
-  public move(position: Phaser.Math.Vector2, duration = 0): Camera {
-    this.camera.move(position, duration);
+  public move(position: Phaser.Math.Vector2, duration = 0, ease: string | Function = 'Cubic'): Camera {
+    this.camera.move(position, duration, ease);
 
     return this;
   }

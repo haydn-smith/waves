@@ -99,7 +99,7 @@ export class Camera extends Phaser.GameObjects.GameObject {
     return this;
   }
 
-  public move(position: Phaser.Math.Vector2, duration = 1000): Camera {
+  public move(position: Phaser.Math.Vector2, duration = 1000, ease: string | Function = 'Cubic'): Camera {
     if (this.target) {
       this.pauseFollow();
     }
@@ -112,7 +112,7 @@ export class Camera extends Phaser.GameObjects.GameObject {
 
     this.scene.tweens.add({
       targets: this.position,
-      ease: 'Cubic',
+      ease,
       duration,
       props: {
         x: { to: position.x, from: this.position.x },

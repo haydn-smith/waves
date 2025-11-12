@@ -10,8 +10,10 @@ import { AutumnTitle } from 'scenes/autumn_title';
 import { Boot } from 'scenes/boot';
 import { Debug } from 'scenes/debug';
 import { DialogBox } from 'scenes/dialog_box';
+import { Finish } from 'scenes/finish';
 import { MainMenu } from 'scenes/main_menu';
 import { Preloader } from 'scenes/preloader';
+import { SpringAgainFlower } from 'scenes/spring_again_flower';
 import { SpringAgainJetty } from 'scenes/spring_again_jetty';
 import { SpringAgainTitle } from 'scenes/spring_again_title';
 import { SpringFlower } from 'scenes/spring_flower';
@@ -92,6 +94,8 @@ const config: Phaser.Types.Core.GameConfig = {
     WinterFlower,
     SpringAgainTitle,
     SpringAgainJetty,
+    SpringAgainFlower,
+    Finish,
   ],
 };
 

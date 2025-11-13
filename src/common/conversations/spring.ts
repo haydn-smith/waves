@@ -1,14 +1,14 @@
 import { Dialog } from 'common/objects/dialog_box';
-import { Sprite } from 'constants';
+import { Animation, Sprite } from 'constants';
 
 export const otherPenguinHello = [
   {
-    image: Sprite.PlayerIdle,
+    image: Animation.OtherPenguinDialog,
     line1: ['Oh...', 'Hi!'],
     line2: ["It's that time of year, you know?"],
   },
   {
-    image: Sprite.PlayerIdle,
+    image: Animation.OtherPenguinDialog,
     line1: ['Time to migrate!'],
     line2: ['The fishies wont eat themselves!'],
   },
@@ -16,37 +16,37 @@ export const otherPenguinHello = [
 
 export const otherPenguinGoodbye = [
   {
-    image: Sprite.PlayerIdle,
+    image: Animation.OtherPenguinDialog,
     line1: ['...'],
     line2: [],
   },
   {
-    image: Sprite.PlayerIdle,
+    image: Animation.OtherPenguinDialog,
     line1: ["You're that one pengiun, aren't you?"],
     line2: [],
   },
   {
-    image: Sprite.PlayerIdle,
+    image: Animation.OtherPenguinDialog,
     line1: ['...'],
     line2: [],
   },
   {
-    image: Sprite.PlayerIdle,
+    image: Animation.OtherPenguinDialog,
     line1: ['The penguin with one more thing left to do here.'],
     line2: [],
   },
   {
-    image: Sprite.PlayerIdle,
+    image: Animation.OtherPenguinDialog,
     line1: ['What can one pengiun do...'],
     line2: ['Against the adversities of the antarctic?'],
   },
   {
-    image: Sprite.PlayerIdle,
+    image: Animation.OtherPenguinDialog,
     line1: ['...'],
     line2: ['Oh well!'],
   },
   {
-    image: Sprite.PlayerIdle,
+    image: Animation.OtherPenguinDialog,
     line1: ['Good luck!'],
     line2: [],
   },

@@ -2,11 +2,13 @@ import { Antialias } from 'common/objects/shaders/anti_alias';
 import { Glow } from 'common/objects/shaders/glow';
 import { Noise } from 'common/objects/shaders/noise';
 import { Outline } from 'common/objects/shaders/outline';
+import { OutlinePost } from 'common/objects/shaders/outline_post';
 import { SoftLight } from 'common/objects/shaders/soft_light';
 import { Vignette } from 'common/objects/shaders/vignette';
 import { logEvent } from 'common/utils/log';
 import { scaled } from 'common/utils/scaled';
-import { Animation, Depth, Font, Scene, Shader, Sound, Sprite, Tilemap, Tileset } from 'constants';
+import { Animation, Depth, Flag, Font, Scene, Shader, Sound, Sprite, Tilemap, Tileset } from 'constants';
+import { setDebug, setFlag } from 'systems/flags';
 import { startUI } from 'systems/ui';
 
 export class Preloader extends Phaser.Scene {
@@ -104,7 +106,18 @@ export class Preloader extends Phaser.Scene {
     this.load.image(Sprite.Snow2, Sprite.Snow2);
     this.load.image(Sprite.Snow3, Sprite.Snow3);
     this.load.image(Sprite.Snow4, Sprite.Snow4);
-    this.load.image(Sprite.Jetty, Sprite.Jetty);
+    this.load.image(Sprite.CliffTop, Sprite.CliffTop);
+    this.load.image(Sprite.CliffBottom, Sprite.CliffBottom);
+    this.load.spritesheet(Sprite.Jetty, Sprite.Jetty, {
+      frameWidth: 128,
+    });
+    this.load.spritesheet(Sprite.Waves, Sprite.Waves, {
+      frameWidth: 32,
+    });
+    this.load.spritesheet(Sprite.Vignette, Sprite.Vignette, {
+      frameWidth: 320,
+      frameHeight: 240,
+    });
     this.load.image(Sprite.MainPlant, Sprite.MainPlant);
     this.load.image(Sprite.DeadPlant1, Sprite.DeadPlant1);
     this.load.image(Sprite.DeadPlant2, Sprite.DeadPlant2);
@@ -123,6 +136,10 @@ export class Preloader extends Phaser.Scene {
     this.load.spritesheet(Sprite.DownArrow, Sprite.DownArrow, {
       frameWidth: 16,
     });
+    this.load.spritesheet(Sprite.OtherPenguinDialog, Sprite.OtherPenguinDialog, {
+      frameWidth: 64,
+      frameHeight: 32,
+    });
 
     // Audio.
     this.load.audio(Sound.Activate, Sound.Activate);
@@ -135,6 +152,7 @@ export class Preloader extends Phaser.Scene {
     // Register global shaders.
     if (this.sys.renderer instanceof Phaser.Renderer.WebGL.WebGLRenderer) {
       this.sys.renderer.pipelines.add(Shader.Outline, new Outline(this.game));
+      this.sys.renderer.pipelines.addPostPipeline(Shader.OutlinePost, OutlinePost);
       this.sys.renderer.pipelines.addPostPipeline(Shader.Glow, Glow);
       this.sys.renderer.pipelines.addPostPipeline(Shader.Vignette, Vignette);
       this.sys.renderer.pipelines.addPostPipeline(Shader.Noise, Noise);
@@ -167,6 +185,30 @@ export class Preloader extends Phaser.Scene {
       frameRate: 3,
       repeat: -1,
     });
+    this.anims.create({
+      key: Animation.Jetty,
+      frames: Sprite.Jetty,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.Waves,
+      frames: Sprite.Waves,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.Vignette,
+      frames: Sprite.Vignette,
+      frameRate: 1,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.OtherPenguinDialog,
+      frames: Sprite.OtherPenguinDialog,
+      frameRate: 3,
+      repeat: -1,
+    });
 
     // Start management scenes.
     startUI(this, {
@@ -179,14 +221,14 @@ export class Preloader extends Phaser.Scene {
 
     // Debug setup.
     localStorage.clear();
-    // setDebug(true);
+    setDebug(false);
     // setFlag(Flag.SummerWakeUpCutsceneWatched);
     // setFlag(Flag.AutumnSnowmanSnow2Completed);
-    // setFlag(Flag.AutumnSnowmanCompleted);
+    setFlag(Flag.OpeningCutsceneWatched);
     // setData('previousScene', Scene.AutumnSnowman);
 
     // Start game.
     this.scene.run(Scene.DialogBox);
-    this.scene.start(Scene.MainMenu);
+    this.scene.start(Scene.SpringJetty);
   }
 }

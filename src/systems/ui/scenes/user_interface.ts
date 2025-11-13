@@ -14,6 +14,8 @@ export class UserInterface extends Phaser.Scene {
 
   private debugTextContent: Partial<Record<string, string>> = {};
 
+  private vignette: Phaser.GameObjects.Sprite;
+
   constructor(
     private depth: number = 9000,
     private debugFont: string = ''
@@ -34,6 +36,9 @@ export class UserInterface extends Phaser.Scene {
     this.debugText = this.add.bitmapText(4, 0, this.debugFont, '', 16).setDepth(debugDepth());
 
     this.graphics = this.add.graphics();
+
+    // this.vignette = this.add.sprite(320 / 2, 240 / 2, Sprite.Vignette);
+    // this.vignette.anims.play(Animation.Vignette);
   }
 
   public getFader(): Fader {

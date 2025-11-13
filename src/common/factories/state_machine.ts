@@ -49,6 +49,35 @@ export const createCallbackOnEnterAndExit = (
   return state;
 };
 
+export const createCallbackOnAnyEnterAndExit = (
+  scene: Phaser.Scene,
+  trigger: Collision,
+  enterFn: (intersects: Collision) => void,
+  exitFn?: (intersects: Collision) => void
+) => {
+  let intersects: Collision[] = [];
+
+  const state = states(scene, 'idle').add('idle', () => {
+    const newIntersects = trigger.intersections();
+
+    const newOnes = newIntersects.filter((i) => !intersects.find((i2) => i2.toGameObject() === i.toGameObject()));
+
+    const oldOnes = intersects.filter((i) => !newIntersects.find((i2) => i2.toGameObject() === i.toGameObject()));
+
+    intersects = newIntersects;
+
+    if (newOnes.length) {
+      enterFn(newOnes[0]);
+    }
+
+    if (oldOnes.length) {
+      exitFn?.(oldOnes[0]);
+    }
+  });
+
+  return state;
+};
+
 export const createDialogBoxStates = (
   scene: Phaser.Scene,
   player: Player,

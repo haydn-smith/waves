@@ -56,6 +56,7 @@ export const Shader = {
   SoftLight: 'Soft Light',
   AntiAlias: 'Anti-alias',
   Outline: 'Outline',
+  OutlinePost: 'OutlinePost',
 } as const;
 export type KeyOfShader = keyof typeof Shader;
 export type TypeOfShader = (typeof Shader)[KeyOfShader];
@@ -109,7 +110,12 @@ export const Sprite = {
   SpringIcon: 'sprites/spring_icon.png',
   SummerIcon: 'sprites/spring_icon.png',
   Jetty: 'sprites/jetty.png',
+  Waves: 'sprites/waves.png',
+  CliffTop: 'sprites/cliff_top.png',
+  CliffBottom: 'sprites/cliff_bottom.png',
   DialogBox: 'sprites/dialog_box.png',
+  Vignette: 'sprites/vignette.png',
+  OtherPenguinDialog: 'sprites/dialogs/other_penguin.png',
 } as const;
 export type KeyOfSprite = keyof typeof Sprite;
 export type TypeOfSprite = (typeof Sprite)[KeyOfSprite];
@@ -127,6 +133,10 @@ export const Animation = {
   ZButton: 'Z Button',
   DownArrow: 'Down Arrow',
   DialogBox: 'Dialog Box',
+  Jetty: 'Jetty',
+  Waves: 'Waves',
+  Vignette: 'Vignette',
+  OtherPenguinDialog: 'OtherPenguinDialog',
 } as const;
 export type KeyOfAnimation = keyof typeof Animation;
 export type TypeOfAnimation = (typeof Animation)[KeyOfAnimation];
@@ -134,6 +144,7 @@ export type TypeOfAnimation = (typeof Animation)[KeyOfAnimation];
 export const CollisionTag = {
   Player: 'Player',
   Pushable: 'Pushable',
+  ThrowsSnow: 'ThrowsSnow',
 } as const;
 export type KeyOfCollisionTag = keyof typeof CollisionTag;
 export type TypeOfCollisionTag = (typeof CollisionTag)[KeyOfCollisionTag];

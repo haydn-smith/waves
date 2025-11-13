@@ -1,11 +1,13 @@
 import { createGateway } from 'common/factories/gateways';
 import { createOtherPenguinCutscene } from 'common/factories/spring_jetty';
+import { Jetty } from 'common/objects/jetty';
 import { OtherPenguin } from 'common/objects/other_penguin';
 import { Player } from 'common/objects/player';
+import { Snow } from 'common/objects/snow';
 import { Tilemap as TilemapObject } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
 import { logEvent } from 'common/utils/log';
-import { Depth, Flag, Scene, Shader, Sprite, Tilemap } from 'constants';
+import { Depth, Flag, Scene, Sprite, Tilemap } from 'constants';
 import { camera, Camera } from 'systems/camera';
 import { collision } from 'systems/collision';
 import { checkFlag, setFlag } from 'systems/flags';
@@ -37,25 +39,32 @@ export class SpringJetty extends Phaser.Scene {
     const map = new TilemapObject(this, Tilemap.SpringJetty);
 
     map.forPoints('Snow 1', (v) =>
-      this.ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow1).setPipeline(Shader.Outline))
+      this.ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow1).setPosition(v.x, v.y)))
     );
     map.forPoints('Snow 2', (v) =>
-      this.ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow2).setPipeline(Shader.Outline))
+      this.ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow2).setPosition(v.x, v.y)))
     );
     map.forPoints('Snow 3', (v) =>
-      this.ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow3).setPipeline(Shader.Outline))
+      this.ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow3).setPosition(v.x, v.y)))
     );
     map.forPoints('Snow 4', (v) =>
-      this.ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow4).setPipeline(Shader.Outline))
+      this.ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow4).setPosition(v.x, v.y)))
     );
 
-    map.forPoints('Jetty', (v) => this.add.sprite(v.x, v.y, Sprite.Jetty).setDepth(Depth.Main - 1));
+    map.forPoints('Jetty', (v) => this.add.existing(new Jetty(this).setPosition(v.x, v.y)));
 
     this.player = new Player(this).addToDisplayList().addToUpdateList();
 
     this.ySortObjects.add(this.player);
 
     this.camera = camera(this);
+
+    this.cameras.main.setBounds(
+      map.getArea('Camera Bounds').x,
+      map.getArea('Camera Bounds').y,
+      map.getArea('Camera Bounds').width,
+      map.getArea('Camera Bounds').height
+    );
 
     createGateway(
       this,
@@ -80,6 +89,7 @@ export class SpringJetty extends Phaser.Scene {
       createOtherPenguinCutscene(this, this.player, this.otherPenguin, this.camera, map, blockPlayerFromExit);
     }
 
+    this.player.setPosition(map.getPoint('Player Start').x, map.getPoint('Player Start').y);
     if (!checkFlag(Flag.OpeningCutsceneWatched)) {
       this.player.setPosition(map.getPoint('Player Start').x, map.getPoint('Player Start').y);
 

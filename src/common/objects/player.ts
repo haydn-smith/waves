@@ -22,6 +22,7 @@ export class Player extends Phaser.GameObjects.Container {
 
     this.collision = collision(this.scene, rect(scaled(-4), scaled(-4), scaled(8), scaled(2)))
       .tag(CollisionTag.Player)
+      .tag(CollisionTag.ThrowsSnow)
       .mask(CollisionMask.Default);
 
     this.movement = movement(this.scene, this, this.collision)

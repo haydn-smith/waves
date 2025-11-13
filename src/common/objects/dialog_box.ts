@@ -1,12 +1,12 @@
 import { actionInput } from 'common/factories/input';
 import { scaled } from 'common/utils/scaled';
-import { Action, Animation, Shader, Sprite, TypeOfSprite } from 'constants';
+import { Action, Animation, Shader, Sprite, TypeOfAnimation, TypeOfSprite } from 'constants';
 import { Input } from 'systems/input';
 import { states, States } from 'systems/states';
 import { Typewriter } from './typewriter';
 
 export type Dialog = {
-  image: TypeOfSprite;
+  image: TypeOfSprite | TypeOfAnimation;
   line1: string[];
   line2: string[];
 }[];
@@ -24,7 +24,7 @@ export class DialogBox extends Phaser.GameObjects.Container {
 
   private inputs: Input;
 
-  private sprite: Phaser.GameObjects.Sprite;
+  public sprite: Phaser.GameObjects.Sprite;
 
   private typewriter: Typewriter;
 
@@ -41,23 +41,25 @@ export class DialogBox extends Phaser.GameObjects.Container {
 
     this.inputs = actionInput(scene);
 
-    this.sprite = this.scene.add.sprite(this.scene.renderer.width / -2 + scaled(32), 0, Sprite.PlayerIdle).setAlpha(0);
-    this.add(this.sprite);
+    this.sprite = this.scene.add.sprite(48, this.scene.renderer.height + 32, Sprite.Unknown);
+    this.sprite.setAlpha(1).setScrollFactor(0).setDepth(1000).setScale(2);
+    this.setDepth(1001);
 
     this.typewriter = this.scene.add
       .existing(new Typewriter(scene))
-      .setPosition(this.scene.renderer.width / -2 + scaled(64), scaled(-6));
+      .setPosition(this.scene.renderer.width / -2 + scaled(24), scaled(-6));
 
     this.typewriter2 = this.scene.add
       .existing(new Typewriter(scene))
-      .setPosition(this.scene.renderer.width / -2 + scaled(64), scaled(10));
+      .setPosition(this.scene.renderer.width / -2 + scaled(24), scaled(10));
 
     this.add(this.typewriter);
     this.add(this.typewriter2);
 
     const downArrow = scene.add
-      .sprite(this.scene.renderer.width / 2 - scaled(32), scaled(16), Sprite.DownArrow)
+      .sprite(this.scene.renderer.width / 2 - scaled(24), scaled(12), Sprite.DownArrow)
       .play(Animation.DownArrow)
+      .setScale(1)
       .setDepth(1)
       .setPipeline(Shader.Outline);
 
@@ -65,7 +67,11 @@ export class DialogBox extends Phaser.GameObjects.Container {
 
     this.states = states<'idle' | 'animating' | 'next line' | 'writing' | 'waiting', 'idle'>(scene, 'idle')
       .add('next line', ({ change }) => {
-        this.sprite.setTexture(this.dialog[this.currentDialog].image).setAlpha(1);
+        if (this.sprite.anims.animationManager.exists(this.dialog[this.currentDialog].image)) {
+          this.sprite.anims.play(this.dialog[this.currentDialog].image);
+        } else {
+          this.sprite.setTexture(this.dialog[this.currentDialog].image);
+        }
 
         this.typewriter.setText(this.resolveNextLine1(), this.resolveCurrentLine1().length).play();
 
@@ -74,15 +80,38 @@ export class DialogBox extends Phaser.GameObjects.Container {
         change('writing');
       })
       .add('writing', ({ change, timeInState }) => {
-        if (timeInState > this.typewriter.typewriteDuration()) {
+        const duration =
+          this.currentLine === 0 ? this.typewriter.typewriteDuration() : this.typewriter2.typewriteDuration();
+
+        if (timeInState > duration) {
+          change('waiting');
+        }
+
+        if (this.inputs.wasJustActive(Action.Action)) {
+          this.typewriter.setText(this.resolveNextLine1(), this.resolveNextLine1().length).play();
+
+          this.typewriter2.setText(this.resolveNextLine2(), this.resolveNextLine2().length).play();
+
           change('waiting');
         }
       })
       .add('waiting', ({ change }) => {
+        downArrow.setAlpha(1);
+
         if (this.inputs.wasJustActive(Action.Action)) {
+          downArrow.setAlpha(0);
+
           this.scene.tweens.add({
             targets: this,
             y: this.scene.renderer.height - scaled(42),
+            duration: 50,
+            repeat: 1,
+            yoyo: true,
+          });
+
+          this.scene.tweens.add({
+            targets: this.sprite,
+            y: this.scene.renderer.height - scaled(82),
             duration: 50,
             repeat: 1,
             yoyo: true,
@@ -110,9 +139,23 @@ export class DialogBox extends Phaser.GameObjects.Container {
 
     this.states.change('animating');
 
+    if (this.sprite.anims.animationManager.exists(this.dialog[this.currentDialog].image)) {
+      this.sprite.anims.play(this.dialog[this.currentDialog].image);
+    } else {
+      this.sprite.setTexture(this.dialog[this.currentDialog].image);
+    }
+
     this.scene.tweens.add({
       targets: this,
       y: this.scene.renderer.height - scaled(36),
+      ease: Phaser.Math.Easing.Back.Out,
+      duration: 400,
+    });
+
+    this.scene.tweens.add({
+      targets: this.sprite,
+      delay: 50,
+      y: this.scene.renderer.height - 86,
       ease: Phaser.Math.Easing.Back.Out,
       duration: 400,
       onComplete: () => this.states.change('next line'),
@@ -127,18 +170,18 @@ export class DialogBox extends Phaser.GameObjects.Container {
 
   private resolveCurrentLine1(): string {
     if (this.currentLine === 1) {
-      return this.dialog[this.currentDialog].line1.join();
+      return this.dialog[this.currentDialog].line1.join('');
     }
 
-    return this.dialog[this.currentDialog].line1.slice(0, this.currentSection).join();
+    return this.dialog[this.currentDialog].line1.slice(0, this.currentSection).join('');
   }
 
   private resolveNextLine1(): string {
     if (this.currentLine === 1) {
-      return this.dialog[this.currentDialog].line1.join();
+      return this.dialog[this.currentDialog].line1.join('');
     }
 
-    return this.dialog[this.currentDialog].line1.slice(0, this.currentSection + 1).join();
+    return this.dialog[this.currentDialog].line1.slice(0, this.currentSection + 1).join('');
   }
 
   private resolveCurrentLine2(): string {
@@ -146,7 +189,7 @@ export class DialogBox extends Phaser.GameObjects.Container {
       return '';
     }
 
-    return this.dialog[this.currentDialog].line2.slice(0, this.currentSection).join();
+    return this.dialog[this.currentDialog].line2.slice(0, this.currentSection).join('');
   }
 
   private resolveNextLine2(): string {
@@ -154,7 +197,7 @@ export class DialogBox extends Phaser.GameObjects.Container {
       return '';
     }
 
-    return this.dialog[this.currentDialog].line2.slice(0, this.currentSection + 1).join();
+    return this.dialog[this.currentDialog].line2.slice(0, this.currentSection + 1).join('');
   }
 
   private updateDialogIndexes(): 'animating' | 'next line' {
@@ -182,6 +225,14 @@ export class DialogBox extends Phaser.GameObjects.Container {
         y: this.scene.renderer.height + scaled(32),
         ease: Phaser.Math.Easing.Back.In,
         duration: 400,
+      });
+
+      this.scene.tweens.add({
+        targets: this.sprite,
+        y: this.scene.renderer.height + scaled(32),
+        ease: Phaser.Math.Easing.Back.In,
+        duration: 400,
+        delay: 50,
         onComplete: () => this.states.change('idle'),
       });
 

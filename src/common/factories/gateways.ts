@@ -45,7 +45,6 @@ export const createGateway = (
                 .start()
             ),
             new MoveToTarget(player.movement, moveTo),
-            wait(500),
             runCallback(() => player.enableUserInput()),
             runCallback(() => change('not active')),
             runCallback(() => onEnteredGateway?.()),

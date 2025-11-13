@@ -89,8 +89,9 @@ export class SpringJetty extends Phaser.Scene {
       createOtherPenguinCutscene(this, this.player, this.otherPenguin, this.camera, map, blockPlayerFromExit);
     }
 
-    this.player.setPosition(map.getPoint('Player Start').x, map.getPoint('Player Start').y);
     if (!checkFlag(Flag.OpeningCutsceneWatched)) {
+      this.ui.black();
+
       this.player.setPosition(map.getPoint('Player Start').x, map.getPoint('Player Start').y);
 
       sequence(this)

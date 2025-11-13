@@ -7,8 +7,8 @@ import { SoftLight } from 'common/objects/shaders/soft_light';
 import { Vignette } from 'common/objects/shaders/vignette';
 import { logEvent } from 'common/utils/log';
 import { scaled } from 'common/utils/scaled';
-import { Animation, Depth, Flag, Font, Scene, Shader, Sound, Sprite, Tilemap, Tileset } from 'constants';
-import { setDebug, setFlag } from 'systems/flags';
+import { Animation, Depth, Font, Scene, Shader, Sound, Sprite, Tilemap, Tileset } from 'constants';
+import { setDebug } from 'systems/flags';
 import { startUI } from 'systems/ui';
 
 export class Preloader extends Phaser.Scene {
@@ -224,7 +224,7 @@ export class Preloader extends Phaser.Scene {
     setDebug(false);
     // setFlag(Flag.SummerWakeUpCutsceneWatched);
     // setFlag(Flag.AutumnSnowmanSnow2Completed);
-    setFlag(Flag.OpeningCutsceneWatched);
+    // setFlag(Flag.OpeningCutsceneWatched);
     // setData('previousScene', Scene.AutumnSnowman);
 
     // Start game.

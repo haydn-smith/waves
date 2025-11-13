@@ -24,7 +24,7 @@ void main()
 }
 `;
 
-export class Outline extends Phaser.Renderer.WebGL.Pipelines.PreFXPipeline {
+export class Outline extends Phaser.Renderer.WebGL.Pipelines.SinglePipeline {
   constructor(game: Phaser.Game) {
     super({
       name: Shader.Outline,
@@ -34,6 +34,6 @@ export class Outline extends Phaser.Renderer.WebGL.Pipelines.PreFXPipeline {
   }
 
   onPreRender() {
-    this.set2f('uResolution', this.activeTextures[0]?.width, this.activeTextures[0]?.height);
+    // this.set2f('uResolution', this.activeTextures[0]?.width, this.activeTextures[0]?.height);
   }
 }

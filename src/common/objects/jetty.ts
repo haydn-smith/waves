@@ -1,5 +1,5 @@
 import { rect } from 'common/factories/phaser';
-import { Animation, Depth, Shader, Sprite } from 'constants';
+import { Animation, Depth, Sprite } from 'constants';
 import { collision } from 'systems/collision';
 
 export class Jetty extends Phaser.GameObjects.Container {
@@ -14,7 +14,7 @@ export class Jetty extends Phaser.GameObjects.Container {
 
     super(scene);
 
-    this.sprite = scene.add.sprite(0, 0, Sprite.Jetty).setPipeline(Shader.Outline);
+    this.sprite = scene.add.sprite(-2, 0, Sprite.Jetty);
 
     this.sprite.anims.play(Animation.Jetty);
 

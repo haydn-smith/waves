@@ -1,6 +1,6 @@
 import { rect } from 'common/factories/phaser';
 import { createCallbackOnAnyEnterAndExit } from 'common/factories/state_machine';
-import { CollisionTag, Shader, Sprite, TypeOfSprite } from 'constants';
+import { CollisionTag, Sprite, TypeOfSprite } from 'constants';
 import { Collision, collision } from 'systems/collision';
 
 export class Snow extends Phaser.GameObjects.Container {
@@ -9,7 +9,9 @@ export class Snow extends Phaser.GameObjects.Container {
   constructor(scene: Phaser.Scene, sprite: TypeOfSprite) {
     super(scene);
 
-    this.sprite = scene.add.sprite(0, 0, sprite).setPipeline(Shader.Outline);
+    this.sprite = scene.add.sprite(0, 0, sprite);
+
+    this.sprite.pipeline.set2f('uResolution', this.sprite.width, this.sprite.height);
 
     this.add([this.sprite]);
 

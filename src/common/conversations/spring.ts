@@ -4,7 +4,7 @@ import { Animation, Sprite } from 'constants';
 export const otherPenguinHello = [
   {
     image: Animation.OtherPenguinDialog,
-    line1: ['Oh...', 'Hi!'],
+    line1: ['Oh... ', 'Hi!'],
     line2: ["It's that time of year, you know?"],
   },
   {
@@ -22,7 +22,7 @@ export const otherPenguinGoodbye = [
   },
   {
     image: Animation.OtherPenguinDialog,
-    line1: ["You're that one pengiun, aren't you?"],
+    line1: ["You're that one pengiun."],
     line2: [],
   },
   {
@@ -32,22 +32,22 @@ export const otherPenguinGoodbye = [
   },
   {
     image: Animation.OtherPenguinDialog,
-    line1: ['The penguin with one more thing left to do here.'],
+    line1: ["You're gonna stick around, aren't you?"],
     line2: [],
   },
   {
     image: Animation.OtherPenguinDialog,
-    line1: ['What can one pengiun do...'],
+    line1: ['What can one small pengiun do...'],
     line2: ['Against the adversities of the antarctic?'],
   },
   {
     image: Animation.OtherPenguinDialog,
     line1: ['...'],
-    line2: ['Oh well!'],
+    line2: ['Oh well! ', 'Whatever it is...'],
   },
   {
     image: Animation.OtherPenguinDialog,
-    line1: ['Good luck!'],
+    line1: ['...Good luck!'],
     line2: [],
   },
 ];

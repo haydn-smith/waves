@@ -1,7 +1,7 @@
 import { directionalInputs } from 'common/factories/input';
 import { rect, vec2 } from 'common/factories/phaser';
 import { scaled } from 'common/utils/scaled';
-import { Action, CollisionMask, CollisionTag, Sprite } from 'constants';
+import { Action, Animation, CollisionMask, CollisionTag, Sprite } from 'constants';
 import { collision, Collision } from 'systems/collision';
 import { Input } from 'systems/input';
 import { movement, Movement } from 'systems/movement';
@@ -53,6 +53,46 @@ export class Player extends Phaser.GameObjects.Container {
     const y = this.isUserInputDisabled ? 0 : this.inputs.isActive(Action.Down) - this.inputs.isActive(Action.Up);
 
     this.movement.moveInDirection(new Phaser.Math.Vector2(x, y), delta);
+
+    if (this.movement.isMoving()) {
+      if (this.movement.cardinal() === 'north') {
+        this.sprite.anims.play(Animation.PlayerRunUp, true);
+      }
+
+      if (this.movement.cardinal() === 'south') {
+        this.sprite.anims.play(Animation.PlayerRunDown, true);
+      }
+
+      if (this.movement.cardinal() === 'east') {
+        this.sprite.anims.play(Animation.PlayerRunRight, true);
+        this.sprite.flipX = false;
+      }
+
+      if (this.movement.cardinal() === 'west') {
+        this.sprite.anims.play(Animation.PlayerRunRight, true);
+        this.sprite.flipX = true;
+      }
+    }
+
+    if (this.movement.isNotMoving()) {
+      if (this.movement.cardinal() === 'north') {
+        this.sprite.anims.play(Animation.PlayerIdleUp, true);
+      }
+
+      if (this.movement.cardinal() === 'south') {
+        this.sprite.anims.play(Animation.PlayerIdleDown, true);
+      }
+
+      if (this.movement.cardinal() === 'east') {
+        this.sprite.anims.play(Animation.PlayerIdleRight, true);
+        this.sprite.flipX = false;
+      }
+
+      if (this.movement.cardinal() === 'west') {
+        this.sprite.anims.play(Animation.PlayerIdleRight, true);
+        this.sprite.flipX = true;
+      }
+    }
   }
 
   public sleep(): Player {

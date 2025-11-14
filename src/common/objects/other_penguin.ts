@@ -1,6 +1,6 @@
 import { rect } from 'common/factories/phaser';
 import { scaled } from 'common/utils/scaled';
-import { CollisionTag, Sprite } from 'constants';
+import { Animation, CollisionTag, Sprite } from 'constants';
 import { collision, Collision } from 'systems/collision';
 import { movement, Movement } from 'systems/movement';
 
@@ -29,5 +29,49 @@ export class OtherPenguin extends Phaser.GameObjects.Container {
     this.sprite = this.scene.add.sprite(0, scaled(-8), Sprite.PlayerIdle);
 
     this.add(this.sprite);
+
+    this.addToUpdateList();
+  }
+
+  public preUpdate() {
+    if (this.movement.isMoving()) {
+      if (this.movement.cardinal() === 'north') {
+        this.sprite.anims.play(Animation.PlayerRunUp, true);
+      }
+
+      if (this.movement.cardinal() === 'south') {
+        this.sprite.anims.play(Animation.PlayerRunDown, true);
+      }
+
+      if (this.movement.cardinal() === 'east') {
+        this.sprite.anims.play(Animation.PlayerRunRight, true);
+        this.sprite.flipX = false;
+      }
+
+      if (this.movement.cardinal() === 'west') {
+        this.sprite.anims.play(Animation.PlayerRunRight, true);
+        this.sprite.flipX = true;
+      }
+    }
+
+    if (this.movement.isNotMoving()) {
+      if (this.movement.cardinal() === 'north') {
+        this.sprite.anims.play(Animation.PlayerIdleUp, true);
+      }
+
+      if (this.movement.cardinal() === 'south') {
+        this.sprite.anims.play(Animation.PlayerIdleDown, true);
+      }
+
+      if (this.movement.cardinal() === 'east') {
+        this.sprite.anims.play(Animation.PlayerIdleRight, true);
+        this.sprite.flipX = false;
+      }
+
+      if (this.movement.cardinal() === 'west') {
+        this.sprite.anims.play(Animation.PlayerIdleRight, true);
+        this.sprite.flipX = true;
+      }
+    }
   }
 }

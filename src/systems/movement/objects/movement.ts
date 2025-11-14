@@ -35,6 +35,7 @@ export class Movement extends Phaser.GameObjects.GameObject {
 
   private easeFn: (v: number) => number = Phaser.Math.Easing.Linear;
 
+  private prevMovementFn: MovementFn = linearMovement;
   private movementFn: MovementFn = linearMovement;
 
   private onCollide?: (collision: Collision, velocity: Phaser.Math.Vector2, isX: boolean, delta: number) => void;
@@ -56,7 +57,11 @@ export class Movement extends Phaser.GameObjects.GameObject {
     this.states = states<MovementStates, 'idle'>(scene, 'idle')
       .add('idle', () => {})
       .add('moveToTarget', ({ change, delta }) => {
+        this.movementFn = linearMovement;
+
         if (!this.target) {
+          this.movementFn = this.prevMovementFn;
+
           change('idle');
 
           return;
@@ -75,6 +80,8 @@ export class Movement extends Phaser.GameObjects.GameObject {
         if (difference.length() < this.speed * delta * 0.001) {
           this.actor.setPosition(this.target.x, this.target.y);
           this.velocity = Phaser.Math.Vector2.ZERO;
+
+          this.movementFn = this.prevMovementFn;
 
           change('idle');
 
@@ -208,6 +215,8 @@ export class Movement extends Phaser.GameObjects.GameObject {
 
   public moveTo(position: Phaser.Math.Vector2): Movement {
     this.target = position;
+
+    this.prevMovementFn = this.movementFn;
 
     this.states.change('moveToTarget');
 

@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "autumn_flower_area.tmx",
+    "activeFile": "spring_jetty_area.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -150,11 +150,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 3,
+            "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 285.3333333333333,
-                "y": 257.3333333333333
+                "x": 247,
+                "y": 284
             }
         },
         "spring_jetty_area.tmx#snow": {
@@ -242,19 +242,12 @@
     "map.tileWidth": 8,
     "map.width": 64,
     "openFiles": [
-        "autumn_ice_cube_with_snowman_area.tmx",
-        "autumn_flower_area.tmx",
-        "spring_flower_area.tmx",
-        "summer_flower_area.tmx",
-        "winter_ice_cube_area.tmx",
-        "winter_flower_area.tmx",
-        "spring_jetty_area.tmx",
-        "spring_again_jetty_area.tmx",
-        "spring_again_flower_area.tmx"
+        "spring_jetty_area.tmx"
     ],
     "project": "waves.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "spring_jetty_area.tmx",
         "autumn_ice_cube_with_snowman_area.tmx",
         "autumn_flower_area.tmx",
         "spring_flower_area.tmx",
@@ -263,7 +256,6 @@
         "winter_flower_area.tmx",
         "spring_again_jetty_area.tmx",
         "spring_again_flower_area.tmx",
-        "spring_jetty_area.tmx",
         "test.tmx",
         "snow.tsx",
         "debug.tsx"

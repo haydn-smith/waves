@@ -123,6 +123,9 @@ export class Preloader extends Phaser.Scene {
     this.load.image(Sprite.DeadPlant2, Sprite.DeadPlant2);
     this.load.image(Sprite.DeadPlant3, Sprite.DeadPlant3);
     this.load.image(Sprite.SpringIcon, Sprite.SpringIcon);
+    this.load.image(Sprite.AutumnIcon, Sprite.AutumnIcon);
+    this.load.image(Sprite.SummerIcon, Sprite.SummerIcon);
+    this.load.image(Sprite.WinterIcon, Sprite.WinterIcon);
     this.load.spritesheet(Sprite.DialogBox, Sprite.DialogBox, {
       frameWidth: 160,
       frameHeight: 32,
@@ -139,6 +142,48 @@ export class Preloader extends Phaser.Scene {
     this.load.spritesheet(Sprite.OtherPenguinDialog, Sprite.OtherPenguinDialog, {
       frameWidth: 64,
       frameHeight: 32,
+    });
+    this.load.spritesheet(Sprite.ThinkingDialog, Sprite.ThinkingDialog, {
+      frameWidth: 64,
+      frameHeight: 32,
+    });
+    this.load.spritesheet(Sprite.SnowmanDialog, Sprite.SnowmanDialog, {
+      frameWidth: 64,
+      frameHeight: 32,
+    });
+    this.load.spritesheet(Sprite.IceCubeDialog, Sprite.IceCubeDialog, {
+      frameWidth: 64,
+      frameHeight: 32,
+    });
+    this.load.spritesheet(Sprite.PlayerSleep, Sprite.PlayerSleep, {
+      frameWidth: 32,
+    });
+    this.load.spritesheet(Sprite.PlayerWakeUp, Sprite.PlayerWakeUp, {
+      frameWidth: 32,
+    });
+    this.load.spritesheet(Sprite.PlayerWave, Sprite.PlayerWave, {
+      frameWidth: 32,
+    });
+    this.load.spritesheet(Sprite.PlayerWater, Sprite.PlayerWater, {
+      frameWidth: 32,
+    });
+    this.load.spritesheet(Sprite.PlayerIdleDown, Sprite.PlayerIdleDown, {
+      frameWidth: 32,
+    });
+    this.load.spritesheet(Sprite.PlayerIdleUp, Sprite.PlayerIdleUp, {
+      frameWidth: 32,
+    });
+    this.load.spritesheet(Sprite.PlayerIdleRight, Sprite.PlayerIdleRight, {
+      frameWidth: 32,
+    });
+    this.load.spritesheet(Sprite.PlayerRunDown, Sprite.PlayerRunDown, {
+      frameWidth: 32,
+    });
+    this.load.spritesheet(Sprite.PlayerRunUp, Sprite.PlayerRunUp, {
+      frameWidth: 32,
+    });
+    this.load.spritesheet(Sprite.PlayerRunRight, Sprite.PlayerRunRight, {
+      frameWidth: 32,
     });
 
     // Audio.
@@ -206,6 +251,78 @@ export class Preloader extends Phaser.Scene {
     this.anims.create({
       key: Animation.OtherPenguinDialog,
       frames: Sprite.OtherPenguinDialog,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.ThinkingDialog,
+      frames: Sprite.ThinkingDialog,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.SnowmanDialog,
+      frames: Sprite.SnowmanDialog,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.IceCubeDialog,
+      frames: Sprite.IceCubeDialog,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.PlayerSleep,
+      frames: Sprite.PlayerSleep,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.PlayerWakeUp,
+      frames: Sprite.PlayerWakeUp,
+      frameRate: 3,
+      repeat: 0,
+    });
+    this.anims.create({
+      key: Animation.PlayerWater,
+      frames: Sprite.PlayerWater,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.PlayerIdleDown,
+      frames: Sprite.PlayerIdleDown,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.PlayerIdleUp,
+      frames: Sprite.PlayerIdleUp,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.PlayerIdleRight,
+      frames: Sprite.PlayerIdleRight,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.PlayerRunDown,
+      frames: Sprite.PlayerRunDown,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.PlayerRunUp,
+      frames: Sprite.PlayerRunUp,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.PlayerRunRight,
+      frames: Sprite.PlayerRunRight,
       frameRate: 3,
       repeat: -1,
     });

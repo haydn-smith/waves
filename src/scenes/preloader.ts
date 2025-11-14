@@ -185,6 +185,18 @@ export class Preloader extends Phaser.Scene {
     this.load.spritesheet(Sprite.PlayerRunRight, Sprite.PlayerRunRight, {
       frameWidth: 32,
     });
+    this.load.spritesheet(Sprite.PlayerStruggleRight, Sprite.PlayerStruggleRight, {
+      frameWidth: 32,
+    });
+    this.load.spritesheet(Sprite.PlayerSwimDown, Sprite.PlayerSwimDown, {
+      frameWidth: 32,
+    });
+    this.load.spritesheet(Sprite.PlayerSwimUp, Sprite.PlayerSwimUp, {
+      frameWidth: 32,
+    });
+    this.load.spritesheet(Sprite.PlayerSwimRight, Sprite.PlayerSwimRight, {
+      frameWidth: 32,
+    });
 
     // Audio.
     this.load.audio(Sound.Activate, Sound.Activate);
@@ -323,6 +335,30 @@ export class Preloader extends Phaser.Scene {
     this.anims.create({
       key: Animation.PlayerRunRight,
       frames: Sprite.PlayerRunRight,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.PlayerStruggleRight,
+      frames: Sprite.PlayerStruggleRight,
+      frameRate: 1.5,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.PlayerSwimDown,
+      frames: Sprite.PlayerSwimDown,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.PlayerSwimUp,
+      frames: Sprite.PlayerSwimUp,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.PlayerSwimRight,
+      frames: Sprite.PlayerSwimRight,
       frameRate: 3,
       repeat: -1,
     });

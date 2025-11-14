@@ -198,6 +198,10 @@ export const Animation = {
   PlayerSwimDown: 'PlayerSwimDown',
   PlayerSwimUp: 'PlayerSwimUp',
   PlayerSwimRight: 'PlayerSwimRight',
+
+  IceCubeRight: 'IceCubeRight',
+  IceCubeMelting: 'IceCubeMelting',
+  IceCubeSwimRight: 'IceCubeSwimRight',
 } as const;
 export type KeyOfAnimation = keyof typeof Animation;
 export type TypeOfAnimation = (typeof Animation)[KeyOfAnimation];

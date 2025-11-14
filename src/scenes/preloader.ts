@@ -197,6 +197,17 @@ export class Preloader extends Phaser.Scene {
     this.load.spritesheet(Sprite.PlayerSwimRight, Sprite.PlayerSwimRight, {
       frameWidth: 32,
     });
+    this.load.spritesheet(Sprite.IceCubeRight, Sprite.IceCubeRight, {
+      frameWidth: 32,
+    });
+    this.load.spritesheet(Sprite.IceCubeSwimRight, Sprite.IceCubeSwimRight, {
+      frameWidth: 32,
+    });
+    this.load.image(Sprite.IceCubeFrozen, Sprite.IceCubeFrozen);
+    this.load.spritesheet(Sprite.IceCubeMelting, Sprite.IceCubeMelting, {
+      frameWidth: 32,
+    });
+    this.load.image(Sprite.IceCubePuddle, Sprite.IceCubePuddle);
 
     // Audio.
     this.load.audio(Sound.Activate, Sound.Activate);
@@ -359,6 +370,24 @@ export class Preloader extends Phaser.Scene {
     this.anims.create({
       key: Animation.PlayerSwimRight,
       frames: Sprite.PlayerSwimRight,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.IceCubeRight,
+      frames: Sprite.IceCubeRight,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.IceCubeSwimRight,
+      frames: Sprite.IceCubeSwimRight,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.IceCubeMelting,
+      frames: Sprite.IceCubeMelting,
       frameRate: 3,
       repeat: -1,
     });

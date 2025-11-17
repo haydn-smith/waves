@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="8" tileheight="8" infinite="0" nextlayerid="3" nextobjectid="20">
  <editorsettings>
-  <export target="../../waves/public/assets/tilemaps/autumn_ice_cube_area.json" format="json"/>
+  <export target="../public/assets/tilemaps/autumn_ice_cube_area.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="snow" tilewidth="8" tileheight="8" spacing="8" margin="8" tilecount="64" columns="8">
-  <image source="../../waves/public/assets/tilemaps/snow.png" width="136" height="136"/>
+  <image source="../public/assets/tilemaps/snow.png" width="136" height="136"/>
   <tile id="0">
    <properties>
     <property name="collision" type="bool" value="true"/>

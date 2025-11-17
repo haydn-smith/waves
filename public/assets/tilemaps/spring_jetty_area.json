@@ -69,6 +69,7 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":64,
          "id":1,
+         "locked":true,
          "name":"map",
          "opacity":1,
          "type":"tilelayer",
@@ -163,8 +164,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":218,
-                 "y":270
+                 "x":227,
+                 "y":275
                 }, 
                 {
                  "height":16,
@@ -293,6 +294,54 @@
                  "width":455,
                  "x":31,
                  "y":77
+                }, 
+                {
+                 "height":0,
+                 "id":22,
+                 "name":"Edge",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":400,
+                 "y":256
+                }, 
+                {
+                 "height":0,
+                 "id":26,
+                 "name":"Swim To",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":492,
+                 "y":262
+                }, 
+                {
+                 "height":0,
+                 "id":27,
+                 "name":"Peak",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":409,
+                 "y":246
+                }, 
+                {
+                 "height":0,
+                 "id":28,
+                 "name":"Water",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":416,
+                 "y":262
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -301,7 +350,7 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":22,
+ "nextobjectid":29,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

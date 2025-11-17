@@ -98,14 +98,11 @@ export class Preloader extends Phaser.Scene {
     // Sprites.
     this.load.image(Sprite.Black1px, Sprite.Black1px);
     this.load.image(Sprite.White1px, Sprite.White1px);
-    this.load.image(Sprite.PlayerIdle, Sprite.PlayerIdle);
-    this.load.image(Sprite.PlayerWater, Sprite.PlayerWater);
-    this.load.image(Sprite.PlayerSleep, Sprite.PlayerSleep);
-    this.load.image(Sprite.PlayerWave, Sprite.PlayerWave);
     this.load.image(Sprite.Snow1, Sprite.Snow1);
     this.load.image(Sprite.Snow2, Sprite.Snow2);
     this.load.image(Sprite.Snow3, Sprite.Snow3);
     this.load.image(Sprite.Snow4, Sprite.Snow4);
+    this.load.image(Sprite.CaveIn1, Sprite.CaveIn1);
     this.load.image(Sprite.CliffTop, Sprite.CliffTop);
     this.load.image(Sprite.CliffBottom, Sprite.CliffBottom);
     this.load.spritesheet(Sprite.Jetty, Sprite.Jetty, {
@@ -118,7 +115,10 @@ export class Preloader extends Phaser.Scene {
       frameWidth: 320,
       frameHeight: 240,
     });
-    this.load.image(Sprite.MainPlant, Sprite.MainPlant);
+    this.load.spritesheet(Sprite.MainPlant, Sprite.MainPlant, {
+      frameWidth: 32,
+      frameHeight: 64,
+    });
     this.load.image(Sprite.DeadPlant1, Sprite.DeadPlant1);
     this.load.image(Sprite.DeadPlant2, Sprite.DeadPlant2);
     this.load.image(Sprite.DeadPlant3, Sprite.DeadPlant3);
@@ -165,6 +165,9 @@ export class Preloader extends Phaser.Scene {
       frameWidth: 32,
     });
     this.load.spritesheet(Sprite.PlayerWater, Sprite.PlayerWater, {
+      frameWidth: 32,
+    });
+    this.load.spritesheet(Sprite.PlayerSigh, Sprite.PlayerSigh, {
       frameWidth: 32,
     });
     this.load.spritesheet(Sprite.PlayerIdleDown, Sprite.PlayerIdleDown, {
@@ -298,7 +301,19 @@ export class Preloader extends Phaser.Scene {
     this.anims.create({
       key: Animation.PlayerSleep,
       frames: Sprite.PlayerSleep,
-      frameRate: 3,
+      frameRate: 1,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.PlayerWave,
+      frames: Sprite.PlayerWave,
+      frameRate: 8,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.PlayerSigh,
+      frames: Sprite.PlayerSigh,
+      frameRate: 2,
       repeat: -1,
     });
     this.anims.create({
@@ -391,6 +406,12 @@ export class Preloader extends Phaser.Scene {
       frameRate: 3,
       repeat: -1,
     });
+    this.anims.create({
+      key: Animation.MainPlant,
+      frames: Sprite.MainPlant,
+      frameRate: 3,
+      repeat: -1,
+    });
 
     // Start management scenes.
     startUI(this, {
@@ -407,10 +428,10 @@ export class Preloader extends Phaser.Scene {
     // setFlag(Flag.SummerWakeUpCutsceneWatched);
     // setFlag(Flag.AutumnSnowmanSnow2Completed);
     // setFlag(Flag.OpeningCutsceneWatched);
-    // setData('previousScene', Scene.AutumnSnowman);
+    // setData('previousScene', Scene.SpringIceCube);
 
     // Start game.
     this.scene.run(Scene.DialogBox);
-    this.scene.start(Scene.SpringJetty);
+    this.scene.start(Scene.SpringTitle);
   }
 }

@@ -22,6 +22,6 @@ export class MoveToTarget implements Sequenceable {
   }
 
   isComplete(): boolean {
-    return this.target.clone().subtract(this.movement.position()).length() < 4;
+    return this.target.clone().subtract(this.movement.position()).length() < 2;
   }
 }

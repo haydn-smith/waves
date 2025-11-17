@@ -7,11 +7,11 @@ import { Snow } from 'common/objects/snow';
 import { Tilemap as TilemapObject } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
 import { logEvent } from 'common/utils/log';
-import { Depth, Flag, Scene, Sprite, Tilemap } from 'constants';
+import { Animation, Depth, Flag, Scene, Sprite, Tilemap } from 'constants';
 import { camera, Camera } from 'systems/camera';
 import { collision } from 'systems/collision';
 import { checkFlag, setFlag } from 'systems/flags';
-import { runCallback, sequence, wait } from 'systems/sequence';
+import { playAnimation, runCallback, sequence, wait } from 'systems/sequence';
 import { ui, UserInterface } from 'systems/ui';
 
 export class SpringJetty extends Phaser.Scene {
@@ -51,7 +51,11 @@ export class SpringJetty extends Phaser.Scene {
       this.ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow4).setPosition(v.x, v.y)))
     );
 
-    map.forPoints('Jetty', (v) => this.add.existing(new Jetty(this).setPosition(v.x, v.y)));
+    const jetty = this.add.existing(new Jetty(this));
+
+    map.forPoints('Jetty', (v) => {
+      jetty.setPosition(v.x, v.y);
+    });
 
     this.player = new Player(this).addToDisplayList().addToUpdateList();
 
@@ -86,7 +90,7 @@ export class SpringJetty extends Phaser.Scene {
 
       const blockPlayerFromExit = collision(this, map.getArea('Block Player From Exit'));
 
-      createOtherPenguinCutscene(this, this.player, this.otherPenguin, this.camera, map, blockPlayerFromExit);
+      createOtherPenguinCutscene(this, this.player, this.otherPenguin, this.camera, map, blockPlayerFromExit, jetty);
     }
 
     if (!checkFlag(Flag.OpeningCutsceneWatched)) {
@@ -97,19 +101,22 @@ export class SpringJetty extends Phaser.Scene {
       sequence(this)
         .of([
           runCallback(() => setFlag(Flag.OpeningCutsceneWatched)),
-          runCallback(() => this.player.sleep()),
+          runCallback(() => this.player.animator.playAnimation(Animation.PlayerSleep)),
           runCallback(() => this.player.disableUserInput()),
           runCallback(() => this.ui.showLetterbox()),
           runCallback(() => this.camera.zoom(2)),
-          wait(500),
+          wait(1000),
           runCallback(() => this.ui.fadeIn(2000)),
-          wait(3000),
-          runCallback(() => this.player.wave()),
+          wait(4000),
+          playAnimation(this.player.sprite, Animation.PlayerWakeUp),
+          wait(1000),
+          runCallback(() => this.player.animator.playAnimation(Animation.PlayerWave)),
+          wait(2000),
+          runCallback(() => this.player.animator.playMovementAndIdleAnimations()),
           wait(1000),
           runCallback(() => this.camera.zoom(1, 800)),
           runCallback(() => this.ui.hideLetterbox()),
           wait(800),
-          runCallback(() => this.player.runnningAround()),
           runCallback(() => this.player.enableUserInput()),
         ])
         .destroyWhenComplete()

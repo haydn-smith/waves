@@ -1,4 +1,4 @@
-import { iceCube1, iceCube2, iceCube3, snowCaveIn1 } from 'common/conversations/spring';
+import { iceCube1, iceCube2, iceCube3, snowCaveIn1, snowCaveIn2 } from 'common/conversations/spring';
 import { Player } from 'common/objects/player';
 import { Tilemap } from 'common/objects/tilemap';
 import { PlayDialog } from 'common/sequenceables/play_dialog';
@@ -12,16 +12,16 @@ import { actionInput } from './input';
 import { rect } from './phaser';
 
 export const createIceCube = (scene: Phaser.Scene, map: Tilemap, player: Player) => {
-  const sprite = scene.add.sprite(0, 0, Sprite.PlayerIdle).setPipeline(Shader.Outline);
+  const sprite = scene.add.sprite(0, -8, Sprite.IceCubeFrozen);
 
-  const body = collision(scene, rect(0, 0, 8, 8));
+  const body = collision(scene, rect(-6, -2, 11, 2));
 
   const trigger = collision(scene, map.getArea('Ice Cube Trigger')).notSolid();
 
   const position = map.getPoint('Ice Cube');
 
   const arrow = scene.add
-    .sprite(position.x, position.y - 16, Sprite.DownArrow)
+    .sprite(position.x, position.y - 24, Sprite.DownArrow)
     .play(Animation.DownArrow)
     .setDepth(Depth.Main + 1)
     .setPipeline(Shader.Outline);
@@ -63,9 +63,9 @@ export const createIceCube = (scene: Phaser.Scene, map: Tilemap, player: Player)
 };
 
 export const createSnowCaveIn = (scene: Phaser.Scene, map: Tilemap, player: Player) => {
-  const sprite = scene.add.sprite(0, 0, Sprite.PlayerIdle).setPipeline(Shader.Outline);
+  const sprite = scene.add.sprite(0, 0, Sprite.CaveIn1);
 
-  collision(scene, map.getArea('Snow Cave In Body'));
+  // collision(scene, map.getArea('Snow Cave In Body'));
 
   const trigger = collision(scene, map.getArea('Snow Cave In Trigger')).notSolid();
 
@@ -79,7 +79,7 @@ export const createSnowCaveIn = (scene: Phaser.Scene, map: Tilemap, player: Play
 
   const inputs = actionInput(scene);
 
-  const repeater = new Repeater([snowCaveIn1], 'repeat last');
+  const repeater = new Repeater([snowCaveIn1, snowCaveIn2], 'repeat last');
 
   const dialog = () =>
     sequence(scene).of([
@@ -108,7 +108,11 @@ export const createSnowCaveIn = (scene: Phaser.Scene, map: Tilemap, player: Play
       }
     });
 
-  const container = scene.add.container().setPosition(position.x, position.y).add(sprite).setDepth(Depth.Foreground);
+  const container = scene.add
+    .container()
+    .setPosition(position.x, position.y)
+    .add(sprite)
+    .setDepth(Depth.Main - 1);
 
   return container;
 };

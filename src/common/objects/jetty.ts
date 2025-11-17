@@ -1,6 +1,6 @@
 import { rect } from 'common/factories/phaser';
 import { Animation, Depth, Sprite } from 'constants';
-import { collision } from 'systems/collision';
+import { Collision, collision } from 'systems/collision';
 
 export class Jetty extends Phaser.GameObjects.Container {
   public sprite: Phaser.GameObjects.Sprite;
@@ -8,6 +8,8 @@ export class Jetty extends Phaser.GameObjects.Container {
   public tiledSprite: Phaser.GameObjects.TileSprite;
 
   public waves: Phaser.GameObjects.Sprite;
+
+  private collisions: Collision[];
 
   constructor(scene: Phaser.Scene) {
     const tiledSprite = scene.add.tileSprite(120, 0, 320, 480, Sprite.Waves).setDepth(Depth.Background - 1);
@@ -26,6 +28,8 @@ export class Jetty extends Phaser.GameObjects.Container {
     const c3 = collision(scene, rect(-32, -16, 64, 1));
     const c4 = collision(scene, rect(-32, 0, 64, 1));
     const c5 = collision(scene, rect(32, -16, 1, 16));
+
+    this.collisions = [c1, c2, c3, c4, c5];
 
     this.tiledSprite = tiledSprite;
 
@@ -58,6 +62,18 @@ export class Jetty extends Phaser.GameObjects.Container {
     }
 
     super.setPosition(x, y, z, w);
+
+    return this;
+  }
+
+  public collisionOff(): this {
+    this.collisions.forEach((o) => o.notSolid());
+
+    return this;
+  }
+
+  public collisionOn(): this {
+    this.collisions.forEach((o) => o.notSolid());
 
     return this;
   }

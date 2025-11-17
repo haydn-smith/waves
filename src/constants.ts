@@ -96,11 +96,11 @@ export const Sprite = {
   ZButton: 'sprites/z_button.png',
   DownArrow: 'sprites/down_arrow.png',
   PlayerIdle: 'sprites/player/foo.png',
-  PlayerWater: 'sprites/player/bar.png',
   Snow1: 'sprites/snow/snow_1.png',
   Snow2: 'sprites/snow/snow_2.png',
   Snow3: 'sprites/snow/snow_3.png',
   Snow4: 'sprites/snow/snow_4.png',
+  CaveIn1: 'sprites/snow/cave_in_1.png',
   Jetty: 'sprites/jetty.png',
   Waves: 'sprites/waves.png',
   CliffTop: 'sprites/cliff_top.png',
@@ -122,7 +122,7 @@ export const Sprite = {
   PlayerIdleUp: 'sprites/player/player_idle_up.png',
   PlayerIdleDown: 'sprites/player/player_idle.png',
   PlayerIdleRight: 'sprites/player/player_idle_right.png',
-  PlayerWaterPlant: 'sprites/player/player_water.png',
+  PlayerWater: 'sprites/player/player_water.png',
   PlayerStruggleRight: 'sprites/player/struggle_right.png',
   PlayerSigh: 'sprites/player/sigh.png',
   PlayerSwimUp: 'sprites/player/swim_up.png',
@@ -188,6 +188,7 @@ export const Animation = {
   PlayerWakeUp: 'PlayerWakeUp',
   PlayerWave: 'PlayerWave',
   PlayerWater: 'PlayerWater',
+  PlayerSigh: 'PlayerSigh',
   PlayerIdleDown: 'PlayerIdleDown',
   PlayerIdleUp: 'PlayerIdleUp',
   PlayerIdleRight: 'PlayerIdleRight',
@@ -202,6 +203,8 @@ export const Animation = {
   IceCubeRight: 'IceCubeRight',
   IceCubeMelting: 'IceCubeMelting',
   IceCubeSwimRight: 'IceCubeSwimRight',
+
+  MainPlant: 'MainPlant',
 } as const;
 export type KeyOfAnimation = keyof typeof Animation;
 export type TypeOfAnimation = (typeof Animation)[KeyOfAnimation];

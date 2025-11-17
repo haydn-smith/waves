@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="8" tileheight="8" infinite="0" nextlayerid="3" nextobjectid="22">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="8" tileheight="8" infinite="0" nextlayerid="3" nextobjectid="29">
  <editorsettings>
   <export target="../public/assets/tilemaps/spring_jetty_area.json" format="json"/>
  </editorsettings>
@@ -186,7 +186,7 @@
    </properties>
   </tile>
  </tileset>
- <layer id="1" name="map" width="64" height="64">
+ <layer id="1" name="map" width="64" height="64" locked="1">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -273,7 +273,7 @@
   <object id="6" name="Snow 1" x="277" y="288">
    <point/>
   </object>
-  <object id="7" name="Snow 4" x="218" y="270">
+  <object id="7" name="Snow 4" x="227" y="275">
    <point/>
   </object>
   <object id="10" name="Ice Cube Area Trigger" x="160" y="249" width="16" height="16"/>
@@ -301,5 +301,17 @@
    <point/>
   </object>
   <object id="21" name="Camera Bounds" x="31" y="77" width="455" height="398"/>
+  <object id="22" name="Edge" x="400" y="256">
+   <point/>
+  </object>
+  <object id="26" name="Swim To" x="492" y="262">
+   <point/>
+  </object>
+  <object id="27" name="Peak" x="409" y="246">
+   <point/>
+  </object>
+  <object id="28" name="Water" x="416" y="262">
+   <point/>
+  </object>
  </objectgroup>
 </map>

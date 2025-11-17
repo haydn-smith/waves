@@ -69,35 +69,43 @@ export class Movement extends Phaser.GameObjects.GameObject {
 
         const difference = this.target.clone().subtract(this.currentPosition());
 
-        if (Math.abs(difference.x) < this.speed * delta * 0.001) {
+        if (Math.abs(difference.x) < 2) {
           this.actor.x = this.target.x;
         }
 
-        if (Math.abs(difference.y) < this.speed * delta * 0.001) {
+        if (Math.abs(difference.y) < 2) {
           this.actor.y = this.target.y;
         }
 
-        if (difference.length() < this.speed * delta * 0.001) {
+        if (this.actor.y === this.target.y && this.actor.x === this.target.x) {
           this.actor.setPosition(this.target.x, this.target.y);
           this.velocity = Phaser.Math.Vector2.ZERO;
+          this.prevVelocity = Phaser.Math.Vector2.ZERO;
+          this.hasMovedInDirectionXThisTick = false;
+          this.hasMovedInDirectionYThisTick = false;
+          this.easedVelocity = Phaser.Math.Vector2.ZERO;
 
           this.movementFn = this.prevMovementFn;
 
           change('idle');
 
           return;
+        } else {
+          const direction = new Phaser.Math.Vector2(
+            Math.abs(difference.x) < 2 ? 0 : difference.x > 0 ? 1 : -1,
+            Math.abs(difference.y) < 2 ? 0 : difference.y > 0 ? 1 : -1
+          );
+
+          this.moveInDirection(direction, delta);
         }
-
-        const direction = new Phaser.Math.Vector2(
-          Math.abs(difference.x) < this.speed * delta * 0.001 ? 0 : difference.x > 0 ? 1 : -1,
-          Math.abs(difference.y) < this.speed * delta * 0.001 ? 0 : difference.y > 0 ? 1 : -1
-        );
-
-        this.moveInDirection(direction, delta);
       });
   }
 
   public preUpdate(_: number, delta: number) {
+    if (this.velocity.length() !== 0) {
+      this.lastMovementDirection = this.velocity.clone().normalize();
+    }
+
     if (isDebug()) {
       const d = this.actor.getWorldTransformMatrix().decomposeMatrix();
 
@@ -126,7 +134,7 @@ export class Movement extends Phaser.GameObjects.GameObject {
     if (
       this.movementFn === velocityMovement &&
       this.prevVelocity.x === this.velocity.x &&
-      !this.velocity.equals(Phaser.Math.Vector2.ZERO)
+      this.velocity.length() !== 0
     ) {
       this.moveInDirection(this.velocity.clone().negate().multiply({ x: 1, y: 0 }), delta, false);
     }
@@ -134,7 +142,7 @@ export class Movement extends Phaser.GameObjects.GameObject {
     if (
       this.movementFn === velocityMovement &&
       this.prevVelocity.y === this.velocity.y &&
-      !this.velocity.equals(Phaser.Math.Vector2.ZERO)
+      this.velocity.length() !== 0
     ) {
       this.moveInDirection(this.velocity.clone().negate().multiply({ x: 0, y: 1 }), delta, false);
     }
@@ -176,10 +184,6 @@ export class Movement extends Phaser.GameObjects.GameObject {
   }
 
   private doMove(delta: number) {
-    if (!this.velocity.equals(Phaser.Math.Vector2.ZERO)) {
-      this.lastMovementDirection = this.velocity.clone().normalize();
-    }
-
     const normalized = normalize(0, this.speed, this.velocity.length());
 
     const eased = this.easeFn(normalized);
@@ -224,7 +228,12 @@ export class Movement extends Phaser.GameObjects.GameObject {
   }
 
   public faceDirection(direction: Phaser.Math.Vector2): Movement {
+    this.velocity = Phaser.Math.Vector2.ZERO;
+    this.prevVelocity = Phaser.Math.Vector2.ZERO;
+    this.easedVelocity = Phaser.Math.Vector2.ZERO;
     this.lastMovementDirection = direction.clone().normalize();
+    this.hasMovedInDirectionXThisTick = false;
+    this.hasMovedInDirectionYThisTick = false;
 
     return this;
   }

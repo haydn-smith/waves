@@ -3,6 +3,7 @@ import { scaled } from 'common/utils/scaled';
 import { Animation, CollisionTag, Sprite } from 'constants';
 import { collision, Collision } from 'systems/collision';
 import { movement, Movement } from 'systems/movement';
+import { Animator } from './animator';
 
 export class OtherPenguin extends Phaser.GameObjects.Container {
   private collision: Collision;
@@ -10,6 +11,8 @@ export class OtherPenguin extends Phaser.GameObjects.Container {
   public movement: Movement;
 
   private sprite: Phaser.GameObjects.Sprite;
+
+  public animator: Animator;
 
   constructor(scene: Phaser.Scene) {
     super(scene);
@@ -19,7 +22,7 @@ export class OtherPenguin extends Phaser.GameObjects.Container {
       .tag(CollisionTag.ThrowsSnow);
 
     this.movement = movement(this.scene, this, this.collision)
-      .setSpeed(scaled(32))
+      .setSpeed(scaled(40))
       .setAcceleration(scaled(128))
       .moveWithVelocity()
       .setMovementEase(Phaser.Math.Easing.Sine.In);
@@ -31,47 +34,19 @@ export class OtherPenguin extends Phaser.GameObjects.Container {
     this.add(this.sprite);
 
     this.addToUpdateList();
+
+    this.animator = new Animator(scene, this.sprite, this.movement);
+
+    this.animator.setMovementAnimations(Animation.PlayerRunUp, Animation.PlayerRunDown, Animation.PlayerRunRight);
+
+    this.animator.setIdleAnimations(Animation.PlayerIdleUp, Animation.PlayerIdleDown, Animation.PlayerIdleRight);
+
+    this.animator.playMovementAndIdleAnimations();
   }
 
-  public preUpdate() {
-    if (this.movement.isMoving()) {
-      if (this.movement.cardinal() === 'north') {
-        this.sprite.anims.play(Animation.PlayerRunUp, true);
-      }
-
-      if (this.movement.cardinal() === 'south') {
-        this.sprite.anims.play(Animation.PlayerRunDown, true);
-      }
-
-      if (this.movement.cardinal() === 'east') {
-        this.sprite.anims.play(Animation.PlayerRunRight, true);
-        this.sprite.flipX = false;
-      }
-
-      if (this.movement.cardinal() === 'west') {
-        this.sprite.anims.play(Animation.PlayerRunRight, true);
-        this.sprite.flipX = true;
-      }
-    }
-
-    if (this.movement.isNotMoving()) {
-      if (this.movement.cardinal() === 'north') {
-        this.sprite.anims.play(Animation.PlayerIdleUp, true);
-      }
-
-      if (this.movement.cardinal() === 'south') {
-        this.sprite.anims.play(Animation.PlayerIdleDown, true);
-      }
-
-      if (this.movement.cardinal() === 'east') {
-        this.sprite.anims.play(Animation.PlayerIdleRight, true);
-        this.sprite.flipX = false;
-      }
-
-      if (this.movement.cardinal() === 'west') {
-        this.sprite.anims.play(Animation.PlayerIdleRight, true);
-        this.sprite.flipX = true;
-      }
-    }
+  public destroy() {
+    this.animator.destroy();
+    this.movement.destroy();
+    super.destroy();
   }
 }

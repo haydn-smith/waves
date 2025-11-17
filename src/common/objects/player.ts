@@ -1,10 +1,11 @@
 import { directionalInputs } from 'common/factories/input';
-import { rect, vec2 } from 'common/factories/phaser';
+import { rect } from 'common/factories/phaser';
 import { scaled } from 'common/utils/scaled';
 import { Action, Animation, CollisionMask, CollisionTag, Sprite } from 'constants';
 import { collision, Collision } from 'systems/collision';
 import { Input } from 'systems/input';
 import { movement, Movement } from 'systems/movement';
+import { Animator } from './animator';
 
 export class Player extends Phaser.GameObjects.Container {
   public collision: Collision;
@@ -13,9 +14,11 @@ export class Player extends Phaser.GameObjects.Container {
 
   private inputs: Input;
 
-  private sprite: Phaser.GameObjects.Sprite;
+  public sprite: Phaser.GameObjects.Sprite;
 
   private isUserInputDisabled = false;
+
+  public animator: Animator;
 
   constructor(scene: Phaser.Scene) {
     super(scene);
@@ -26,7 +29,7 @@ export class Player extends Phaser.GameObjects.Container {
       .mask(CollisionMask.Default);
 
     this.movement = movement(this.scene, this, this.collision)
-      .setSpeed(scaled(32))
+      .setSpeed(scaled(40))
       .setAcceleration(scaled(128))
       .moveWithVelocity()
       .setMovementEase(Phaser.Math.Easing.Sine.In)
@@ -45,6 +48,14 @@ export class Player extends Phaser.GameObjects.Container {
     this.sprite.pipeline.set2f('uResolution', 32, 32);
 
     this.add(this.sprite);
+
+    this.animator = new Animator(scene, this.sprite, this.movement);
+
+    this.animator.setMovementAnimations(Animation.PlayerRunUp, Animation.PlayerRunDown, Animation.PlayerRunRight);
+
+    this.animator.setIdleAnimations(Animation.PlayerIdleUp, Animation.PlayerIdleDown, Animation.PlayerIdleRight);
+
+    this.animator.playMovementAndIdleAnimations();
   }
 
   public preUpdate(_time: number, delta: number) {
@@ -53,70 +64,6 @@ export class Player extends Phaser.GameObjects.Container {
     const y = this.isUserInputDisabled ? 0 : this.inputs.isActive(Action.Down) - this.inputs.isActive(Action.Up);
 
     this.movement.moveInDirection(new Phaser.Math.Vector2(x, y), delta);
-
-    if (this.movement.isMoving()) {
-      if (this.movement.cardinal() === 'north') {
-        this.sprite.anims.play(Animation.PlayerRunUp, true);
-      }
-
-      if (this.movement.cardinal() === 'south') {
-        this.sprite.anims.play(Animation.PlayerRunDown, true);
-      }
-
-      if (this.movement.cardinal() === 'east') {
-        this.sprite.anims.play(Animation.PlayerRunRight, true);
-        this.sprite.flipX = false;
-      }
-
-      if (this.movement.cardinal() === 'west') {
-        this.sprite.anims.play(Animation.PlayerRunRight, true);
-        this.sprite.flipX = true;
-      }
-    }
-
-    if (this.movement.isNotMoving()) {
-      if (this.movement.cardinal() === 'north') {
-        this.sprite.anims.play(Animation.PlayerIdleUp, true);
-      }
-
-      if (this.movement.cardinal() === 'south') {
-        this.sprite.anims.play(Animation.PlayerIdleDown, true);
-      }
-
-      if (this.movement.cardinal() === 'east') {
-        this.sprite.anims.play(Animation.PlayerIdleRight, true);
-        this.sprite.flipX = false;
-      }
-
-      if (this.movement.cardinal() === 'west') {
-        this.sprite.anims.play(Animation.PlayerIdleRight, true);
-        this.sprite.flipX = true;
-      }
-    }
-  }
-
-  public sleep(): Player {
-    this.sprite.setTexture(Sprite.PlayerSleep);
-
-    return this;
-  }
-
-  public wave(): Player {
-    this.sprite.setTexture(Sprite.PlayerWave);
-
-    return this;
-  }
-
-  public water(): Player {
-    this.sprite.setTexture(Sprite.PlayerWater);
-
-    return this;
-  }
-
-  public runnningAround(): Player {
-    this.sprite.setTexture(Sprite.PlayerIdle);
-
-    return this;
   }
 
   public disableUserInput(): Player {
@@ -132,10 +79,10 @@ export class Player extends Phaser.GameObjects.Container {
   }
 
   private pushInDirection(collision: Collision, velocity: Phaser.Math.Vector2, isX: boolean, delta: number): void {
-    const move = vec2(isX ? velocity.x : 0, !isX ? velocity.y : 0);
-
-    collision.toGameObject().movement.moveInDirection(move.normalize(), delta);
-
-    this.movement.setVelocity(velocity);
+    // const move = vec2(isX ? velocity.x : 0, !isX ? velocity.y : 0);
+    //
+    // collision.toGameObject().movement.moveInDirection(move.normalize(), delta);
+    //
+    // this.movement.setVelocity(velocity);
   }
 }

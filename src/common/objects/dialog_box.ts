@@ -9,6 +9,7 @@ export type Dialog = {
   image: TypeOfSprite | TypeOfAnimation;
   line1: string[];
   line2: string[];
+  autoPlaySecondLine?: boolean;
 }[];
 
 export class DialogBox extends Phaser.GameObjects.Container {
@@ -29,6 +30,8 @@ export class DialogBox extends Phaser.GameObjects.Container {
   private typewriter: Typewriter;
 
   private typewriter2: Typewriter;
+
+  private arrow: Phaser.GameObjects.Sprite;
 
   constructor(scene: Phaser.Scene) {
     super(scene);
@@ -62,6 +65,8 @@ export class DialogBox extends Phaser.GameObjects.Container {
       .setScale(2)
       .setDepth(1);
 
+    this.arrow = downArrow;
+
     this.add(downArrow);
 
     this.states = states<'idle' | 'animating' | 'next line' | 'writing' | 'waiting', 'idle'>(scene, 'idle')
@@ -83,7 +88,13 @@ export class DialogBox extends Phaser.GameObjects.Container {
           this.currentLine === 0 ? this.typewriter.typewriteDuration() : this.typewriter2.typewriteDuration();
 
         if (timeInState > duration) {
-          change('waiting');
+          if (this.currentLine === 0 && this.dialog[this.currentDialog].autoPlaySecondLine) {
+            downArrow.setAlpha(0);
+
+            change(this.updateDialogIndexes());
+          } else {
+            change('waiting');
+          }
         }
 
         if (this.inputs.wasJustActive(Action.Action)) {
@@ -137,6 +148,8 @@ export class DialogBox extends Phaser.GameObjects.Container {
     if (this.states.current() !== 'idle') return this;
 
     this.states.change('animating');
+
+    this.arrow.setAlpha(0);
 
     if (this.sprite.anims.animationManager.exists(this.dialog[this.currentDialog].image)) {
       this.sprite.anims.play(this.dialog[this.currentDialog].image);

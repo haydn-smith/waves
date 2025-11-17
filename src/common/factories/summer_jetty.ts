@@ -11,7 +11,7 @@ import { states } from 'systems/states';
 import { actionInput } from './input';
 
 export const createMeltedSnow1 = (scene: Phaser.Scene, player: Player, map: Tilemap) => {
-  const sprite = scene.add.sprite(0, 0, Sprite.PlayerIdle).setPipeline(Shader.Outline);
+  const sprite = scene.add.sprite(0, 0, Sprite.Puddle1);
 
   const trigger = collision(scene, map.getArea('Melted Snow 1 Trigger')).notSolid();
 
@@ -20,7 +20,7 @@ export const createMeltedSnow1 = (scene: Phaser.Scene, player: Player, map: Tile
   const arrow = scene.add
     .sprite(position.x, position.y - 16, Sprite.DownArrow)
     .play(Animation.DownArrow)
-    .setDepth(Depth.Main - 1)
+    .setDepth(Depth.Main + 1)
     .setPipeline(Shader.Outline);
 
   const inputs = actionInput(scene);
@@ -54,13 +54,17 @@ export const createMeltedSnow1 = (scene: Phaser.Scene, player: Player, map: Tile
       }
     });
 
-  const container = scene.add.container().setPosition(position.x, position.y).add(sprite).setDepth(Depth.Foreground);
+  const container = scene.add
+    .container()
+    .setPosition(position.x, position.y)
+    .add(sprite)
+    .setDepth(Depth.Main - 1);
 
   return container;
 };
 
 export const createMeltedSnow2 = (scene: Phaser.Scene, player: Player, map: Tilemap) => {
-  const sprite = scene.add.sprite(0, 0, Sprite.PlayerIdle).setPipeline(Shader.Outline);
+  const sprite = scene.add.sprite(0, 0, Sprite.Puddle2);
 
   const trigger = collision(scene, map.getArea('Melted Snow 2 Trigger')).notSolid();
 
@@ -69,7 +73,7 @@ export const createMeltedSnow2 = (scene: Phaser.Scene, player: Player, map: Tile
   const arrow = scene.add
     .sprite(position.x, position.y - 16, Sprite.DownArrow)
     .play(Animation.DownArrow)
-    .setDepth(Depth.Main - 1)
+    .setDepth(Depth.Main + 1)
     .setPipeline(Shader.Outline);
 
   const inputs = actionInput(scene);
@@ -103,7 +107,11 @@ export const createMeltedSnow2 = (scene: Phaser.Scene, player: Player, map: Tile
       }
     });
 
-  const container = scene.add.container().setPosition(position.x, position.y).add(sprite).setDepth(Depth.Foreground);
+  const container = scene.add
+    .container()
+    .setPosition(position.x, position.y)
+    .add(sprite)
+    .setDepth(Depth.Main - 1);
 
   return container;
 };

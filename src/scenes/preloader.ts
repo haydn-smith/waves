@@ -102,6 +102,8 @@ export class Preloader extends Phaser.Scene {
     this.load.image(Sprite.Snow2, Sprite.Snow2);
     this.load.image(Sprite.Snow3, Sprite.Snow3);
     this.load.image(Sprite.Snow4, Sprite.Snow4);
+    this.load.image(Sprite.Puddle1, Sprite.Puddle1);
+    this.load.image(Sprite.Puddle2, Sprite.Puddle2);
     this.load.image(Sprite.CaveIn1, Sprite.CaveIn1);
     this.load.image(Sprite.CliffTop, Sprite.CliffTop);
     this.load.image(Sprite.CliffBottom, Sprite.CliffBottom);
@@ -432,6 +434,6 @@ export class Preloader extends Phaser.Scene {
 
     // Start game.
     this.scene.run(Scene.DialogBox);
-    this.scene.start(Scene.SpringTitle);
+    this.scene.start(Scene.SummerTitle);
   }
 }

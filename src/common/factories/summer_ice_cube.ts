@@ -7,6 +7,8 @@ import {
   iceCubeOnTwoFans,
   iceCubeWall1,
   iceCubeWall2,
+  snowCaveIn1,
+  snowCaveIn2,
   youHopeIceCubeIsOkay,
 } from 'common/conversations/summer';
 import { Player } from 'common/objects/player';
@@ -14,20 +16,25 @@ import { Tilemap } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
 import { PlayDialog } from 'common/sequenceables/play_dialog';
 import { Repeater } from 'common/utils/repeater';
-import { Depth, Flag, Shader, Sprite } from 'constants';
+import { Action, Animation, Depth, Flag, Shader, Sprite } from 'constants';
 import { DialogBox } from 'scenes/dialog_box';
 import { Camera } from 'systems/camera';
 import { collision } from 'systems/collision';
 import { setFlag } from 'systems/flags';
 import { runCallback, runTween, sequence, wait } from 'systems/sequence';
+import { states } from 'systems/states';
 import { ui } from 'systems/ui';
+import { actionInput } from './input';
 import { rect } from './phaser';
 import { createCallbackOnActivateOnce, createDialogBoxStates } from './state_machine';
 
 export const createIceCube = (scene: Phaser.Scene, player: Player, map: Tilemap, ySort: YSortObjects) => {
   const position = map.getPoint('Ice Cube');
 
-  const sprite = scene.add.sprite(0, 0, Sprite.Unknown).setPipeline(Shader.Outline);
+  const sprite = scene.add.sprite(0, 0, Sprite.IceCubeFrozen);
+  const sprite2 = scene.add.sprite(position.x, position.y, Sprite.IceCubePuddle).setDepth(Depth.Main - 1);
+
+  sprite.anims.play(Animation.IceCubeRight);
 
   const coll = collision(scene, rect(-4, -4, 8, 8));
 
@@ -290,6 +297,61 @@ export const createIceWallAfterPuzzle = (scene: Phaser.Scene, player: Player, ma
   const container = scene.add.container(position.x, position.y, [sprite]);
 
   ySort.add(container);
+
+  return container;
+};
+
+export const createSnowCaveIn = (scene: Phaser.Scene, map: Tilemap, player: Player) => {
+  const sprite = scene.add.sprite(0, 0, Sprite.CaveIn1);
+
+  // collision(scene, map.getArea('Snow Cave In Body'));
+
+  const trigger = collision(scene, map.getArea('Snow Cave In Trigger')).notSolid();
+
+  const position = map.getPoint('Snow Cave In');
+
+  const arrow = scene.add
+    .sprite(position.x, position.y - 16, Sprite.DownArrow)
+    .play(Animation.DownArrow)
+    .setDepth(Depth.Main + 1)
+    .setPipeline(Shader.Outline);
+
+  const inputs = actionInput(scene);
+
+  const repeater = new Repeater([snowCaveIn1, snowCaveIn2], 'repeat last');
+
+  const dialog = () =>
+    sequence(scene).of([
+      runCallback(() => player.disableUserInput()),
+      new PlayDialog(DialogBox.get(scene), repeater.currentItem()),
+      runCallback(() => player.enableUserInput()),
+      runCallback(() => state.change('idle')),
+      runCallback(() => repeater.next()),
+    ]);
+
+  const state = states(scene, 'idle')
+    .add('idle', ({ change }) => {
+      arrow.setAlpha(0);
+
+      if (trigger.intersects(player.collision)) change('active');
+    })
+    .add('active', ({ change }) => {
+      arrow.setAlpha(1);
+
+      if (!trigger.intersects(player.collision)) change('idle');
+
+      if (inputs.isActive(Action.Action)) {
+        dialog().start().destroyWhenComplete();
+        arrow.setAlpha(0);
+        change('dialog');
+      }
+    });
+
+  const container = scene.add
+    .container()
+    .setPosition(position.x, position.y)
+    .add(sprite)
+    .setDepth(Depth.Main - 1);
 
   return container;
 };

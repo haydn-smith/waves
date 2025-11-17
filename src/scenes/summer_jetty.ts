@@ -1,14 +1,15 @@
 import { createGateway } from 'common/factories/gateways';
 import { createMeltedSnow1, createMeltedSnow2 } from 'common/factories/summer_jetty';
+import { Jetty } from 'common/objects/jetty';
 import { Player } from 'common/objects/player';
+import { Snow } from 'common/objects/snow';
 import { Tilemap as TilemapObject } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
-import { MoveToTarget } from 'common/sequenceables/move_to_target';
 import { logEvent } from 'common/utils/log';
-import { Depth, Flag, Scene, Shader, Sprite, Tilemap } from 'constants';
+import { Animation, Depth, Flag, Scene, Sprite, Tilemap } from 'constants';
 import { camera } from 'systems/camera';
 import { checkFlag, setFlag } from 'systems/flags';
-import { runCallback, sequence, wait } from 'systems/sequence';
+import { playAnimation, runCallback, sequence, wait } from 'systems/sequence';
 import { ui } from 'systems/ui';
 
 export class SummerJetty extends Phaser.Scene {
@@ -29,22 +30,33 @@ export class SummerJetty extends Phaser.Scene {
 
     const cam = camera(this);
 
+    this.cameras.main.setBounds(
+      map.getArea('Camera Bounds').x,
+      map.getArea('Camera Bounds').y,
+      map.getArea('Camera Bounds').width,
+      map.getArea('Camera Bounds').height
+    );
+
     ySortObjects.add(player);
 
-    map.forPoints('Jetty', (v) => this.add.sprite(v.x, v.y, Sprite.Jetty).setDepth(Depth.Main - 1));
-
     map.forPoints('Snow 1', (v) =>
-      ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow1).setPipeline(Shader.Outline))
+      ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow1).setPosition(v.x, v.y)))
     );
     map.forPoints('Snow 2', (v) =>
-      ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow2).setPipeline(Shader.Outline))
+      ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow2).setPosition(v.x, v.y)))
     );
     map.forPoints('Snow 3', (v) =>
-      ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow3).setPipeline(Shader.Outline))
+      ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow3).setPosition(v.x, v.y)))
     );
     map.forPoints('Snow 4', (v) =>
-      ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow4).setPipeline(Shader.Outline))
+      ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow4).setPosition(v.x, v.y)))
     );
+
+    const jetty = this.add.existing(new Jetty(this));
+
+    map.forPoints('Jetty', (v) => {
+      jetty.setPosition(v.x, v.y);
+    });
 
     if (!checkFlag(Flag.SummerWakeUpCutsceneWatched)) {
       player.setPosition(map.getPoint('Player Start').x, map.getPoint('Player Start').y);
@@ -52,22 +64,22 @@ export class SummerJetty extends Phaser.Scene {
       sequence(this)
         .of([
           runCallback(() => setFlag(Flag.SummerWakeUpCutsceneWatched)),
-          runCallback(() => player.sleep()),
+          runCallback(() => player.animator.playAnimation(Animation.PlayerSleep)),
           runCallback(() => player.disableUserInput()),
-          runCallback(() => userInterface.showLetterbox()),
+          runCallback(() => ui(this).showLetterbox()),
           runCallback(() => cam.zoom(2)),
-          wait(500),
-          runCallback(() => userInterface.fadeIn(2000)),
-          wait(3000),
-          runCallback(() => player.wave()),
           wait(1000),
-          runCallback(() => player.runnningAround()),
-          wait(500),
-          new MoveToTarget(player.movement, map.getPoint('Player Move to Start')),
+          runCallback(() => ui(this).fadeIn(2000)),
+          wait(4000),
+          playAnimation(player.sprite, Animation.PlayerWakeUp),
+          wait(1000),
+          runCallback(() => player.animator.playAnimation(Animation.PlayerWave)),
+          wait(2000),
+          runCallback(() => player.animator.playMovementAndIdleAnimations()),
+          wait(1000),
           runCallback(() => cam.zoom(1, 800)),
-          runCallback(() => userInterface.hideLetterbox()),
+          runCallback(() => ui(this).hideLetterbox()),
           wait(800),
-          runCallback(() => player.runnningAround()),
           runCallback(() => player.enableUserInput()),
         ])
         .destroyWhenComplete()

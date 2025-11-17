@@ -135,11 +135,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 4,
+            "scale": 2,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 233.25,
-                "y": 246.5
+                "x": 283,
+                "y": 192
             }
         },
         "spring_ice_cube_area.tmx#snow": {
@@ -150,11 +150,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 5.5,
+            "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 254.72727272727272,
-                "y": 252.72727272727275
+                "x": 213.33333333333331,
+                "y": 274.66666666666663
             }
         },
         "spring_jetty_area.tmx#snow": {
@@ -172,22 +172,28 @@
             "scaleInDock": 1
         },
         "summer_ice_cube_area.tmx": {
-            "scale": 5.5,
-            "selectedLayer": 1,
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 1.5,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 242.72727272727272,
-                "y": 196.72727272727272
+                "x": 139.33333333333331,
+                "y": 269.99999999999994
             }
         },
         "summer_ice_cube_area.tmx#snow": {
             "scaleInDock": 1
         },
         "summer_jetty_area.tmx": {
-            "scale": 5.5,
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 4,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 252.9090909090909,
-                "y": 268.54545454545456
+                "x": 269.25,
+                "y": 314.75
             }
         },
         "summer_jetty_area.tmx#snow": {
@@ -247,18 +253,18 @@
     "project": "waves.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "spring_flower_area.tmx",
+        "spring_ice_cube_area.tmx",
         "autumn_ice_cube_area.tmx",
         "summer_ice_cube_area.tmx",
         "spring_again_jetty_area.tmx",
         "spring_jetty_area.tmx",
         "autumn_ice_cube_with_snowman_area.tmx",
         "autumn_flower_area.tmx",
-        "spring_flower_area.tmx",
         "summer_flower_area.tmx",
         "winter_ice_cube_area.tmx",
         "winter_flower_area.tmx",
-        "spring_again_flower_area.tmx",
-        "test.tmx"
+        "spring_again_flower_area.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.margin": 16,

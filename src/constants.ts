@@ -107,6 +107,8 @@ export const Sprite = {
   CliffBottom: 'sprites/cliff_bottom.png',
   DialogBox: 'sprites/dialog_box.png',
   Vignette: 'sprites/vignette.png',
+  Puddle1: 'sprites/puddles/puddle_1.png',
+  Puddle2: 'sprites/puddles/puddle_2.png',
 
   OtherPenguinDialog: 'sprites/dialogs/other_penguin.png',
   IceCubeDialog: 'sprites/dialogs/ice_cube.png',

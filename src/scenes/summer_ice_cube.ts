@@ -1,12 +1,20 @@
 import { iceCubeIntro } from 'common/conversations/summer';
 import { createGateway } from 'common/factories/gateways';
-import { createFan1, createFan2, createFan3, createIceCube, createIceWall } from 'common/factories/summer_ice_cube';
+import {
+  createFan1,
+  createFan2,
+  createFan3,
+  createIceCube,
+  createIceWall,
+  createSnowCaveIn,
+} from 'common/factories/summer_ice_cube';
 import { Player } from 'common/objects/player';
+import { Snow } from 'common/objects/snow';
 import { Tilemap as TilemapObject } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
 import { PlayDialog } from 'common/sequenceables/play_dialog';
 import { logEvent } from 'common/utils/log';
-import { Depth, Flag, Scene, Shader, Sprite, Tilemap } from 'constants';
+import { Depth, Flag, Scene, Sprite, Tilemap } from 'constants';
 import { camera } from 'systems/camera';
 import { checkFlag, setFlag } from 'systems/flags';
 import { runCallback, sequence, wait } from 'systems/sequence';
@@ -34,16 +42,16 @@ export class SummerIceCube extends Phaser.Scene {
     ySortObjects.add(player);
 
     map.forPoints('Snow 1', (v) =>
-      ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow1).setPipeline(Shader.Outline))
+      ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow1).setPosition(v.x, v.y)))
     );
     map.forPoints('Snow 2', (v) =>
-      ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow2).setPipeline(Shader.Outline))
+      ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow2).setPosition(v.x, v.y)))
     );
     map.forPoints('Snow 3', (v) =>
-      ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow3).setPipeline(Shader.Outline))
+      ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow3).setPosition(v.x, v.y)))
     );
     map.forPoints('Snow 4', (v) =>
-      ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow4).setPipeline(Shader.Outline))
+      ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow4).setPosition(v.x, v.y)))
     );
 
     const introCutscene = sequence(this).of([
@@ -105,5 +113,7 @@ export class SummerIceCube extends Phaser.Scene {
     );
 
     cam.follow(player);
+
+    createSnowCaveIn(this, map, player);
   }
 }

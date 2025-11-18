@@ -124,6 +124,11 @@ export const createDialogBoxStates = (
       }
     });
 
+  state.toGameObject().on('destroy', () => {
+    arrow.destroy();
+    inputs.destroy();
+  });
+
   return state;
 };
 
@@ -132,17 +137,18 @@ export const createCallbackOnActivateOnce = (
   player: Player,
   trigger: Collision,
   position: Phaser.Math.Vector2,
-  fn: () => void
+  fn: () => void,
+  arrowYOffset: number = 0
 ) => {
   const arrow = scene.add
-    .sprite(position.x, position.y - 16, Sprite.DownArrow)
+    .sprite(position.x, position.y - 16 + arrowYOffset, Sprite.DownArrow)
     .play(Animation.DownArrow)
     .setDepth(Depth.Main + 1)
     .setPipeline(Shader.Outline);
 
   const inputs = actionInput(scene);
 
-  states(scene, 'idle')
+  const state = states(scene, 'idle')
     .add('idle', ({ change }) => {
       arrow.setAlpha(0);
 
@@ -159,4 +165,11 @@ export const createCallbackOnActivateOnce = (
         change('dialog');
       }
     });
+
+  state.toGameObject().on('destroy', () => {
+    arrow.destroy();
+    inputs.destroy();
+  });
+
+  return state;
 };

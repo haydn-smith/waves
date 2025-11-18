@@ -73,7 +73,7 @@ export class Jetty extends Phaser.GameObjects.Container {
   }
 
   public collisionOn(): this {
-    this.collisions.forEach((o) => o.notSolid());
+    this.collisions.forEach((o) => o.solid());
 
     return this;
   }

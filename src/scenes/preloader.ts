@@ -107,6 +107,8 @@ export class Preloader extends Phaser.Scene {
     this.load.image(Sprite.CaveIn1, Sprite.CaveIn1);
     this.load.image(Sprite.CliffTop, Sprite.CliffTop);
     this.load.image(Sprite.CliffBottom, Sprite.CliffBottom);
+    this.load.image(Sprite.IceWall, Sprite.IceWall);
+    this.load.image(Sprite.IceWallBroken, Sprite.IceWallBroken);
     this.load.spritesheet(Sprite.Jetty, Sprite.Jetty, {
       frameWidth: 128,
     });
@@ -118,6 +120,10 @@ export class Preloader extends Phaser.Scene {
       frameHeight: 240,
     });
     this.load.spritesheet(Sprite.MainPlant, Sprite.MainPlant, {
+      frameWidth: 32,
+      frameHeight: 64,
+    });
+    this.load.spritesheet(Sprite.MainPlantThirsty, Sprite.MainPlantThirsty, {
       frameWidth: 32,
       frameHeight: 64,
     });
@@ -213,6 +219,11 @@ export class Preloader extends Phaser.Scene {
       frameWidth: 32,
     });
     this.load.image(Sprite.IceCubePuddle, Sprite.IceCubePuddle);
+
+    this.load.image(Sprite.Fan1Off, Sprite.Fan1Off);
+    this.load.spritesheet(Sprite.Fan1, Sprite.Fan1, {
+      frameWidth: 64,
+    });
 
     // Audio.
     this.load.audio(Sound.Activate, Sound.Activate);
@@ -414,6 +425,18 @@ export class Preloader extends Phaser.Scene {
       frameRate: 3,
       repeat: -1,
     });
+    this.anims.create({
+      key: Animation.MainPlantThirsty,
+      frames: Sprite.MainPlantThirsty,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.Fan1,
+      frames: Sprite.Fan1,
+      frameRate: 8,
+      repeat: -1,
+    });
 
     // Start management scenes.
     startUI(this, {
@@ -430,10 +453,10 @@ export class Preloader extends Phaser.Scene {
     // setFlag(Flag.SummerWakeUpCutsceneWatched);
     // setFlag(Flag.AutumnSnowmanSnow2Completed);
     // setFlag(Flag.OpeningCutsceneWatched);
-    // setData('previousScene', Scene.SpringIceCube);
+    // setData('previousScene', Scene.SummerIceCube);
 
     // Start game.
     this.scene.run(Scene.DialogBox);
-    this.scene.start(Scene.SummerTitle);
+    this.scene.start(Scene.MainMenu);
   }
 }

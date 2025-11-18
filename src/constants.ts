@@ -150,6 +150,7 @@ export const Sprite = {
   SnowmanCovered: '',
 
   MainPlant: 'sprites/plants/main_plant.png',
+  MainPlantThirsty: 'sprites/plants/main_plant_thirsty.png',
   MainPlantWindy: '',
   MainPlantSad: '',
   MainPlantWithFlower: '',
@@ -161,6 +162,11 @@ export const Sprite = {
   SummerIcon: 'sprites/summer_icon.png',
   AutumnIcon: 'sprites/autumn_icon.png',
   WinterIcon: 'sprites/winter_icon.png',
+
+  Fan1Off: 'sprites/fans/fan_1_off.png',
+  Fan1: 'sprites/fans/fan_1.png',
+  IceWall: 'sprites/ice_barrier.png',
+  IceWallBroken: 'sprites/ice_barrier_broken.png',
 } as const;
 export type KeyOfSprite = keyof typeof Sprite;
 export type TypeOfSprite = (typeof Sprite)[KeyOfSprite];
@@ -207,6 +213,11 @@ export const Animation = {
   IceCubeSwimRight: 'IceCubeSwimRight',
 
   MainPlant: 'MainPlant',
+  MainPlantThirsty: 'MainPlantThirsty',
+
+  Fan1: 'Fan1',
+  Fan2: 'Fan2',
+  Fan3: 'Fan3',
 } as const;
 export type KeyOfAnimation = keyof typeof Animation;
 export type TypeOfAnimation = (typeof Animation)[KeyOfAnimation];

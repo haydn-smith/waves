@@ -1,12 +1,17 @@
 import { iceCubeIntro } from 'common/conversations/summer';
 import { createGateway } from 'common/factories/gateways';
+import { vec2 } from 'common/factories/phaser';
 import {
   createFan1,
+  createFan1On,
   createFan2,
-  createFan3,
+  createFan2On,
   createIceCube,
+  createIceCubeAfterPuzzle,
   createIceWall,
+  createIceWallAfterPuzzle,
   createSnowCaveIn,
+  createWindyArea,
 } from 'common/factories/summer_ice_cube';
 import { Player } from 'common/objects/player';
 import { Snow } from 'common/objects/snow';
@@ -53,6 +58,8 @@ export class SummerIceCube extends Phaser.Scene {
     map.forPoints('Snow 4', (v) =>
       ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow4).setPosition(v.x, v.y)))
     );
+    map.forPoints('Puddle 1', (v) => this.add.sprite(v.x, v.y, Sprite.Puddle1).setDepth(Depth.Main - 1));
+    map.forPoints('Puddle 2', (v) => this.add.sprite(v.x, v.y, Sprite.Puddle2).setDepth(Depth.Main - 1));
 
     const introCutscene = sequence(this).of([
       runCallback(() => {
@@ -61,13 +68,13 @@ export class SummerIceCube extends Phaser.Scene {
         userInterface.showLetterbox();
         cam.zoom(2, 1000);
         cam.pauseFollow();
-        cam.move(map.getPoint('Ice Cube'), 2000);
+        cam.move(vec2(map.getPoint('Ice Cube').x, map.getPoint('Ice Cube').y + 16), 2000);
       }),
       wait(2000),
       new PlayDialog(DialogBox.get(this), iceCubeIntro),
       wait(500),
       runCallback(() => {
-        userInterface.showLetterbox();
+        userInterface.hideLetterbox();
         cam.zoom(1, 1000);
         cam.resumeFollow();
       }),
@@ -81,13 +88,16 @@ export class SummerIceCube extends Phaser.Scene {
 
     const iceWall = createIceWall(this, player, map, ySortObjects);
 
-    createFan1(this, player, map, ySortObjects, cam);
+    const fan1 = createFan1(this, player, map, ySortObjects, cam, iceCube, iceWall);
 
-    createFan2(this, player, map, ySortObjects, cam);
+    const fan2 = createFan2(this, player, map, ySortObjects, cam, iceCube, iceWall);
 
-    createFan3(this, player, map, ySortObjects, cam, iceCube, iceWall);
-
-    // createSnowBarrier();
+    this.cameras.main.setBounds(
+      map.getArea('Camera Bounds').x,
+      map.getArea('Camera Bounds').y,
+      map.getArea('Camera Bounds').width,
+      map.getArea('Camera Bounds').height
+    );
 
     createGateway(
       this,
@@ -115,5 +125,23 @@ export class SummerIceCube extends Phaser.Scene {
     cam.follow(player);
 
     createSnowCaveIn(this, map, player);
+
+    if (checkFlag(Flag.SummerIceCubeFan1Activated) && checkFlag(Flag.SummerIceCubeFan2Activated)) {
+      iceWall.destroy();
+      iceCube.destroy();
+      createIceWallAfterPuzzle(this, player, map, ySortObjects);
+      createIceCubeAfterPuzzle(this, player, map, ySortObjects);
+      createWindyArea(this, player, map);
+    }
+
+    if (checkFlag(Flag.SummerIceCubeFan1Activated)) {
+      fan1.destroy();
+      createFan1On(this, map, ySortObjects);
+    }
+
+    if (checkFlag(Flag.SummerIceCubeFan2Activated)) {
+      fan2.destroy();
+      createFan2On(this, map, ySortObjects);
+    }
   }
 }

@@ -4,7 +4,6 @@ import {
   iceCubeNoFans,
   iceCubeOnOneFan,
   iceCubeOnThreeFans,
-  iceCubeOnTwoFans,
   iceCubeWall1,
   iceCubeWall2,
   snowCaveIn1,
@@ -20,13 +19,13 @@ import { Action, Animation, Depth, Flag, Shader, Sprite } from 'constants';
 import { DialogBox } from 'scenes/dialog_box';
 import { Camera } from 'systems/camera';
 import { collision } from 'systems/collision';
-import { setFlag } from 'systems/flags';
-import { runCallback, runTween, sequence, wait } from 'systems/sequence';
+import { checkFlag, setFlag } from 'systems/flags';
+import { runCallback, runTween, sequence, Sequenceable, wait } from 'systems/sequence';
 import { states } from 'systems/states';
-import { ui } from 'systems/ui';
+import { ui, UserInterface } from 'systems/ui';
 import { actionInput } from './input';
-import { rect } from './phaser';
-import { createCallbackOnActivateOnce, createDialogBoxStates } from './state_machine';
+import { rect, vec2 } from './phaser';
+import { createCallbackOnActivateOnce, createCallbackOnEnterAndExit, createDialogBoxStates } from './state_machine';
 
 export const createIceCube = (scene: Phaser.Scene, player: Player, map: Tilemap, ySort: YSortObjects) => {
   const position = map.getPoint('Ice Cube');
@@ -59,7 +58,9 @@ export const createIceCube = (scene: Phaser.Scene, player: Player, map: Tilemap,
 export const createIceCubeAfterPuzzle = (scene: Phaser.Scene, player: Player, map: Tilemap, ySort: YSortObjects) => {
   const position = map.getPoint('Ice Cube After Puzzle');
 
-  const sprite = scene.add.sprite(0, 0, Sprite.Unknown).setPipeline(Shader.Outline);
+  const sprite = scene.add.sprite(0, 0, Sprite.IceCubeRight);
+
+  sprite.anims.play(Animation.IceCubeRight);
 
   const coll = collision(scene, rect(-4, -4, 8, 8));
 
@@ -85,97 +86,7 @@ export const createIceCubeAfterPuzzle = (scene: Phaser.Scene, player: Player, ma
   return container;
 };
 
-export const createFan1 = (scene: Phaser.Scene, player: Player, map: Tilemap, ySort: YSortObjects, cam: Camera) => {
-  const position = map.getPoint('Fan 1');
-
-  const sprite = scene.add.sprite(0, 0, Sprite.Unknown).setPipeline(Shader.Outline);
-
-  const coll = collision(scene, rect(-2, -2, 4, 4));
-
-  const trigger = collision(scene, map.getArea('Fan 1 Trigger')).notSolid();
-
-  const container = scene.add.container(position.x, position.y, [sprite, coll.toGameObject()]);
-
-  const userInterface = ui(scene);
-
-  const cutscene = sequence(scene).of([
-    runCallback(() => {
-      setFlag(Flag.SummerIceCubeFan1Activated);
-      player.disableUserInput();
-      userInterface.showLetterbox();
-      cam.zoom(2, 1000);
-      cam.pauseFollow();
-      cam.move(map.getPoint('Fan 1'), 2000);
-    }),
-    wait(2000),
-    // TODO: Play "fan on" animation.
-    runCallback(() => {
-      cam.move(map.getPoint('Ice Cube'), 2000);
-    }),
-    wait(2000),
-    new PlayDialog(DialogBox.get(scene), iceCubeOnOneFan),
-    runCallback(() => {
-      userInterface.showLetterbox();
-      cam.zoom(1, 1000);
-      cam.resumeFollow();
-    }),
-    wait(1000),
-    runCallback(() => {
-      player.enableUserInput();
-    }),
-  ]);
-
-  createCallbackOnActivateOnce(scene, player, trigger, position, () => cutscene.start());
-
-  ySort.add(container);
-};
-
-export const createFan2 = (scene: Phaser.Scene, player: Player, map: Tilemap, ySort: YSortObjects, cam: Camera) => {
-  const position = map.getPoint('Fan 2');
-
-  const sprite = scene.add.sprite(0, 0, Sprite.Unknown).setPipeline(Shader.Outline);
-
-  const coll = collision(scene, rect(-2, -2, 4, 4));
-
-  const trigger = collision(scene, map.getArea('Fan 2 Trigger')).notSolid();
-
-  const container = scene.add.container(position.x, position.y, [sprite, coll.toGameObject()]);
-
-  const userInterface = ui(scene);
-
-  const cutscene = sequence(scene).of([
-    runCallback(() => {
-      setFlag(Flag.SummerIceCubeFan2Activated);
-      player.disableUserInput();
-      userInterface.showLetterbox();
-      cam.zoom(2, 1000);
-      cam.pauseFollow();
-      cam.move(map.getPoint('Fan 2'), 2000);
-    }),
-    wait(2000),
-    // TODO: Play "fan on" animation.
-    runCallback(() => {
-      cam.move(map.getPoint('Ice Cube'), 2000);
-    }),
-    wait(2000),
-    new PlayDialog(DialogBox.get(scene), iceCubeOnTwoFans),
-    runCallback(() => {
-      userInterface.showLetterbox();
-      cam.zoom(1, 1000);
-      cam.resumeFollow();
-    }),
-    wait(1000),
-    runCallback(() => {
-      player.enableUserInput();
-    }),
-  ]);
-
-  createCallbackOnActivateOnce(scene, player, trigger, position, () => cutscene.start());
-
-  ySort.add(container);
-};
-
-export const createFan3 = (
+export const createFan1 = (
   scene: Phaser.Scene,
   player: Player,
   map: Tilemap,
@@ -184,82 +95,197 @@ export const createFan3 = (
   iceCube: Phaser.GameObjects.Container,
   iceWall: Phaser.GameObjects.Container
 ) => {
-  const position = map.getPoint('Fan 3');
+  const position = map.getPoint('Fan 1');
 
-  const sprite = scene.add.sprite(0, 0, Sprite.Unknown).setPipeline(Shader.Outline);
+  const sprite = scene.add.sprite(0, -16, Sprite.Fan1Off);
 
-  const coll = collision(scene, rect(-2, -2, 4, 4));
+  const coll = collision(scene, rect(-10, -2, 18, 2));
 
-  const trigger = collision(scene, map.getArea('Fan 3 Trigger')).notSolid();
+  const trigger = collision(scene, map.getArea('Fan 1 Trigger')).notSolid();
 
   const container = scene.add.container(position.x, position.y, [sprite, coll.toGameObject()]);
 
   const userInterface = ui(scene);
 
   const particles = scene.add
-    .particles(iceCube.x - 64 - 32, iceCube.y, Sprite.White1px, {
+    .particles(position.x - 16, position.y - 16, Sprite.White1px, {
       lifespan: 800,
-      speed: { min: 160, max: 320 },
-      angle: { min: 180 + 45 + 45 + 45, max: 360 - 45 + 45 },
+      speed: { min: 80, max: 100 },
+      angle: { min: 180, max: 180 + 45 },
       alpha: { end: 1, start: 1 },
       emitZone: {
         type: 'random',
         source: new Phaser.Geom.Rectangle(-16, -16, 32, 32) as Phaser.Types.GameObjects.Particles.RandomZoneSource,
       },
-      gravityY: 300,
-      frequency: -1,
-      quantity: 200,
+      gravityY: 0,
+      frequency: 10,
+      quantity: 1,
     })
-    .setDepth(Depth.Main + 1);
+    .setDepth(Depth.Main + 1)
+    .stop();
 
+  const cutscene = () =>
+    sequence(scene).of([
+      runCallback(() => {
+        setFlag(Flag.SummerIceCubeFan1Activated);
+        player.disableUserInput();
+        userInterface.showLetterbox();
+        cam.zoom(2, 1000);
+        cam.pauseFollow();
+        cam.move(map.getPoint('Fan 1'), 2000);
+      }),
+      wait(1000),
+      runCallback(() => {
+        sprite.anims.play(Animation.Fan1);
+        particles.start();
+      }),
+      wait(2000),
+      runCallback(() => {
+        cam.move(vec2(map.getPoint('Ice Cube').x, map.getPoint('Ice Cube').y + 16), 2000);
+      }),
+      wait(2000),
+      ...sequenceItemsAfterFan(scene, iceCube, map, iceWall, ySort, userInterface, player, cam),
+    ]);
+
+  const states = createCallbackOnActivateOnce(scene, player, trigger, position, () => cutscene().start(), -22);
+
+  ySort.add(container);
+
+  return container.on('destroy', () => {
+    states.destroy();
+  });
+};
+
+export const createFan1On = (scene: Phaser.Scene, map: Tilemap, ySort: YSortObjects) => {
+  const position = map.getPoint('Fan 1');
+
+  const sprite = scene.add.sprite(0, -16, Sprite.Fan1Off);
+
+  const coll = collision(scene, rect(-10, -2, 18, 2));
+
+  const container = scene.add.container(position.x, position.y, [sprite, coll.toGameObject()]);
+
+  const particles = scene.add
+    .particles(position.x - 16, position.y - 16, Sprite.White1px, {
+      lifespan: 800,
+      speed: { min: 80, max: 100 },
+      angle: { min: 180, max: 180 + 45 },
+      alpha: { end: 1, start: 1 },
+      emitZone: {
+        type: 'random',
+        source: new Phaser.Geom.Rectangle(-16, -16, 32, 32) as Phaser.Types.GameObjects.Particles.RandomZoneSource,
+      },
+      gravityY: 0,
+      frequency: 10,
+      quantity: 1,
+    })
+    .setDepth(Depth.Main + 1)
+    .stop();
+
+  sprite.anims.play(Animation.Fan1);
   particles.start();
 
-  const cutscene = sequence(scene).of([
-    runCallback(() => {
-      setFlag(Flag.SummerIceCubeFan3Activated);
-      player.disableUserInput();
-      userInterface.showLetterbox();
-      cam.zoom(2, 1000);
-      cam.pauseFollow();
-      cam.move(map.getPoint('Fan 3'), 2000);
-    }),
-    wait(2000),
-    // TODO: Play "fan on" animation.
-    runCallback(() => {
-      cam.move(map.getPoint('Ice Cube'), 2000);
-    }),
-    wait(2000),
-    new PlayDialog(DialogBox.get(scene), iceCubeOnThreeFans),
-    wait(500),
-    runTween(scene, {
-      targets: iceCube,
-      x: map.getPoint('Ice Cube Blown To').x,
-      y: map.getPoint('Ice Cube Blown To').y,
-      duration: 1000,
-      ease: Phaser.Math.Easing.Quintic.In,
-    }),
-    runCallback(() => {
-      particles.explode();
-    }),
-    wait(4000),
-    new PlayDialog(DialogBox.get(scene), youHopeIceCubeIsOkay),
-    wait(500),
-    runCallback(() => {
-      iceCube.destroy();
-      iceWall.destroy();
-      createIceWallAfterPuzzle(scene, player, map, ySort);
-      createIceCubeAfterPuzzle(scene, player, map, ySort);
-      userInterface.showLetterbox();
-      cam.zoom(1, 1000);
-      cam.resumeFollow();
-    }),
-    wait(1000),
-    runCallback(() => {
-      player.enableUserInput();
-    }),
-  ]);
+  ySort.add(container);
+};
 
-  createCallbackOnActivateOnce(scene, player, trigger, position, () => cutscene.start());
+export const createFan2 = (
+  scene: Phaser.Scene,
+  player: Player,
+  map: Tilemap,
+  ySort: YSortObjects,
+  cam: Camera,
+  iceCube: Phaser.GameObjects.Container,
+  iceWall: Phaser.GameObjects.Container
+) => {
+  const position = map.getPoint('Fan 2');
+
+  const sprite = scene.add.sprite(0, -16, Sprite.Fan1Off);
+
+  const coll = collision(scene, rect(-10, -2, 18, 2));
+
+  const trigger = collision(scene, map.getArea('Fan 2 Trigger')).notSolid();
+
+  const container = scene.add.container(position.x, position.y, [sprite, coll.toGameObject()]);
+
+  const userInterface = ui(scene);
+
+  const fanParticles = scene.add
+    .particles(position.x - 16, position.y - 16, Sprite.White1px, {
+      lifespan: 800,
+      speed: { min: 80, max: 100 },
+      angle: { min: 180 - 45, max: 180 },
+      alpha: { end: 1, start: 1 },
+      emitZone: {
+        type: 'random',
+        source: new Phaser.Geom.Rectangle(-16, -16, 32, 32) as Phaser.Types.GameObjects.Particles.RandomZoneSource,
+      },
+      gravityY: 0,
+      frequency: 10,
+      quantity: 1,
+    })
+    .setDepth(Depth.Main + 1)
+    .stop();
+
+  const cutscene = () =>
+    sequence(scene).of([
+      runCallback(() => {
+        setFlag(Flag.SummerIceCubeFan2Activated);
+        player.disableUserInput();
+        userInterface.showLetterbox();
+        cam.zoom(2, 1000);
+        cam.pauseFollow();
+        cam.move(map.getPoint('Fan 2'), 2000);
+      }),
+      wait(2000),
+      runCallback(() => {
+        sprite.anims.play(Animation.Fan1);
+        fanParticles.start();
+      }),
+      wait(1000),
+      runCallback(() => {
+        cam.move(vec2(map.getPoint('Ice Cube').x, map.getPoint('Ice Cube').y + 16), 2000);
+      }),
+      wait(2000),
+      ...sequenceItemsAfterFan(scene, iceCube, map, iceWall, ySort, userInterface, player, cam),
+    ]);
+
+  const states = createCallbackOnActivateOnce(scene, player, trigger, position, () => cutscene().start(), -22);
+
+  ySort.add(container);
+
+  return container.on('destroy', () => {
+    states.destroy();
+  });
+};
+
+export const createFan2On = (scene: Phaser.Scene, map: Tilemap, ySort: YSortObjects) => {
+  const position = map.getPoint('Fan 2');
+
+  const sprite = scene.add.sprite(0, -16, Sprite.Fan1Off);
+
+  const coll = collision(scene, rect(-10, -2, 18, 2));
+
+  const container = scene.add.container(position.x, position.y, [sprite, coll.toGameObject()]);
+
+  const particles = scene.add
+    .particles(position.x - 16, position.y - 16, Sprite.White1px, {
+      lifespan: 800,
+      speed: { min: 80, max: 100 },
+      angle: { min: 180 - 45, max: 180 },
+      alpha: { end: 1, start: 1 },
+      emitZone: {
+        type: 'random',
+        source: new Phaser.Geom.Rectangle(-16, -16, 32, 32) as Phaser.Types.GameObjects.Particles.RandomZoneSource,
+      },
+      gravityY: 0,
+      frequency: 10,
+      quantity: 1,
+    })
+    .setDepth(Depth.Main + 1)
+    .stop();
+
+  sprite.anims.play(Animation.Fan1);
+  particles.start();
 
   ySort.add(container);
 };
@@ -267,13 +293,13 @@ export const createFan3 = (
 export const createIceWall = (scene: Phaser.Scene, player: Player, map: Tilemap, ySort: YSortObjects) => {
   const position = map.getPoint('Ice Wall');
 
-  const sprite = scene.add.sprite(0, 0, Sprite.Unknown).setPipeline(Shader.Outline);
+  const sprite = scene.add.sprite(0, 0, Sprite.IceWall);
 
   const coll = collision(scene, map.getArea('Ice Wall Collision'));
 
   const trigger = collision(scene, map.getArea('Ice Wall Trigger')).notSolid();
 
-  const container = scene.add.container(position.x, position.y, [sprite, coll.toGameObject()]);
+  const container = scene.add.container(position.x, position.y, [sprite]).setDepth(Depth.Main + 1);
 
   const repeater = new Repeater([iceCubeWall1, iceCubeWall2], 'repeat last');
 
@@ -282,9 +308,8 @@ export const createIceWall = (scene: Phaser.Scene, player: Player, map: Tilemap,
   container.on('destroy', () => {
     states.destroy();
     trigger.destroy();
+    coll.destroy();
   });
-
-  ySort.add(container);
 
   return container;
 };
@@ -292,19 +317,15 @@ export const createIceWall = (scene: Phaser.Scene, player: Player, map: Tilemap,
 export const createIceWallAfterPuzzle = (scene: Phaser.Scene, player: Player, map: Tilemap, ySort: YSortObjects) => {
   const position = map.getPoint('Ice Wall');
 
-  const sprite = scene.add.sprite(0, 0, Sprite.Unknown).setPipeline(Shader.Outline);
+  const sprite = scene.add.sprite(0, 0, Sprite.IceWallBroken);
 
-  const container = scene.add.container(position.x, position.y, [sprite]);
-
-  ySort.add(container);
+  const container = scene.add.container(position.x, position.y, [sprite]).setDepth(Depth.Main + 1);
 
   return container;
 };
 
 export const createSnowCaveIn = (scene: Phaser.Scene, map: Tilemap, player: Player) => {
   const sprite = scene.add.sprite(0, 0, Sprite.CaveIn1);
-
-  // collision(scene, map.getArea('Snow Cave In Body'));
 
   const trigger = collision(scene, map.getArea('Snow Cave In Trigger')).notSolid();
 
@@ -354,4 +375,106 @@ export const createSnowCaveIn = (scene: Phaser.Scene, map: Tilemap, player: Play
     .setDepth(Depth.Main - 1);
 
   return container;
+};
+
+const sequenceItemsAfterFan = (
+  scene: Phaser.Scene,
+  iceCube: Phaser.GameObjects.Container,
+  map: Tilemap,
+  iceWall: Phaser.GameObjects.Container,
+  ySort: YSortObjects,
+  userInterface: UserInterface,
+  player: Player,
+  cam: Camera
+): Sequenceable[] => {
+  const fanCount = [checkFlag(Flag.SummerIceCubeFan1Activated), checkFlag(Flag.SummerIceCubeFan2Activated)].filter(
+    (o) => !!o
+  ).length;
+
+  if (fanCount === 1) {
+    const particles = scene.add
+      .particles(iceCube.x - 64 - 32, iceCube.y, Sprite.White1px, {
+        lifespan: 800,
+        speed: { min: 160, max: 320 },
+        angle: { min: 180 + 45 + 45 + 45, max: 360 - 45 + 45 },
+        alpha: { end: 1, start: 1 },
+        emitZone: {
+          type: 'random',
+          source: new Phaser.Geom.Rectangle(-16, -16, 32, 32) as Phaser.Types.GameObjects.Particles.RandomZoneSource,
+        },
+        gravityY: 300,
+        frequency: -1,
+        quantity: 200,
+      })
+      .setDepth(Depth.Main + 1)
+      .start();
+
+    return [
+      new PlayDialog(DialogBox.get(scene), iceCubeOnThreeFans),
+      wait(500),
+      runTween(scene, {
+        targets: iceCube,
+        x: map.getPoint('Ice Cube Blown To').x,
+        y: map.getPoint('Ice Cube Blown To').y,
+        duration: 1000,
+        ease: Phaser.Math.Easing.Quintic.In,
+      }),
+      runCallback(() => {
+        particles.explode();
+      }),
+      wait(4000),
+      new PlayDialog(DialogBox.get(scene), youHopeIceCubeIsOkay),
+      wait(500),
+      runCallback(() => {
+        iceCube.destroy();
+        iceWall.destroy();
+        createIceWallAfterPuzzle(scene, player, map, ySort);
+        createIceCubeAfterPuzzle(scene, player, map, ySort);
+        createWindyArea(scene, player, map);
+        userInterface.hideLetterbox();
+        cam.zoom(1, 1000);
+        cam.resumeFollow();
+      }),
+      wait(1000),
+      runCallback(() => {
+        player.enableUserInput();
+      }),
+    ];
+  }
+
+  return [
+    new PlayDialog(DialogBox.get(scene), iceCubeOnOneFan),
+    runCallback(() => {
+      userInterface.hideLetterbox();
+      cam.zoom(1, 1000);
+      cam.resumeFollow();
+    }),
+    wait(1000),
+    runCallback(() => {
+      player.enableUserInput();
+    }),
+  ];
+};
+
+export const createWindyArea = (scene: Phaser.Scene, player: Player, map: Tilemap) => {
+  const trigger = collision(scene, map.getArea('Fan Wind Trigger')).notSolid();
+
+  createCallbackOnEnterAndExit(
+    scene,
+    trigger,
+    player.collision,
+    () => {
+      player.disableUserInput();
+      player.movement.setSpeed(128);
+    },
+    () => {
+      player.enableUserInput();
+      player.movement.setSpeed(40);
+    },
+    (delta) => {
+      player.movement.setVelocity(
+        vec2(player.movement.velocity().x - 128 * delta * 0.001, player.movement.velocity().y)
+      );
+    }
+  );
 };

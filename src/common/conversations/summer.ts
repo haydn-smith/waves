@@ -1,5 +1,5 @@
 import { Dialog } from 'common/objects/dialog_box';
-import { Animation, Sprite } from 'constants';
+import { Animation } from 'constants';
 
 export const meltedSnow1_1: Dialog = [
   {
@@ -73,7 +73,7 @@ export const iceCubeIntro: Dialog = [
   {
     image: Animation.IceCubeDialog,
     line1: ['... ', 'Well...'],
-    line2: ['hot for the antarctic, anyway.'],
+    line2: ['Hot for the antarctic, anyway.'],
   },
   {
     image: Animation.IceCubeDialog,
@@ -95,7 +95,7 @@ export const iceCubeOnOneFan: Dialog = [
   {
     image: Animation.IceCubeDialog,
     line1: ['...Whoa!'],
-    line2: ["That's s much cooler!"],
+    line2: ["That's much cooler!"],
   },
   {
     image: Animation.IceCubeDialog,
@@ -156,17 +156,17 @@ export const youHopeIceCubeIsOkay: Dialog = [
 
 export const iceCubeAfterPuzzle1: Dialog = [
   {
-    image: Sprite.Unknown,
+    image: Animation.IceCubeDialog,
     line2: ['...!'],
     line1: ['WHHOOOAAA!'],
   },
   {
-    image: Sprite.Unknown,
+    image: Animation.IceCubeDialog,
     line1: ['THAT WAS AWESOME!'],
     line2: ['...!'],
   },
   {
-    image: Sprite.Unknown,
+    image: Animation.IceCubeDialog,
     line1: ["I'm not even thinking about being cool anymore."],
     line2: ['Because that was the coolest thing ever!'],
   },
@@ -180,23 +180,24 @@ export const iceCubeAfterPuzzle2: Dialog = [
   },
 ];
 
-export const iceCubeWall2 = [
+export const iceCubeWall2: Dialog = [
   {
     image: Animation.ThinkingDialog,
     line1: ['This ice cube wall is in the way.'],
-    line2: ['Somehow, these ice cubes seem...'],
+    line2: [],
   },
   {
     image: Animation.ThinkingDialog,
-    line1: ['less fiendly than the other one.'],
-    line2: ['...'],
+    line1: ['Somehow, these ice cubes seem'],
+    line2: ['less fiendly than the other one.'],
+    autoPlaySecondLine: true,
   },
 ];
 
 export const iceCubeWall1 = [
   {
     image: Animation.ThinkingDialog,
-    line1: ['This barrier stands between you...'],
+    line1: ['This ice barrier stands between you...'],
     line2: ['And giving the plant some water.'],
   },
 ];
@@ -209,7 +210,7 @@ export const summerFlower = [
   },
   {
     image: Animation.ThinkingDialog,
-    line1: ['...even through summer.'],
+    line1: ['...Even through summer.'],
     line2: ['It looks a little thirsty though!'],
   },
 ];

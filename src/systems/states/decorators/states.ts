@@ -22,4 +22,8 @@ export class States<TState extends string, TInitialState extends TState> {
   public destroy(): void {
     this.states.destroy();
   }
+
+  public toGameObject(): StatesObject<TState, TInitialState> {
+    return this.states;
+  }
 }

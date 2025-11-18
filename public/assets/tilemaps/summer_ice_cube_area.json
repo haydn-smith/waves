@@ -114,7 +114,7 @@
                  "visible":true,
                  "width":0,
                  "x":288,
-                 "y":296
+                 "y":292
                 }, 
                 {
                  "height":0,
@@ -129,15 +129,15 @@
                  "y":232
                 }, 
                 {
-                 "height":29,
+                 "height":31,
                  "id":13,
                  "name":"Ice Cube Trigger",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":28,
+                 "width":31,
                  "x":274,
-                 "y":279
+                 "y":277
                 }, 
                 {
                  "height":19,
@@ -170,8 +170,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":324,
-                 "y":258
+                 "x":331,
+                 "y":334
                 }, 
                 {
                  "height":0,
@@ -182,53 +182,30 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":335,
-                 "y":311
+                 "x":330,
+                 "y":270
                 }, 
                 {
-                 "height":0,
-                 "id":18,
-                 "name":"Fan 3",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":312,
-                 "y":337
-                }, 
-                {
-                 "height":15,
+                 "height":22,
                  "id":19,
                  "name":"Fan 1 Trigger",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":12,
-                 "x":318,
-                 "y":249
+                 "width":36,
+                 "x":312,
+                 "y":319
                 }, 
                 {
-                 "height":15,
+                 "height":21,
                  "id":20,
                  "name":"Fan 2 Trigger",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":12,
-                 "x":329,
-                 "y":302
-                }, 
-                {
-                 "height":13,
-                 "id":21,
-                 "name":"Fan 3 Trigger",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":11,
-                 "x":307,
-                 "y":328
+                 "width":35,
+                 "x":312,
+                 "y":255
                 }, 
                 {
                  "height":0,
@@ -240,7 +217,7 @@
                  "visible":true,
                  "width":0,
                  "x":160,
-                 "y":297
+                 "y":293
                 }, 
                 {
                  "height":0,
@@ -263,7 +240,7 @@
                  "visible":true,
                  "width":28,
                  "x":163,
-                 "y":261
+                 "y":268
                 }, 
                 {
                  "height":0,
@@ -274,19 +251,19 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":152,
-                 "y":297
+                 "x":159,
+                 "y":288
                 }, 
                 {
-                 "height":48,
+                 "height":16,
                  "id":26,
                  "name":"Ice Wall Collision",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":32,
-                 "x":160,
-                 "y":272
+                 "width":8,
+                 "x":152,
+                 "y":288
                 }, 
                 {
                  "height":64,
@@ -308,13 +285,13 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":244,
-                 "y":274
+                 "x":207,
+                 "y":256
                 }, 
                 {
                  "height":0,
                  "id":30,
-                 "name":"Snow 1",
+                 "name":"Puddle 1",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -374,7 +351,7 @@
                 {
                  "height":0,
                  "id":35,
-                 "name":"Snow 1",
+                 "name":"Puddle 2",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -392,8 +369,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":337,
-                 "y":285
+                 "x":332,
+                 "y":298
                 }, 
                 {
                  "height":332,
@@ -403,8 +380,19 @@
                  "type":"",
                  "visible":true,
                  "width":463,
-                 "x":20,
+                 "x":21,
                  "y":113
+                }, 
+                {
+                 "height":66,
+                 "id":38,
+                 "name":"Fan Wind Trigger",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":46,
+                 "x":255,
+                 "y":264
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -413,7 +401,7 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":38,
+ "nextobjectid":43,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

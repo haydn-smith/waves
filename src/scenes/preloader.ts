@@ -457,6 +457,6 @@ export class Preloader extends Phaser.Scene {
 
     // Start game.
     this.scene.run(Scene.DialogBox);
-    this.scene.start(Scene.MainMenu);
+    this.scene.start(Scene.AutumnTitle);
   }
 }

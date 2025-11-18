@@ -36,7 +36,7 @@ export class AutumnTitle extends Phaser.Scene {
         runCallback(() => this.typewriter.typewrite(`3.`)),
         wait(() => this.typewriter.typewriteDuration()),
         wait(500),
-        runCallback(() => this.typewriter2.typewrite(`[sprite:${Sprite.SpringIcon}] Autumn`)),
+        runCallback(() => this.typewriter2.typewrite(`[sprite:${Sprite.AutumnIcon}] Autumn`)),
         wait(() => this.typewriter2.typewriteDuration()),
         wait(500),
         runTween(this, {

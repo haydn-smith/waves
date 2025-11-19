@@ -1,3 +1,6 @@
+import { Fade } from 'common/objects/shaders/fade';
+import { Shader } from 'constants';
+
 export class Fader extends Phaser.GameObjects.Container {
   private graphics: Phaser.GameObjects.Graphics;
 
@@ -23,10 +26,13 @@ export class Fader extends Phaser.GameObjects.Container {
 
   public fadeIn(duration: number = 800, ease: string = 'Quadratic.InOut'): Fader {
     this.scene.tweens.add({
-      targets: this,
-      ease,
+      targets: this.scene.cameras.main,
+      ease: 'Linear',
       duration,
-      props: { alpha: { from: 1, to: 0 } },
+      props: { glowAlpha: { from: 1, to: 0 } },
+      onUpdate: (_tween, _target, _key, current) => {
+        (this.scene.cameras.main.getPostPipeline(Shader.Fade) as Fade).progress = current;
+      },
     });
 
     return this;
@@ -34,16 +40,20 @@ export class Fader extends Phaser.GameObjects.Container {
 
   public fadeOut(duration: number = 800, ease: string = 'Quadratic.InOut'): Fader {
     this.scene.tweens.add({
-      targets: this,
-      ease,
+      targets: this.scene.cameras.main,
+      ease: 'Linear',
       duration,
-      props: { alpha: { from: 0, to: 1 } },
+      props: { glowAlpha: { from: 0, to: 1 } },
+      onUpdate: (_tween, _target, _key, current) => {
+        (this.scene.cameras.main.getPostPipeline(Shader.Fade) as Fade).progress = current;
+      },
     });
+
     return this;
   }
 
   public setFade(alpha: number): Fader {
-    this.setAlpha(alpha);
+    (this.scene.cameras.main.getPostPipeline(Shader.Fade) as Fade).progress = alpha;
 
     return this;
   }

@@ -1,5 +1,5 @@
 import { directionalInputs } from 'common/factories/input';
-import { rect } from 'common/factories/phaser';
+import { rect, vec2 } from 'common/factories/phaser';
 import { scaled } from 'common/utils/scaled';
 import { Action, Animation, CollisionMask, CollisionTag, Sprite } from 'constants';
 import { collision, Collision } from 'systems/collision';
@@ -79,10 +79,10 @@ export class Player extends Phaser.GameObjects.Container {
   }
 
   private pushInDirection(collision: Collision, velocity: Phaser.Math.Vector2, isX: boolean, delta: number): void {
-    // const move = vec2(isX ? velocity.x : 0, !isX ? velocity.y : 0);
-    //
-    // collision.toGameObject().movement.moveInDirection(move.normalize(), delta);
-    //
-    // this.movement.setVelocity(velocity);
+    const move = vec2(isX ? velocity.x : 0, !isX ? velocity.y : 0);
+
+    collision.toGameObject().movement.moveInDirection(move.normalize(), delta);
+
+    this.movement.setVelocity(velocity);
   }
 }

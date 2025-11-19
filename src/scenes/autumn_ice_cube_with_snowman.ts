@@ -5,10 +5,11 @@ import {
 } from 'common/factories/autumn_ice_cube_with_snowman';
 import { createGateway } from 'common/factories/gateways';
 import { Player } from 'common/objects/player';
+import { Snow } from 'common/objects/snow';
 import { Tilemap as TilemapObject } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
 import { logEvent } from 'common/utils/log';
-import { Depth, Flag, Scene, Shader, Sprite, Tilemap } from 'constants';
+import { Depth, Flag, Scene, Sprite, Tilemap } from 'constants';
 import { camera, Camera } from 'systems/camera';
 import { checkFlag } from 'systems/flags';
 
@@ -29,16 +30,16 @@ export class AutumnIceCubeWithSnowman extends Phaser.Scene {
     const map = new TilemapObject(this, Tilemap.AutumnIceCubeWithSnowman);
 
     map.forPoints('Snow 1', (v) =>
-      ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow1).setPipeline(Shader.Outline))
+      ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow1).setPosition(v.x, v.y)))
     );
     map.forPoints('Snow 2', (v) =>
-      ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow2).setPipeline(Shader.Outline))
+      ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow2).setPosition(v.x, v.y)))
     );
     map.forPoints('Snow 3', (v) =>
-      ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow3).setPipeline(Shader.Outline))
+      ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow3).setPosition(v.x, v.y)))
     );
     map.forPoints('Snow 4', (v) =>
-      ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow4).setPipeline(Shader.Outline))
+      ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow4).setPosition(v.x, v.y)))
     );
 
     this.player = new Player(this)
@@ -49,6 +50,13 @@ export class AutumnIceCubeWithSnowman extends Phaser.Scene {
     ySortObjects.add(this.player);
 
     this.camera = camera(this).follow(this.player).zoom(1);
+
+    this.cameras.main.setBounds(
+      map.getArea('Camera Bounds').x,
+      map.getArea('Camera Bounds').y,
+      map.getArea('Camera Bounds').width,
+      map.getArea('Camera Bounds').height
+    );
 
     createGateway(
       this,

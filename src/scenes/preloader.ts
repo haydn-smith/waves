@@ -1,4 +1,5 @@
 import { Antialias } from 'common/objects/shaders/anti_alias';
+import { Fade } from 'common/objects/shaders/fade';
 import { Glow } from 'common/objects/shaders/glow';
 import { Noise } from 'common/objects/shaders/noise';
 import { Outline } from 'common/objects/shaders/outline';
@@ -104,7 +105,11 @@ export class Preloader extends Phaser.Scene {
     this.load.image(Sprite.Snow4, Sprite.Snow4);
     this.load.image(Sprite.Puddle1, Sprite.Puddle1);
     this.load.image(Sprite.Puddle2, Sprite.Puddle2);
+    this.load.image(Sprite.Leaves1, Sprite.Leaves1);
+    this.load.image(Sprite.Leaves2, Sprite.Leaves2);
     this.load.image(Sprite.CaveIn1, Sprite.CaveIn1);
+    this.load.image(Sprite.CaveIn2, Sprite.CaveIn2);
+    this.load.image(Sprite.Snowball, Sprite.Snowball);
     this.load.image(Sprite.CliffTop, Sprite.CliffTop);
     this.load.image(Sprite.CliffBottom, Sprite.CliffBottom);
     this.load.image(Sprite.IceWall, Sprite.IceWall);
@@ -134,6 +139,7 @@ export class Preloader extends Phaser.Scene {
     this.load.image(Sprite.AutumnIcon, Sprite.AutumnIcon);
     this.load.image(Sprite.SummerIcon, Sprite.SummerIcon);
     this.load.image(Sprite.WinterIcon, Sprite.WinterIcon);
+    this.load.image(Sprite.PushAreaImage, Sprite.PushAreaImage);
     this.load.spritesheet(Sprite.DialogBox, Sprite.DialogBox, {
       frameWidth: 160,
       frameHeight: 32,
@@ -224,6 +230,21 @@ export class Preloader extends Phaser.Scene {
     this.load.spritesheet(Sprite.Fan1, Sprite.Fan1, {
       frameWidth: 64,
     });
+    this.load.spritesheet(Sprite.SnowmanIdleRight, Sprite.SnowmanIdleRight, {
+      frameWidth: 32,
+    });
+    this.load.spritesheet(Sprite.SnowmanNoSnowballs, Sprite.SnowmanNoSnowballs, {
+      frameWidth: 32,
+    });
+    this.load.spritesheet(Sprite.SnowmanOneSnowball, Sprite.SnowmanOneSnowball, {
+      frameWidth: 32,
+    });
+    this.load.spritesheet(Sprite.SnowmanTwoSnowballs, Sprite.SnowmanTwoSnowballs, {
+      frameWidth: 32,
+    });
+    this.load.spritesheet(Sprite.SnowmanMagic, Sprite.SnowmanMagic, {
+      frameWidth: 32,
+    });
 
     // Audio.
     this.load.audio(Sound.Activate, Sound.Activate);
@@ -242,6 +263,7 @@ export class Preloader extends Phaser.Scene {
       this.sys.renderer.pipelines.addPostPipeline(Shader.Noise, Noise);
       this.sys.renderer.pipelines.addPostPipeline(Shader.SoftLight, SoftLight);
       this.sys.renderer.pipelines.addPostPipeline(Shader.AntiAlias, Antialias);
+      this.sys.renderer.pipelines.addPostPipeline(Shader.Fade, Fade);
     }
 
     // Register global animations.
@@ -437,6 +459,36 @@ export class Preloader extends Phaser.Scene {
       frameRate: 8,
       repeat: -1,
     });
+    this.anims.create({
+      key: Animation.SnowmanIdleRight,
+      frames: Sprite.SnowmanIdleRight,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.SnowmamNoSnowballs,
+      frames: Sprite.SnowmanNoSnowballs,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.SnowmamOneSnowball,
+      frames: Sprite.SnowmanOneSnowball,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.SnowmanTwoSnowballs,
+      frames: Sprite.SnowmanTwoSnowballs,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: Animation.SnowmanMagic,
+      frames: Sprite.SnowmanMagic,
+      frameRate: 3,
+      repeat: -1,
+    });
 
     // Start management scenes.
     startUI(this, {
@@ -452,8 +504,8 @@ export class Preloader extends Phaser.Scene {
     setDebug(false);
     // setFlag(Flag.SummerWakeUpCutsceneWatched);
     // setFlag(Flag.AutumnSnowmanSnow2Completed);
-    // setFlag(Flag.OpeningCutsceneWatched);
-    // setData('previousScene', Scene.SummerIceCube);
+    // setFlag(Flag.AutumnSnowmanCompleted);
+    // setData('previousScene', Scene.AutumnSnowman);
 
     // Start game.
     this.scene.run(Scene.DialogBox);

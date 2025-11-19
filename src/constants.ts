@@ -57,6 +57,7 @@ export const Shader = {
   AntiAlias: 'Anti-alias',
   Outline: 'Outline',
   OutlinePost: 'OutlinePost',
+  Fade: 'Fade',
 } as const;
 export type KeyOfShader = keyof typeof Shader;
 export type TypeOfShader = (typeof Shader)[KeyOfShader];
@@ -89,6 +90,7 @@ export type KeyOfTileset = keyof typeof Tileset;
 export type TypeOfTileset = (typeof Tileset)[KeyOfTileset];
 
 export const Sprite = {
+  PushAreaImage: 'sprites/push_area.png',
   Unknown: 'sprites/unknown.png',
   Black1px: 'sprites/black_pixel.png',
   White1px: 'sprites/white_pixel.png',
@@ -101,6 +103,7 @@ export const Sprite = {
   Snow3: 'sprites/snow/snow_3.png',
   Snow4: 'sprites/snow/snow_4.png',
   CaveIn1: 'sprites/snow/cave_in_1.png',
+  CaveIn2: 'sprites/snow/cave_in_2.png',
   Jetty: 'sprites/jetty.png',
   Waves: 'sprites/waves.png',
   CliffTop: 'sprites/cliff_top.png',
@@ -109,6 +112,10 @@ export const Sprite = {
   Vignette: 'sprites/vignette.png',
   Puddle1: 'sprites/puddles/puddle_1.png',
   Puddle2: 'sprites/puddles/puddle_2.png',
+  Leaves1: 'sprites/leaves/leaves_1.png',
+  Leaves2: 'sprites/leaves/leaves_2.png',
+
+  Snowball: 'sprites/snow/snowball.png',
 
   OtherPenguinDialog: 'sprites/dialogs/other_penguin.png',
   IceCubeDialog: 'sprites/dialogs/ice_cube.png',
@@ -139,14 +146,14 @@ export const Sprite = {
 
   SnowmanIdleUp: '',
   SnowmanIdleDown: '',
-  SnowmanIdleRight: '',
+  SnowmanIdleRight: 'sprites/snowman/snowman_right.png',
   SnowmanSwimUp: '',
   SnowmanSwimDown: '',
   SnowmanSwimRight: '',
-  SnowmanMagic: '',
-  SnowmanPuddle: '',
-  SnowmanHead: '',
-  SnowmanBody: '',
+  SnowmanMagic: 'sprites/snowman/snowman_magic.png',
+  SnowmanNoSnowballs: 'sprites/snowman/snowman_no_balls.png',
+  SnowmanOneSnowball: 'sprites/snowman/snowman_one_ball.png',
+  SnowmanTwoSnowballs: 'sprites/snowman/snowman_two_balls.png',
   SnowmanCovered: '',
 
   MainPlant: 'sprites/plants/main_plant.png',
@@ -211,6 +218,12 @@ export const Animation = {
   IceCubeRight: 'IceCubeRight',
   IceCubeMelting: 'IceCubeMelting',
   IceCubeSwimRight: 'IceCubeSwimRight',
+
+  SnowmanIdleRight: 'SnowmanIdleRight',
+  SnowmamNoSnowballs: 'SnowmanNoSnowballs',
+  SnowmamOneSnowball: 'SnowmanOneSnowball',
+  SnowmanTwoSnowballs: 'SnowmanTwoSnowballs',
+  SnowmanMagic: 'SnowmanMagic',
 
   MainPlant: 'MainPlant',
   MainPlantThirsty: 'MainPlantThirsty',

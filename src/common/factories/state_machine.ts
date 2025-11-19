@@ -84,13 +84,15 @@ export const createDialogBoxStates = (
   trigger: Collision,
   position: Phaser.Math.Vector2,
   resolveDialog: () => Dialog,
-  shouldRunDialog?: () => boolean
+  shouldRunDialog?: () => boolean,
+  arrowOffset: number = 0
 ) => {
   const arrow = scene.add
-    .sprite(position.x, position.y - 16, Sprite.DownArrow)
+    .sprite(position.x, position.y - 16 + arrowOffset, Sprite.DownArrow)
     .play(Animation.DownArrow)
     .setDepth(Depth.Main + 1)
-    .setPipeline(Shader.Outline);
+    .setPipeline(Shader.Outline)
+    .setAlpha(0);
 
   const dialog = () =>
     sequence(scene).of([

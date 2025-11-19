@@ -1,8 +1,9 @@
 import { actionInput } from 'common/factories/input';
+import { Fade } from 'common/objects/shaders/fade';
 import { Typewriter } from 'common/objects/typewriter';
 import { logEvent } from 'common/utils/log';
 import { scaled } from 'common/utils/scaled';
-import { Action, Animation, Depth, Scene, Sound } from 'constants';
+import { Action, Animation, Depth, Scene, Shader, Sound } from 'constants';
 import { audio } from 'systems/audio';
 import { camera } from 'systems/camera';
 import { Input } from 'systems/input';
@@ -29,9 +30,17 @@ export class MainMenu extends Phaser.Scene {
 
     camera(this);
 
-    this.typewriter = this.add.existing(new Typewriter(this)).setDepth(Depth.UI).setScrollFactor(0);
+    this.typewriter = this.add
+      .existing(new Typewriter(this))
+      .setDepth(Depth.UI)
+      .setScrollFactor(0)
+      .setPostPipeline(Shader.Fade);
 
-    this.typewriter2 = this.add.existing(new Typewriter(this)).setDepth(Depth.UI).setScrollFactor(0);
+    this.typewriter2 = this.add
+      .existing(new Typewriter(this))
+      .setDepth(Depth.UI)
+      .setScrollFactor(0)
+      .setPostPipeline(Shader.Fade);
 
     this.inputs = actionInput(this);
 
@@ -39,9 +48,8 @@ export class MainMenu extends Phaser.Scene {
 
     sequence(this)
       .of([
-        wait(1000),
         runCallback(() => this.ui.fadeIn(1000, 'Linear')),
-        wait(500),
+        wait(1000),
         runCallback(() => this.typewriter.typewrite(`Are you ready to begin your journey?`)),
         wait(() => this.typewriter.typewriteDuration()),
         wait(500),
@@ -51,13 +59,21 @@ export class MainMenu extends Phaser.Scene {
         runCallback(() => activate.play()),
         runTween(this, {
           targets: this.typewriter,
-          alpha: 0,
+          ease: 'Linear',
           duration: 400,
+          props: { glowAlpha: { from: 0, to: 1 } },
+          onUpdate: (_tween, _target, _key, current) => {
+            (this.typewriter.getPostPipeline(Shader.Fade) as Fade).progress = current;
+          },
         }),
         runTween(this, {
           targets: this.typewriter2,
-          alpha: 0,
+          ease: 'Linear',
           duration: 400,
+          props: { glowAlpha: { from: 0, to: 1 } },
+          onUpdate: (_tween, _target, _key, current) => {
+            (this.typewriter2.getPostPipeline(Shader.Fade) as Fade).progress = current;
+          },
         }),
         runCallback(() => this.ui.fadeOut(1000)),
         wait(1000),

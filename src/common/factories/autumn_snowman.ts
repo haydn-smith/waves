@@ -1,10 +1,10 @@
-import { snowmanNoSnow } from 'common/conversations/autumn';
+import { snowmanNoSnow, snowmanNoSnow2 } from 'common/conversations/autumn';
 import { Player } from 'common/objects/player';
 import { Snowman } from 'common/objects/snowman';
 import { Tilemap } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
 import { Repeater } from 'common/utils/repeater';
-import { CollisionMask, CollisionTag, Shader, Sprite } from 'constants';
+import { CollisionMask, CollisionTag, Sprite } from 'constants';
 import { collision } from 'systems/collision';
 import { movement } from 'systems/movement';
 import { states } from 'systems/states';
@@ -24,7 +24,7 @@ export const createSnowman = (
 
   const container = scene.add.existing(new Snowman(scene).setPosition(position.x, position.y));
 
-  const repeater = new Repeater([snowmanNoSnow], 'repeat last');
+  const repeater = new Repeater([snowmanNoSnow, snowmanNoSnow2], 'repeat last');
 
   const states = createDialogBoxStates(
     scene,
@@ -32,7 +32,8 @@ export const createSnowman = (
     trigger,
     position,
     () => repeater.currentItemThenNext(),
-    isDialogActive
+    isDialogActive,
+    -12
   );
 
   container.on('destroy', () => {
@@ -54,9 +55,9 @@ export const createSnow1 = (
 ) => {
   const position = map.getPoint('Snowman Piece 1');
 
-  const sprite = scene.add.sprite(0, 0, Sprite.Unknown).setPipeline(Shader.Outline);
+  const sprite = scene.add.sprite(0, -8, Sprite.Snowball);
 
-  const coll = collision(scene, rect(-4, -4, 8, 8))
+  const coll = collision(scene, rect(-4, -8, 8, 8))
     .tag(CollisionTag.Pushable)
     .mask(CollisionMask.Default | CollisionMask.Pushable);
 
@@ -90,9 +91,9 @@ export const createSnow2 = (
 ) => {
   const position = map.getPoint('Snowman Piece 2');
 
-  const sprite = scene.add.sprite(0, 0, Sprite.Unknown).setPipeline(Shader.Outline);
+  const sprite = scene.add.sprite(0, -8, Sprite.Snowball);
 
-  const coll = collision(scene, rect(-4, -4, 8, 8))
+  const coll = collision(scene, rect(-4, -8, 8, 8))
     .tag(CollisionTag.Pushable)
     .mask(CollisionMask.Default | CollisionMask.Pushable);
 
@@ -125,9 +126,9 @@ export const createSnow3 = (
 ) => {
   const position = map.getPoint('Snowman Piece 3');
 
-  const sprite = scene.add.sprite(0, 0, Sprite.Unknown).setPipeline(Shader.Outline);
+  const sprite = scene.add.sprite(0, -8, Sprite.Snowball);
 
-  const coll = collision(scene, rect(-4, -4, 8, 8))
+  const coll = collision(scene, rect(-4, -8, 8, 8))
     .tag(CollisionTag.Pushable)
     .mask(CollisionMask.Default | CollisionMask.Pushable);
 

@@ -4,7 +4,7 @@ import { Tilemap } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
 import { MoveToTarget } from 'common/sequenceables/move_to_target';
 import { PlayDialog } from 'common/sequenceables/play_dialog';
-import { Flag, Scene, Sprite } from 'constants';
+import { Animation, Flag, Scene, Sprite } from 'constants';
 import { DialogBox } from 'scenes/dialog_box';
 import { Camera } from 'systems/camera';
 import { collision } from 'systems/collision';
@@ -24,6 +24,8 @@ export const createFlower = (
 
   const sprite = scene.add.sprite(position.x, position.y, Sprite.MainPlant);
 
+  sprite.anims.play(Animation.MainPlant);
+
   ySortObjects.add(sprite);
 
   const trigger = collision(scene, map.getArea('Trigger Flower Cutscene')).notSolid();
@@ -31,7 +33,10 @@ export const createFlower = (
   const cutscene = sequence(scene)
     .of([
       runCallback(() => setFlag(Flag.AutumnWaterFlowerCutsceneWatched)),
-      runCallback(() => player.disableUserInput()),
+      runCallback(() => {
+        player.disableUserInput();
+        player.movement.faceDirection(Phaser.Math.Vector2.LEFT);
+      }),
       runCallback(() => ui(scene).showLetterbox()),
       runCallback(() => camera.zoom(2, 1000)),
       runCallback(() => player.movement.setSpeed(16)),
@@ -39,17 +44,31 @@ export const createFlower = (
       runCallback(() => camera.pauseFollow().move(position, 2000)),
       wait(2200),
       new MoveToTarget(player.movement, map.getPoint('Next To Flower')),
+      wait(200),
+      runCallback(() => player.movement.faceDirection(Phaser.Math.Vector2.LEFT)),
       wait(1000),
       new PlayDialog(DialogBox.get(scene), autumnFlower),
       wait(1000),
-      runCallback(() => player.water()),
+      runCallback(() => player.animator.playAnimation(Animation.PlayerWater)),
       wait(3000),
-      runCallback(() => player.runnningAround()),
+      runCallback(() => player.animator.playMovementAndIdleAnimations()),
       wait(1000),
+      runCallback(() => {
+        player.animator.playAnimation(Animation.PlayerRunRight, true);
+      }),
       new MoveToTarget(player.movement, map.getPoint('Back From Flower')),
-      wait(1000),
-      runCallback(() => player.movement.faceDirection(Phaser.Math.Vector2.LEFT)),
-      runCallback(() => player.sleep()),
+      runCallback(() => {
+        player.animator.playAnimation(Animation.PlayerIdleRight, true);
+      }),
+      wait(600),
+      runCallback(() => player.movement.faceDirection(Phaser.Math.Vector2.DOWN)),
+      wait(600),
+      runCallback(() => player.sprite.anims.playReverse(Animation.PlayerWakeUp)),
+      wait(2000),
+      runCallback(() => {
+        player.sprite.anims.play(Animation.PlayerSleep);
+        player.sprite.flipX = false;
+      }),
       wait(3000),
       runCallback(() => ui(scene).fadeOut(3000)),
       wait(3000),

@@ -77,6 +77,8 @@ export class AutumnJetty extends Phaser.Scene {
     );
 
     if (!checkFlag(Flag.AutumnWakeUpCutsceneWatched)) {
+      ui(this).black();
+
       this.player.setPosition(map.getPoint('Player Start').x, map.getPoint('Player Start').y);
 
       sequence(this)

@@ -1,3 +1,4 @@
+import { Shader } from 'constants';
 import { debugDepth, isDebug } from 'systems/flags';
 import { sceneKey } from 'systems/ui/constants';
 import { Fader } from 'systems/ui/objects/fader';
@@ -36,6 +37,8 @@ export class UserInterface extends Phaser.Scene {
     this.debugText = this.add.bitmapText(4, 0, this.debugFont, '', 16).setDepth(debugDepth());
 
     this.graphics = this.add.graphics();
+
+    this.cameras.main.setPostPipeline(Shader.Fade);
 
     // this.vignette = this.add.sprite(320 / 2, 240 / 2, Sprite.Vignette);
     // this.vignette.anims.play(Animation.Vignette);

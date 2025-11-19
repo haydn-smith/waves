@@ -1,5 +1,5 @@
 import { scaled } from 'common/utils/scaled';
-import { Animation, Font, GlobalScale } from 'constants';
+import { Animation, Font, GlobalScale, Shader } from 'constants';
 import { debugDepth } from 'systems/flags';
 
 export class Typewriter extends Phaser.GameObjects.Container {
@@ -38,7 +38,10 @@ export class Typewriter extends Phaser.GameObjects.Container {
       if (c !== '[') {
         const text = this.scene.add
           .bitmapText(this.textWidth, this.textHeight, this.font, c)
+          .setPostPipeline(Shader.Fade)
           .setAlpha(index >= typeFrom ? 0 : 1);
+
+        // (text.getPostPipeline(Shader.Fade) as Fade).progress = index >= typeFrom ? 1 : 0;
 
         this.textWidth += text.width;
 
@@ -58,7 +61,10 @@ export class Typewriter extends Phaser.GameObjects.Container {
           .sprite(this.textWidth, this.textHeight, key)
           .setOrigin(0, 0)
           .setAlpha(index >= typeFrom ? 0 : 1)
-          .setScale(GlobalScale);
+          .setScale(GlobalScale)
+          .setPostPipeline(Shader.Fade);
+
+        // (obj.getPostPipeline(Shader.Fade) as Fade).progress = index >= typeFrom ? 1 : 0;
 
         const actualKey = Object.values(Animation).find((animation) => animation === key);
 
@@ -93,12 +99,16 @@ export class Typewriter extends Phaser.GameObjects.Container {
             to: o.y,
             from: o.y + scaled(16),
           },
-          alpha: {
-            ease: 'Quadratic.In',
-            to: 1,
-            from: 0,
-          },
+          // glowAlpha: { from: 1, to: 0 },
         },
+        onUpdate: () => {
+          o.setAlpha(1);
+        },
+        // onUpdate: (tween, target, key, current) => {
+        //   if (key === 'glowAlpha') {
+        //     (o.getPostPipeline(Shader.Fade) as Fade).progress = current;
+        //   }
+        // },
       });
     });
 

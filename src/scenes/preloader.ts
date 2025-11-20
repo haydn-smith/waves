@@ -6,6 +6,7 @@ import { Outline } from 'common/objects/shaders/outline';
 import { OutlinePost } from 'common/objects/shaders/outline_post';
 import { SoftLight } from 'common/objects/shaders/soft_light';
 import { Vignette } from 'common/objects/shaders/vignette';
+import { setData } from 'common/utils/data';
 import { logEvent } from 'common/utils/log';
 import { scaled } from 'common/utils/scaled';
 import { Animation, Depth, Font, Scene, Shader, Sound, Sprite, Tilemap, Tileset } from 'constants';
@@ -99,6 +100,8 @@ export class Preloader extends Phaser.Scene {
     // Sprites.
     this.load.image(Sprite.Black1px, Sprite.Black1px);
     this.load.image(Sprite.White1px, Sprite.White1px);
+    this.load.image(Sprite.White4px, Sprite.White4px);
+    this.load.image(Sprite.White8px, Sprite.White8px);
     this.load.image(Sprite.Snow1, Sprite.Snow1);
     this.load.image(Sprite.Snow2, Sprite.Snow2);
     this.load.image(Sprite.Snow3, Sprite.Snow3);
@@ -109,11 +112,15 @@ export class Preloader extends Phaser.Scene {
     this.load.image(Sprite.Leaves2, Sprite.Leaves2);
     this.load.image(Sprite.CaveIn1, Sprite.CaveIn1);
     this.load.image(Sprite.CaveIn2, Sprite.CaveIn2);
+    this.load.image(Sprite.CaveInWinterTop, Sprite.CaveInWinterTop);
+    this.load.image(Sprite.CaveInWinterBottom, Sprite.CaveInWinterBottom);
     this.load.image(Sprite.Snowball, Sprite.Snowball);
     this.load.image(Sprite.CliffTop, Sprite.CliffTop);
     this.load.image(Sprite.CliffBottom, Sprite.CliffBottom);
     this.load.image(Sprite.IceWall, Sprite.IceWall);
     this.load.image(Sprite.IceWallBroken, Sprite.IceWallBroken);
+    this.load.image(Sprite.PlayerUmbrella, Sprite.PlayerUmbrella);
+    this.load.image(Sprite.Umbrella, Sprite.Umbrella);
     this.load.spritesheet(Sprite.Jetty, Sprite.Jetty, {
       frameWidth: 128,
     });
@@ -129,6 +136,10 @@ export class Preloader extends Phaser.Scene {
       frameHeight: 64,
     });
     this.load.spritesheet(Sprite.MainPlantThirsty, Sprite.MainPlantThirsty, {
+      frameWidth: 32,
+      frameHeight: 64,
+    });
+    this.load.spritesheet(Sprite.MainPlantWindy, Sprite.MainPlantWindy, {
       frameWidth: 32,
       frameHeight: 64,
     });
@@ -454,6 +465,12 @@ export class Preloader extends Phaser.Scene {
       repeat: -1,
     });
     this.anims.create({
+      key: Animation.MainPlantWindy,
+      frames: Sprite.MainPlantWindy,
+      frameRate: 12,
+      repeat: -1,
+    });
+    this.anims.create({
       key: Animation.Fan1,
       frames: Sprite.Fan1,
       frameRate: 8,
@@ -505,10 +522,10 @@ export class Preloader extends Phaser.Scene {
     // setFlag(Flag.SummerWakeUpCutsceneWatched);
     // setFlag(Flag.AutumnSnowmanSnow2Completed);
     // setFlag(Flag.AutumnSnowmanCompleted);
-    // setData('previousScene', Scene.AutumnSnowman);
+    setData('previousScene', Scene.WinterIceCube);
 
     // Start game.
     this.scene.run(Scene.DialogBox);
-    this.scene.start(Scene.AutumnTitle);
+    this.scene.start(Scene.WinterFlower);
   }
 }

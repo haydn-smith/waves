@@ -1,12 +1,15 @@
 import { createGateway } from 'common/factories/gateways';
-import { createIceCube, createSnowman, createStorm } from 'common/factories/winter_ice_cube';
+import { createIceCube, createJettyAreaBlocked, createSnowman, createStorm } from 'common/factories/winter_ice_cube';
 import { Player } from 'common/objects/player';
+import { Snow } from 'common/objects/snow';
+import { Storm } from 'common/objects/storm';
 import { Tilemap as TilemapObject } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
 import { MoveToTarget } from 'common/sequenceables/move_to_target';
 import { logEvent } from 'common/utils/log';
-import { Depth, Flag, Scene, Shader, Sprite, Tilemap } from 'constants';
+import { Depth, Flag, Scene, Sprite, Tilemap } from 'constants';
 import { camera, Camera } from 'systems/camera';
+import { collision } from 'systems/collision';
 import { checkFlag, setFlag } from 'systems/flags';
 import { runCallback, sequence, wait } from 'systems/sequence';
 import { ui } from 'systems/ui';
@@ -30,16 +33,16 @@ export class WinterIceCube extends Phaser.Scene {
     const map = new TilemapObject(this, Tilemap.WinterIceCube);
 
     map.forPoints('Snow 1', (v) =>
-      this.ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow1).setPipeline(Shader.Outline))
+      this.ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow1).setPosition(v.x, v.y)))
     );
     map.forPoints('Snow 2', (v) =>
-      this.ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow2).setPipeline(Shader.Outline))
+      this.ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow2).setPosition(v.x, v.y)))
     );
     map.forPoints('Snow 3', (v) =>
-      this.ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow3).setPipeline(Shader.Outline))
+      this.ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow3).setPosition(v.x, v.y)))
     );
     map.forPoints('Snow 4', (v) =>
-      this.ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow4).setPipeline(Shader.Outline))
+      this.ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow4).setPosition(v.x, v.y)))
     );
 
     this.player = new Player(this)
@@ -50,6 +53,20 @@ export class WinterIceCube extends Phaser.Scene {
     this.ySortObjects.add(this.player);
 
     this.camera = camera(this).follow(this.player).zoom(1).shake(2, 0, -1, 200);
+
+    map.forPoints('Snow Top', (v) => this.add.sprite(v.x, v.y, Sprite.CaveInWinterTop).setDepth(Depth.Main - 1));
+    map.forPoints('Snow Bottom', (v) => this.add.sprite(v.x, v.y, Sprite.CaveInWinterBottom).setDepth(Depth.Main - 1));
+
+    map.forAreas('Solid', (v) => this.add.existing(collision(this, v).toGameObject()));
+
+    const storm = this.add.existing(new Storm(this).highIntensity());
+
+    this.cameras.main.setBounds(
+      map.getArea('Camera Bounds').x,
+      map.getArea('Camera Bounds').y,
+      map.getArea('Camera Bounds').width,
+      map.getArea('Camera Bounds').height
+    );
 
     createGateway(
       this,
@@ -94,7 +111,9 @@ export class WinterIceCube extends Phaser.Scene {
 
     createIceCube(this, this.player, map, this.ySortObjects);
 
-    createStorm(this, this.player, map, this.camera);
+    createStorm(this, this.player, map, this.camera, storm);
+
+    createJettyAreaBlocked(this, this.player, map);
   }
 
   update() {}

@@ -12,11 +12,11 @@ export class Player extends Phaser.GameObjects.Container {
 
   public movement: Movement;
 
-  private inputs: Input;
+  public inputs: Input;
 
   public sprite: Phaser.GameObjects.Sprite;
 
-  private isUserInputDisabled = false;
+  public isUserInputDisabled = false;
 
   public animator: Animator;
 

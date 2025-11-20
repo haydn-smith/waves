@@ -94,6 +94,8 @@ export const Sprite = {
   Unknown: 'sprites/unknown.png',
   Black1px: 'sprites/black_pixel.png',
   White1px: 'sprites/white_pixel.png',
+  White4px: 'sprites/white_4px.png',
+  White8px: 'sprites/white_8px.png',
   DebugPlayer: 'sprites/debug_player.png',
   ZButton: 'sprites/z_button.png',
   DownArrow: 'sprites/down_arrow.png',
@@ -104,6 +106,8 @@ export const Sprite = {
   Snow4: 'sprites/snow/snow_4.png',
   CaveIn1: 'sprites/snow/cave_in_1.png',
   CaveIn2: 'sprites/snow/cave_in_2.png',
+  CaveInWinterTop: 'sprites/cave_in_winter_top.png',
+  CaveInWinterBottom: 'sprites/cave_in_winter_bottom.png',
   Jetty: 'sprites/jetty.png',
   Waves: 'sprites/waves.png',
   CliffTop: 'sprites/cliff_top.png',
@@ -114,6 +118,7 @@ export const Sprite = {
   Puddle2: 'sprites/puddles/puddle_2.png',
   Leaves1: 'sprites/leaves/leaves_1.png',
   Leaves2: 'sprites/leaves/leaves_2.png',
+  Umbrella: 'sprites/umbrella.png',
 
   Snowball: 'sprites/snow/snowball.png',
 
@@ -137,6 +142,7 @@ export const Sprite = {
   PlayerSwimUp: 'sprites/player/swim_up.png',
   PlayerSwimDown: 'sprites/player/swim_down.png',
   PlayerSwimRight: 'sprites/player/swim_right.png',
+  PlayerUmbrella: 'sprites/player/player_umbrella.png',
 
   IceCubeRight: 'sprites/ice_cube/ice_cube_idle_right.png',
   IceCubeFrozen: 'sprites/ice_cube/frozen.png',
@@ -158,7 +164,7 @@ export const Sprite = {
 
   MainPlant: 'sprites/plants/main_plant.png',
   MainPlantThirsty: 'sprites/plants/main_plant_thirsty.png',
-  MainPlantWindy: '',
+  MainPlantWindy: 'sprites/plants/main_plant_windy.png',
   MainPlantSad: '',
   MainPlantWithFlower: '',
   DeadPlant1: 'sprites/plants/dead_plant_1.png',
@@ -227,6 +233,7 @@ export const Animation = {
 
   MainPlant: 'MainPlant',
   MainPlantThirsty: 'MainPlantThirsty',
+  MainPlantWindy: 'MainPlantWindy',
 
   Fan1: 'Fan1',
   Fan2: 'Fan2',

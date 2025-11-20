@@ -6,6 +6,7 @@ import {
 import { createGateway } from 'common/factories/gateways';
 import { Player } from 'common/objects/player';
 import { Snow } from 'common/objects/snow';
+import { Storm } from 'common/objects/storm';
 import { Tilemap as TilemapObject } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
 import { logEvent } from 'common/utils/log';
@@ -24,6 +25,7 @@ export class AutumnIceCubeWithSnowman extends Phaser.Scene {
 
   create() {
     logEvent('Creating "Autumn Ice Cube With Snowman" scene.');
+    this.add.existing(new Storm(this));
 
     const ySortObjects = this.add.existing(new YSortObjects(this)).setDepth(Depth.Main);
 

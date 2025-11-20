@@ -81,7 +81,7 @@ export const createStorm = (scene: Phaser.Scene, player: Player, map: Tilemap, c
     () => {
       player.animator.setMovementAnimations(Animation.PlayerRunUp, Animation.PlayerRunDown, Animation.PlayerRunRight);
       storm.highIntensity();
-      player.movement.setSpeed(32);
+      player.movement.setSpeed(40);
       player.movement.setAcceleration(128);
       camera.shake(2, 0, -1, 200);
       camera.zoom(1, 1000);

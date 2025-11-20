@@ -2,6 +2,7 @@ import { createGateway } from 'common/factories/gateways';
 import { createDeadFlower1, createDeadFlower2, createDeadFlower3, createFlower } from 'common/factories/spring_flower';
 import { Player } from 'common/objects/player';
 import { Snow } from 'common/objects/snow';
+import { Storm } from 'common/objects/storm';
 import { Tilemap as TilemapObject } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
 import { logEvent } from 'common/utils/log';
@@ -24,6 +25,8 @@ export class SpringFlower extends Phaser.Scene {
 
   create() {
     logEvent('Creating "Spring Flower" scene.');
+
+    this.add.existing(new Storm(this));
 
     this.ui = ui(this);
 

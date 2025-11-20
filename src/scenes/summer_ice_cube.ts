@@ -15,6 +15,7 @@ import {
 } from 'common/factories/summer_ice_cube';
 import { Player } from 'common/objects/player';
 import { Snow } from 'common/objects/snow';
+import { Storm } from 'common/objects/storm';
 import { Tilemap as TilemapObject } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
 import { PlayDialog } from 'common/sequenceables/play_dialog';
@@ -33,6 +34,8 @@ export class SummerIceCube extends Phaser.Scene {
 
   create() {
     logEvent('Creating "Summer Ice Cube" scene.');
+
+    this.add.existing(new Storm(this));
 
     const userInterface = ui(this);
 

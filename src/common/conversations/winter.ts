@@ -4,7 +4,7 @@ import { Animation } from 'constants';
 export const iceCubeWinter1 = [
   {
     image: Animation.ThinkingDialog,
-    line1: ['...', '...', '...'],
+    line1: ['... ', '... ', '...'],
     line2: ['The ice cube is completely frozen.'],
   },
 ];
@@ -12,7 +12,7 @@ export const iceCubeWinter1 = [
 export const iceCubeWinter2 = [
   {
     image: Animation.ThinkingDialog,
-    line1: ['...', '...'],
+    line1: ['... ', '...'],
     line2: ['Yep. ', 'Still frozen.'],
   },
 ];
@@ -34,21 +34,25 @@ export const snowmanWinter1 = [
   {
     image: Animation.SnowmanDialog,
     line1: ['By golly! ', 'This storm is crazy!'],
-    line2: ['...'],
+    line2: ["It's blown away my body!"],
   },
   {
     image: Animation.SnowmanDialog,
-    line1: ['I sure do like all this snow though!'],
-    line2: ['...'],
+    line1: ["It's quite alright though..."],
+    line2: ['I sure do like all this snow!'],
+  },
+  {
+    image: Animation.SnowmanDialog,
+    line1: ['Say pal...'],
+    line2: ['I hope your little plant is okay.'],
   },
 ];
 
 export const snowmanWinter2: Dialog = [
   {
     image: Animation.SnowmanDialog,
-    line1: ['Say pal...', 'Do you think our little'],
-    line2: ['plant field is okay?'],
-    autoPlaySecondLine: true,
+    line1: ['Say pal...'],
+    line2: ['I hope your little plant is okay.'],
   },
 ];
 

@@ -2,6 +2,7 @@ import { createIceCube, createSnowBarrier } from 'common/factories/autumn_ice_cu
 import { createGateway } from 'common/factories/gateways';
 import { Player } from 'common/objects/player';
 import { Snow } from 'common/objects/snow';
+import { Storm } from 'common/objects/storm';
 import { Tilemap as TilemapObject } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
 import { logEvent } from 'common/utils/log';
@@ -24,6 +25,7 @@ export class AutumnIceCube extends Phaser.Scene {
 
   create() {
     logEvent('Creating "Autumn Ice Cube" scene.');
+    this.add.existing(new Storm(this));
 
     this.ui = ui(this);
 

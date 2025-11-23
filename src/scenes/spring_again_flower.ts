@@ -1,7 +1,9 @@
+import { Snow } from 'common/objects/snow';
+import { Storm } from 'common/objects/storm';
 import { Tilemap as TilemapObject } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
 import { logEvent } from 'common/utils/log';
-import { Depth, Scene, Shader, Sprite, Tilemap } from 'constants';
+import { Animation, Depth, Scene, Sprite, Tilemap } from 'constants';
 import { camera, Camera } from 'systems/camera';
 import { runCallback, sequence, wait } from 'systems/sequence';
 import { ui, UserInterface } from 'systems/ui';
@@ -27,17 +29,19 @@ export class SpringAgainFlower extends Phaser.Scene {
     const map = new TilemapObject(this, Tilemap.SpringAgainFlower);
 
     map.forPoints('Snow 1', (v) =>
-      this.ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow1).setPipeline(Shader.Outline))
+      this.ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow1).setPosition(v.x, v.y)))
     );
     map.forPoints('Snow 2', (v) =>
-      this.ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow2).setPipeline(Shader.Outline))
+      this.ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow2).setPosition(v.x, v.y)))
     );
     map.forPoints('Snow 3', (v) =>
-      this.ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow3).setPipeline(Shader.Outline))
+      this.ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow3).setPosition(v.x, v.y)))
     );
     map.forPoints('Snow 4', (v) =>
-      this.ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow4).setPipeline(Shader.Outline))
+      this.ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow4).setPosition(v.x, v.y)))
     );
+
+    this.add.existing(new Storm(this));
 
     this.camera = camera(this).zoom(1).move(map.getPoint('Dead Flower 1'), 0);
 
@@ -45,16 +49,18 @@ export class SpringAgainFlower extends Phaser.Scene {
 
     sequence(this)
       .of([
-        runCallback(() => ui(this).showLetterbox()),
-        runCallback(() => this.camera.zoom(2)),
         runCallback(() => {
-          this.camera.move(map.getPoint('Flower'), 6000, Phaser.Math.Easing.Cubic.InOut);
+          ui(this).black().showLetterbox();
         }),
         wait(800),
+        runCallback(() => this.camera.zoom(2)),
         runCallback(() => {
-          ui(this).fadeIn(800);
+          this.camera.move(map.getPoint('Flower'), 9000, Phaser.Math.Easing.Cubic.Out);
         }),
-        wait(7000),
+        runCallback(() => {
+          ui(this).fadeIn(1000);
+        }),
+        wait(12000),
         runCallback(() => {
           ui(this).fadeOut(2000);
         }),
@@ -71,6 +77,8 @@ const createFlower = (scene: Phaser.Scene, map: TilemapObject, ySortObjects: YSo
   const position = map.getPoint('Flower');
 
   const sprite = scene.add.sprite(position.x, position.y, Sprite.MainPlant);
+
+  sprite.anims.play(Animation.MainPlantWithFlower);
 
   ySortObjects.add(sprite);
 };

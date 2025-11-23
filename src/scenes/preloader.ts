@@ -135,6 +135,10 @@ export class Preloader extends Phaser.Scene {
       frameWidth: 32,
       frameHeight: 64,
     });
+    this.load.spritesheet(Sprite.MainPlantWithFlower, Sprite.MainPlantWithFlower, {
+      frameWidth: 32,
+      frameHeight: 64,
+    });
     this.load.spritesheet(Sprite.MainPlantThirsty, Sprite.MainPlantThirsty, {
       frameWidth: 32,
       frameHeight: 64,
@@ -462,6 +466,12 @@ export class Preloader extends Phaser.Scene {
       repeat: -1,
     });
     this.anims.create({
+      key: Animation.MainPlantWithFlower,
+      frames: Sprite.MainPlantWithFlower,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
       key: Animation.MainPlantThirsty,
       frames: Sprite.MainPlantThirsty,
       frameRate: 3,
@@ -527,7 +537,7 @@ export class Preloader extends Phaser.Scene {
 
     // Debug setup.
     localStorage.clear();
-    setDebug(true);
+    setDebug(false);
     // setFlag(Flag.SummerWakeUpCutsceneWatched);
     // setFlag(Flag.AutumnSnowmanSnow2Completed);
     // setFlag(Flag.AutumnSnowmanCompleted);
@@ -535,6 +545,6 @@ export class Preloader extends Phaser.Scene {
 
     // Start game.
     this.scene.run(Scene.DialogBox);
-    this.scene.start(Scene.SpringAgainTitle);
+    this.scene.start(Scene.MainMenu);
   }
 }

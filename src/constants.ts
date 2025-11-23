@@ -167,7 +167,7 @@ export const Sprite = {
   MainPlantThirsty: 'sprites/plants/main_plant_thirsty.png',
   MainPlantWindy: 'sprites/plants/main_plant_windy.png',
   MainPlantSad: '',
-  MainPlantWithFlower: '',
+  MainPlantWithFlower: 'sprites/plants/main_plant_flower.png',
   DeadPlant1: 'sprites/plants/dead_plant_1.png',
   DeadPlant2: 'sprites/plants/dead_plant_2.png',
   DeadPlant3: 'sprites/plants/dead_plant_3.png',
@@ -236,6 +236,7 @@ export const Animation = {
   MainPlant: 'MainPlant',
   MainPlantThirsty: 'MainPlantThirsty',
   MainPlantWindy: 'MainPlantWindy',
+  MainPlantWithFlower: 'MainPlantWithFlower',
 
   Fan1: 'Fan1',
   Fan2: 'Fan2',

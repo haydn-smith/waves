@@ -361,8 +361,18 @@ export const createFinalCutscene = (
         new MoveToTarget(player.movement, map.getPoint('Edge')),
         runCallback(() => camera.unfollow()),
         new PlayDialog(DialogBox.get(scene), playerLeaves),
+        wait(500),
+        runCallback(() => player.movement.faceDirection(Phaser.Math.Vector2.DOWN)),
+        wait(800),
+        runCallback(() => player.animator.playAnimation(Animation.PlayerWave)),
+        wait(1000),
+        runCallback(() => {
+          player.movement.faceDirection(Phaser.Math.Vector2.DOWN);
+          player.animator.playMovementAndIdleAnimations();
+        }),
         wait(1000),
         runCallback(() => player.animator.playAnimation(Animation.PlayerIdleRight)),
+        wait(400),
         new RunTween(scene, {
           targets: player,
           x: map.getPoint('Peak').x,
@@ -379,14 +389,14 @@ export const createFinalCutscene = (
         }),
         runCallback(() => {
           player.animator.setMovementAnimations(
-            Animation.PlayerSwimUp,
-            Animation.PlayerSwimDown,
+            Animation.PlayerSwimRight,
+            Animation.PlayerSwimRight,
             Animation.PlayerSwimRight
           );
 
           player.animator.setIdleAnimations(
-            Animation.PlayerSwimUp,
-            Animation.PlayerSwimDown,
+            Animation.PlayerSwimRight,
+            Animation.PlayerSwimRight,
             Animation.PlayerSwimRight
           );
 

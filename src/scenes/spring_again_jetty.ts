@@ -7,6 +7,7 @@ import {
 import { Jetty } from 'common/objects/jetty';
 import { Player } from 'common/objects/player';
 import { Snow } from 'common/objects/snow';
+import { Storm } from 'common/objects/storm';
 import { Tilemap as TilemapObject } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
 import { MoveToTarget } from 'common/sequenceables/move_to_target';
@@ -109,6 +110,8 @@ export class SpringAgainJetty extends Phaser.Scene {
     const snowman = createSnowman2(this, this.player, map, this.camera);
 
     const iceCube = createIceCube2(this, this.player, map, this.camera);
+
+    this.add.existing(new Storm(this));
 
     this.ySortObjects.add(snowman);
 

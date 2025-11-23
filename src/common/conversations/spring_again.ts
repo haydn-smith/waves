@@ -63,7 +63,7 @@ export const iceCubeLeaves2 = [
   {
     image: Animation.IceCubeDialog,
     line1: ['Hey!'],
-    line2: ["Stay cool while I'm gone!"],
+    line2: ['Stay cool... ', "And I'll see you again soon!"],
   },
 ];
 
@@ -88,11 +88,17 @@ export const snowBarrier2 = [
   },
 ];
 
-export const playerLeaves = [
+export const playerLeaves: Dialog = [
   {
     image: Animation.ThinkingDialog,
     line1: ['...'],
     line2: ['It seems your time here is done.'],
+  },
+  {
+    image: Animation.ThinkingDialog,
+    line1: ['Moving through moments, like waves'],
+    line2: ['in an ocean.'],
+    autoPlaySecondLine: true,
   },
   {
     image: Animation.ThinkingDialog,

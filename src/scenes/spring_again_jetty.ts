@@ -4,11 +4,14 @@ import {
   createSnowBarrier,
   createSnowman2,
 } from 'common/factories/spring_again_jetty';
+import { Jetty } from 'common/objects/jetty';
 import { Player } from 'common/objects/player';
+import { Snow } from 'common/objects/snow';
 import { Tilemap as TilemapObject } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
+import { MoveToTarget } from 'common/sequenceables/move_to_target';
 import { logEvent } from 'common/utils/log';
-import { Depth, Scene, Shader, Sprite, Tilemap } from 'constants';
+import { Animation, Depth, Scene, Sprite, Tilemap } from 'constants';
 import { camera, Camera } from 'systems/camera';
 import { runCallback, sequence, wait } from 'systems/sequence';
 import { ui, UserInterface } from 'systems/ui';
@@ -36,28 +39,39 @@ export class SpringAgainJetty extends Phaser.Scene {
     const map = new TilemapObject(this, Tilemap.SpringAgainJetty);
 
     map.forPoints('Snow 1', (v) =>
-      this.ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow1).setPipeline(Shader.Outline))
+      this.ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow1).setPosition(v.x, v.y)))
     );
     map.forPoints('Snow 2', (v) =>
-      this.ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow2).setPipeline(Shader.Outline))
+      this.ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow2).setPosition(v.x, v.y)))
     );
     map.forPoints('Snow 3', (v) =>
-      this.ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow3).setPipeline(Shader.Outline))
+      this.ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow3).setPosition(v.x, v.y)))
     );
     map.forPoints('Snow 4', (v) =>
-      this.ySortObjects.add(this.add.sprite(v.x, v.y, Sprite.Snow4).setPipeline(Shader.Outline))
+      this.ySortObjects.add(this.add.existing(new Snow(this, Sprite.Snow4).setPosition(v.x, v.y)))
     );
 
-    map.forPoints('Jetty', (v) => this.add.sprite(v.x, v.y, Sprite.Jetty).setDepth(Depth.Main - 1));
+    const jetty = this.add.existing(new Jetty(this));
+
+    map.forPoints('Jetty', (v) => {
+      jetty.setPosition(v.x, v.y);
+    });
 
     this.player = new Player(this)
       .addToDisplayList()
       .addToUpdateList()
-      .setPosition(map.getPoint('Player Start').x, map.getPoint('Player Start').x);
+      .setPosition(map.getPoint('Player Start').x, map.getPoint('Player Start').y);
 
     this.ySortObjects.add(this.player);
 
     this.camera = camera(this);
+
+    this.cameras.main.setBounds(
+      map.getArea('Camera Bounds').x,
+      map.getArea('Camera Bounds').y,
+      map.getArea('Camera Bounds').width,
+      map.getArea('Camera Bounds').height
+    );
 
     this.camera.follow(this.player);
 
@@ -72,16 +86,18 @@ export class SpringAgainJetty extends Phaser.Scene {
         wait(800),
         runCallback(() => {
           this.ui.fadeIn();
+          this.player.movement.setSpeed(8);
         }),
-        wait(800),
-        // TODO: Get up animation.
-        // TODO: sigh animation
+        wait(2000),
+        new MoveToTarget(this.player.movement, map.getPoint('Player Move To Opening')),
+        runCallback(() => this.player.movement.faceDirection(Phaser.Math.Vector2.LEFT)),
         wait(1000),
         runCallback(() => {
-          this.player.movement.faceDirection(Phaser.Math.Vector2.RIGHT);
+          this.player.animator.playAnimationOnce(Animation.PlayerSigh, true);
         }),
-        wait(500),
+        wait(3000),
         runCallback(() => {
+          this.player.movement.setSpeed(40);
           this.player.enableUserInput();
           this.ui.hideLetterbox();
           this.camera.zoom(1, 1000);
@@ -94,9 +110,11 @@ export class SpringAgainJetty extends Phaser.Scene {
 
     const iceCube = createIceCube2(this, this.player, map, this.camera);
 
+    this.ySortObjects.add(snowman);
+
     createSnowBarrier(this, this.player, map);
 
-    createFinalCutscene(this, map, this.camera, this.player, snowman, iceCube);
+    createFinalCutscene(this, map, this.camera, this.player, snowman, iceCube, jetty);
 
     this.ySortObjects.add(snowman);
     this.ySortObjects.add(iceCube);

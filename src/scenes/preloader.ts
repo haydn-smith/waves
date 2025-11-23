@@ -113,6 +113,7 @@ export class Preloader extends Phaser.Scene {
     this.load.image(Sprite.CaveIn2, Sprite.CaveIn2);
     this.load.image(Sprite.CaveInWinterTop, Sprite.CaveInWinterTop);
     this.load.image(Sprite.CaveInWinterBottom, Sprite.CaveInWinterBottom);
+    this.load.image(Sprite.CaveInSpringAgain, Sprite.CaveInSpringAgain);
     this.load.image(Sprite.Snowball, Sprite.Snowball);
     this.load.image(Sprite.CliffTop, Sprite.CliffTop);
     this.load.image(Sprite.CliffBottom, Sprite.CliffBottom);
@@ -243,6 +244,9 @@ export class Preloader extends Phaser.Scene {
     this.load.spritesheet(Sprite.SnowmanIdleRight, Sprite.SnowmanIdleRight, {
       frameWidth: 32,
     });
+    this.load.spritesheet(Sprite.SnowmanSwimRight, Sprite.SnowmanSwimRight, {
+      frameWidth: 32,
+    });
     this.load.spritesheet(Sprite.SnowmanNoSnowballs, Sprite.SnowmanNoSnowballs, {
       frameWidth: 32,
     });
@@ -358,7 +362,7 @@ export class Preloader extends Phaser.Scene {
     this.anims.create({
       key: Animation.PlayerSigh,
       frames: Sprite.PlayerSigh,
-      frameRate: 2,
+      frameRate: 6,
       repeat: -1,
     });
     this.anims.create({
@@ -482,6 +486,12 @@ export class Preloader extends Phaser.Scene {
       repeat: -1,
     });
     this.anims.create({
+      key: Animation.SnowmanSwimRight,
+      frames: Sprite.SnowmanSwimRight,
+      frameRate: 3,
+      repeat: -1,
+    });
+    this.anims.create({
       key: Animation.SnowmamNoSnowballs,
       frames: Sprite.SnowmanNoSnowballs,
       frameRate: 3,
@@ -517,7 +527,7 @@ export class Preloader extends Phaser.Scene {
 
     // Debug setup.
     localStorage.clear();
-    setDebug(false);
+    setDebug(true);
     // setFlag(Flag.SummerWakeUpCutsceneWatched);
     // setFlag(Flag.AutumnSnowmanSnow2Completed);
     // setFlag(Flag.AutumnSnowmanCompleted);
@@ -525,6 +535,6 @@ export class Preloader extends Phaser.Scene {
 
     // Start game.
     this.scene.run(Scene.DialogBox);
-    this.scene.start(Scene.MainMenu);
+    this.scene.start(Scene.SpringAgainTitle);
   }
 }

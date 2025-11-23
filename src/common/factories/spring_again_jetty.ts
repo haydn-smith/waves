@@ -7,12 +7,14 @@ import {
   snowmanLeaves1,
   snowmanLeaves2,
 } from 'common/conversations/spring_again';
+import { Jetty } from 'common/objects/jetty';
 import { Player } from 'common/objects/player';
+import { Snowman } from 'common/objects/snowman';
 import { Tilemap } from 'common/objects/tilemap';
 import { MoveToTarget } from 'common/sequenceables/move_to_target';
 import { PlayDialog } from 'common/sequenceables/play_dialog';
 import { Repeater } from 'common/utils/repeater';
-import { Depth, Flag, Scene, Sprite } from 'constants';
+import { Animation, Depth, Flag, Scene, Sprite } from 'constants';
 import { DialogBox } from 'scenes/dialog_box';
 import { Camera } from 'systems/camera';
 import { collision } from 'systems/collision';
@@ -92,17 +94,11 @@ export const createSnowman = (scene: Phaser.Scene, player: Player, map: Tilemap,
 };
 
 export const createSnowman2 = (scene: Phaser.Scene, player: Player, map: Tilemap, camera: Camera) => {
-  const container = scene.add.container(map.getPoint('Snowman').x, map.getPoint('Snowman').y);
+  const snowman = scene.add.existing(new Snowman(scene));
 
-  const sprite = scene.add.sprite(0, 0, Sprite.Unknown);
-
-  const body = collision(scene, rect(-2, -2, 4, 4));
+  snowman.setPosition(map.getPoint('Snowman').x, map.getPoint('Snowman').y);
 
   const area = collision(scene, map.getArea('Snowman Interaction')).notSolid();
-
-  const move = movement(scene, container, body).setSpeed(8);
-
-  container.add([sprite, body.toGameObject(), move.toGameObject().setName('Movement')]);
 
   const states = callbackOnEnterOnce(scene, area, player, () => {
     sequence(scene)
@@ -120,10 +116,11 @@ export const createSnowman2 = (scene: Phaser.Scene, player: Player, map: Tilemap
         wait(1000),
         new PlayDialog(DialogBox.get(scene), snowmanLeaves1),
         wait(1000),
-        runCallback(() => move.setSpeed(16)),
-        new MoveToTarget(move, map.getPoint('To Jetty 1')),
-        new MoveToTarget(move, map.getPoint('To Jetty 2')),
+        runCallback(() => snowman.movement.setSpeed(16)),
+        new MoveToTarget(snowman.movement, map.getPoint('To Jetty 1')),
+        new MoveToTarget(snowman.movement, map.getPoint('To Jetty 2')),
         runCallback(() => {
+          snowman.coll.notSolid();
           player.enableUserInput();
           ui(scene).hideLetterbox();
           camera.zoom(1, 1000);
@@ -133,10 +130,8 @@ export const createSnowman2 = (scene: Phaser.Scene, player: Player, map: Tilemap
       .destroyWhenComplete();
   });
 
-  return container.on('destroy', () => {
-    area.destroy();
+  return snowman.on('destroy', () => {
     states.destroy();
-    move.destroy();
   });
 };
 
@@ -211,7 +206,7 @@ export const createSnowBarrier = (scene: Phaser.Scene, player: Player, map: Tile
     .container(map.getPoint('Snow Barrier').x, map.getPoint('Snow Barrier').y)
     .setDepth(Depth.Main + 1);
 
-  const sprite = scene.add.sprite(0, 0, Sprite.Unknown);
+  const sprite = scene.add.sprite(0, 0, Sprite.CaveInSpringAgain);
 
   const body = collision(scene, map.getArea('Block Player From Exit'));
 
@@ -229,9 +224,13 @@ export const createSnowBarrier = (scene: Phaser.Scene, player: Player, map: Tile
 export const createIceCube2 = (scene: Phaser.Scene, player: Player, map: Tilemap, camera: Camera) => {
   const container = scene.add.container(map.getPoint('Ice Cube').x, map.getPoint('Ice Cube').y);
 
-  const sprite = scene.add.sprite(0, 0, Sprite.Unknown);
+  const sprite = scene.add.sprite(0, 0, Sprite.Unknown).setName('Sprite');
 
-  const body = collision(scene, rect(-2, -2, 4, 4));
+  sprite.flipX = true;
+
+  sprite.anims.play(Animation.IceCubeRight);
+
+  const body = collision(scene, rect(-4, 5, 8, 2));
 
   const area = collision(scene, map.getArea('Ice Cube Interaction')).notSolid();
 
@@ -255,7 +254,10 @@ export const createIceCube2 = (scene: Phaser.Scene, player: Player, map: Tilemap
         wait(1000),
         new PlayDialog(DialogBox.get(scene), iceCubeLeaves1),
         wait(1000),
-        runCallback(() => move.setSpeed(16)),
+        runCallback(() => {
+          sprite.flipX = false;
+          move.setSpeed(16);
+        }),
         new MoveToTarget(move, map.getPoint('To Jetty 1')),
         new MoveToTarget(move, map.getPoint('To Jetty 3')),
         runCallback(() => {
@@ -280,8 +282,9 @@ export const createFinalCutscene = (
   map: Tilemap,
   camera: Camera,
   player: Player,
-  snowman: Phaser.GameObjects.Container,
-  iceCube: Phaser.GameObjects.Container
+  snowman: Snowman,
+  iceCube: Phaser.GameObjects.Container,
+  jetty: Jetty
 ) => {
   const area = collision(scene, map.getArea('Final Cutscene Area')).notSolid();
 
@@ -297,33 +300,35 @@ export const createFinalCutscene = (
           player.disableUserInput();
           ui(scene).showLetterbox();
           camera.zoom(2, 1000);
-          (snowman.getByName('Movement') as Movement).setSpeed(8);
+          snowman.movement.setSpeed(8);
+          jetty.collisionOff();
+          player.movement.faceDirection(Phaser.Math.Vector2.RIGHT);
         }),
         wait(1000),
 
-        new MoveToTarget(new MovementDecorator(snowman.getByName('Movement') as Movement), map.getPoint('Edge')),
+        new MoveToTarget(snowman.movement, map.getPoint('Edge')),
         new PlayDialog(DialogBox.get(scene), snowmanLeaves2),
         wait(1000),
         new RunTween(scene, {
           targets: snowman,
-          x: map.getPoint('Snowman Peak').x,
-          y: map.getPoint('Snowman Peak').y,
-          ease: Phaser.Math.Easing.Quintic.In,
-          duration: 1000,
+          x: map.getPoint('Peak').x,
+          y: map.getPoint('Peak').y,
+          ease: Phaser.Math.Easing.Cubic.Out,
+          duration: 500,
         }),
         new RunTween(scene, {
           targets: snowman,
-          x: map.getPoint('Snowman Water').x,
-          y: map.getPoint('Snowman Water').y,
-          ease: Phaser.Math.Easing.Quintic.Out,
-          duration: 1000,
+          x: map.getPoint('Water').x,
+          y: map.getPoint('Water').y,
+          ease: Phaser.Math.Easing.Cubic.In,
+          duration: 500,
+        }),
+        runCallback(() => {
+          snowman.sprite.anims.play(Animation.SnowmanSwimRight);
         }),
         wait(1000),
-        runCallback(() => (snowman.getByName('Movement') as Movement).setSpeed(16)),
-        new MoveToTarget(
-          new MovementDecorator(snowman.getByName('Movement') as Movement),
-          map.getPoint('Snowman Swim To')
-        ),
+        runCallback(() => snowman.movement.setSpeed(16)),
+        new MoveToTarget(snowman.movement, map.getPoint('Swim To')),
         runCallback(() => snowman.destroy()),
 
         wait(1000),
@@ -332,24 +337,24 @@ export const createFinalCutscene = (
         wait(1000),
         new RunTween(scene, {
           targets: iceCube,
-          x: map.getPoint('Snowman Peak').x,
-          y: map.getPoint('Snowman Peak').y,
-          ease: Phaser.Math.Easing.Quintic.In,
-          duration: 1000,
+          x: map.getPoint('Peak').x,
+          y: map.getPoint('Peak').y,
+          ease: Phaser.Math.Easing.Cubic.Out,
+          duration: 500,
         }),
         new RunTween(scene, {
           targets: iceCube,
-          x: map.getPoint('Snowman Water').x,
-          y: map.getPoint('Snowman Water').y,
-          ease: Phaser.Math.Easing.Quintic.Out,
-          duration: 1000,
+          x: map.getPoint('Water').x,
+          y: map.getPoint('Water').y,
+          ease: Phaser.Math.Easing.Cubic.In,
+          duration: 500,
+        }),
+        runCallback(() => {
+          iceCube.getByName('Sprite').anims.play(Animation.IceCubeSwimRight);
         }),
         wait(1000),
         runCallback(() => (iceCube.getByName('Movement') as Movement).setSpeed(16)),
-        new MoveToTarget(
-          new MovementDecorator(iceCube.getByName('Movement') as Movement),
-          map.getPoint('Snowman Swim To')
-        ),
+        new MoveToTarget(new MovementDecorator(iceCube.getByName('Movement') as Movement), map.getPoint('Swim To')),
         runCallback(() => iceCube.destroy()),
 
         wait(1000),
@@ -357,31 +362,47 @@ export const createFinalCutscene = (
         runCallback(() => camera.unfollow()),
         new PlayDialog(DialogBox.get(scene), playerLeaves),
         wait(1000),
+        runCallback(() => player.animator.playAnimation(Animation.PlayerIdleRight)),
         new RunTween(scene, {
           targets: player,
-          x: map.getPoint('Snowman Peak').x,
-          y: map.getPoint('Snowman Peak').y,
-          ease: Phaser.Math.Easing.Quintic.In,
-          duration: 1000,
+          x: map.getPoint('Peak').x,
+          y: map.getPoint('Peak').y,
+          ease: Phaser.Math.Easing.Cubic.Out,
+          duration: 500,
         }),
         new RunTween(scene, {
           targets: player,
-          x: map.getPoint('Snowman Water').x,
-          y: map.getPoint('Snowman Water').y,
-          ease: Phaser.Math.Easing.Quintic.Out,
-          duration: 1000,
+          x: map.getPoint('Water').x,
+          y: map.getPoint('Water').y,
+          ease: Phaser.Math.Easing.Cubic.In,
+          duration: 500,
+        }),
+        runCallback(() => {
+          player.animator.setMovementAnimations(
+            Animation.PlayerSwimUp,
+            Animation.PlayerSwimDown,
+            Animation.PlayerSwimRight
+          );
+
+          player.animator.setIdleAnimations(
+            Animation.PlayerSwimUp,
+            Animation.PlayerSwimDown,
+            Animation.PlayerSwimRight
+          );
+
+          player.animator.playMovementAndIdleAnimations();
         }),
         wait(1000),
         runCallback(() => player.movement.setSpeed(16)),
-        new MoveToTarget(player.movement, map.getPoint('Snowman Swim To')),
+        new MoveToTarget(player.movement, map.getPoint('Swim To')),
         runCallback(() => {
           camera.move(map.getPoint('Snow Barrier'), 9000, Phaser.Math.Easing.Cubic.In);
         }),
-        wait(3000),
+        wait(8000),
         runCallback(() => {
-          ui(scene).fadeOut(3000);
+          ui(scene).fadeOut(1000);
         }),
-        wait(3000),
+        wait(1000),
         runCallback(() => scene.scene.start(Scene.SpringAgainFlower)),
       ])
       .start();

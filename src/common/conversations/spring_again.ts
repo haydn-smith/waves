@@ -1,62 +1,67 @@
-import { Sprite } from 'constants';
+import { Dialog } from 'common/objects/dialog_box';
+import { Animation } from 'constants';
 
-export const snowmanLeaves1 = [
+export const snowmanLeaves1: Dialog = [
   {
-    image: Sprite.Unknown,
+    image: Animation.SnowmanDialog,
     line1: ['Well then kiddo...'],
     line2: ['...My friend.'],
   },
   {
-    image: Sprite.Unknown,
+    image: Animation.SnowmanDialog,
     line1: ["It seems it's that time once more..."],
-    line2: ['...time to leave, ', 'for now.'],
+    line2: ['...Time to leave, ', 'for now.'],
   },
   {
-    image: Sprite.Unknown,
+    image: Animation.SnowmanDialog,
     line1: ['I must say though, it has indeed been'],
     line2: ['a good time!'],
+    autoPlaySecondLine: true,
   },
 ];
 
 export const snowmanLeaves2 = [
   {
-    image: Sprite.Unknown,
+    image: Animation.SnowmanDialog,
     line1: ['...'],
     line2: ["See ya round, ol' chap."],
   },
 ];
 
-export const iceCubeLeaves1 = [
+export const iceCubeLeaves1: Dialog = [
   {
-    image: Sprite.Unknown,
-    line1: ['Hiya! ', '...'],
+    image: Animation.IceCubeDialog,
+    line1: ['Hiya!'],
     line2: ['You know...'],
   },
   {
-    image: Sprite.Unknown,
-    line1: ["I don't think I want to melt away this year too."],
-    line2: ['...'],
+    image: Animation.IceCubeDialog,
+    line1: ["I don't think I want to melt away"],
+    line2: ['this year too.'],
+    autoPlaySecondLine: true,
   },
   {
-    image: Sprite.Unknown,
-    line1: ['So...', 'sooooooo...'],
-    line2: ["... I'm going to have to leave!"],
+    image: Animation.IceCubeDialog,
+    line1: ['So... ', 'Sooooooo...'],
+    line2: ["...I'm going to have to leave!"],
   },
   {
-    image: Sprite.Unknown,
+    image: Animation.IceCubeDialog,
     line1: ['Off I go! In search of'],
     line2: ['cooler water!'],
+    autoPlaySecondLine: true,
   },
   {
-    image: Sprite.Unknown,
-    line1: ["I'll always remember this time though."],
-    line2: ['...'],
+    image: Animation.IceCubeDialog,
+    line1: ["I'll always remember this time we "],
+    line2: ['spent hanging out here.'],
+    autoPlaySecondLine: true,
   },
 ];
 
 export const iceCubeLeaves2 = [
   {
-    image: Sprite.Unknown,
+    image: Animation.IceCubeDialog,
     line1: ['Hey!'],
     line2: ["Stay cool while I'm gone!"],
   },
@@ -64,12 +69,12 @@ export const iceCubeLeaves2 = [
 
 export const snowBarrier1 = [
   {
-    image: Sprite.Unknown,
+    image: Animation.ThinkingDialog,
     line1: ['...'],
     line2: ["There's no way to get through."],
   },
   {
-    image: Sprite.Unknown,
+    image: Animation.ThinkingDialog,
     line1: ['This time...'],
     line2: ['...not even magic can help.'],
   },
@@ -77,21 +82,21 @@ export const snowBarrier1 = [
 
 export const snowBarrier2 = [
   {
-    image: Sprite.Unknown,
+    image: Animation.ThinkingDialog,
     line1: ['...'],
-    line2: ['(you wonder if the little plant is doing okay)'],
+    line2: ['You wonder if the little plant is doing okay.'],
   },
 ];
 
 export const playerLeaves = [
   {
-    image: Sprite.Unknown,
+    image: Animation.ThinkingDialog,
     line1: ['...'],
-    line2: ['(it seems your time here is done)'],
+    line2: ['It seems your time here is done.'],
   },
   {
-    image: Sprite.Unknown,
+    image: Animation.ThinkingDialog,
     line1: ['...'],
-    line2: ['(the next adventure awaits)'],
+    line2: ['The next adventure awaits.'],
   },
 ];

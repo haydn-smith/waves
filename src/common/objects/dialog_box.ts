@@ -155,6 +155,7 @@ export class DialogBox extends Phaser.GameObjects.Container {
 
     this.arrow.setAlpha(0);
     this.setVisible(true);
+    this.sprite.setVisible(true);
 
     if (this.sprite.anims.animationManager.exists(this.dialog[this.currentDialog].image)) {
       this.sprite.anims.play(this.dialog[this.currentDialog].image);
@@ -256,6 +257,7 @@ export class DialogBox extends Phaser.GameObjects.Container {
         onComplete: () => {
           this.states.change('idle');
           this.setVisible(false);
+          this.sprite.setVisible(false);
         },
       });
 

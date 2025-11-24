@@ -27,10 +27,9 @@ import { SummerTitle } from 'scenes/summer_title';
 import { WinterFlower } from 'scenes/winter_flower';
 import { WinterIceCube } from 'scenes/winter_ice_cube';
 import { WinterTitle } from 'scenes/winter_title';
-import { setDebug } from 'systems/flags';
 
 // @ts-expect-error Injected environment variable.
-setDebug(true); // process.env.PHASER_DEBUG === 'true');
+// setDebug(true); // process.env.PHASER_DEBUG === 'true');
 
 // @ts-expect-error Injected environment variable.
 if (process.env.PHASER_SENTRY_DSN) {

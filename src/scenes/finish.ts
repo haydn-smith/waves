@@ -27,13 +27,13 @@ export class Finish extends Phaser.Scene {
     this.typewriter = this.add
       .existing(new Typewriter(this))
       .setDepth(Depth.UI)
-      .setScrollFactor(1)
+      .setScrollFactor(0)
       .setPostPipeline(Shader.Fade);
 
     this.typewriter2 = this.add
       .existing(new Typewriter(this))
       .setDepth(Depth.UI)
-      .setScrollFactor(1)
+      .setScrollFactor(0)
       .setPostPipeline(Shader.Fade);
 
     sequence(this)

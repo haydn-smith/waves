@@ -1,4 +1,3 @@
-import { Shader } from 'constants';
 import { CameraShake } from 'systems/camera/objects/camera_shake';
 import { States, states } from 'systems/states';
 import { ui } from 'systems/ui';
@@ -35,7 +34,7 @@ export class Camera extends Phaser.GameObjects.GameObject {
 
     this.shaker = new CameraShake(scene);
 
-    this.camera.setPostPipeline([Shader.Noise]);
+    // this.camera.setPostPipeline([Shader.Noise]);
 
     this.states = states<CameraStates, 'idle'>(scene, 'idle')
       .add('following', ({ delta }) => {

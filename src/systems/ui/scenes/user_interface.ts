@@ -42,6 +42,12 @@ export class UserInterface extends Phaser.Scene {
 
     // this.vignette = this.add.sprite(320 / 2, 240 / 2, Sprite.Vignette);
     // this.vignette.anims.play(Animation.Vignette);
+
+    this.graphics
+      .setDepth(this.depth + 100)
+      .clear()
+      .lineStyle(2, 0xffffff, 1)
+      .strokeRect(0, 0, this.renderer.width, this.renderer.height);
   }
 
   public getFader(): Fader {

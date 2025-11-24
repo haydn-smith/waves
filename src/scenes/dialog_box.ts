@@ -1,5 +1,5 @@
 import { DialogBox as DialogBoxObject } from 'common/objects/dialog_box';
-import { Scene, Shader } from 'constants';
+import { Scene } from 'constants';
 import { ui, UserInterface } from 'systems/ui';
 
 export class DialogBox extends Phaser.Scene {
@@ -25,7 +25,7 @@ export class DialogBox extends Phaser.Scene {
     this.container.add([this.dialogBox, this.dialogBox.sprite]);
     this.container.sort('depth');
 
-    this.cameras.main.setPostPipeline(Shader.Noise);
+    // this.cameras.main.setPostPipeline(Shader.Noise);
   }
 
   public static get(scene: Phaser.Scene): DialogBoxObject {

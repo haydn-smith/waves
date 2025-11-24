@@ -25,7 +25,11 @@ void main()
 
   vec2 pos = gl_FragCoord.xy;
 
-  if (uProgress == 1.0) {
+  if (pos.x <= 1.0 || pos.x >= 319.0 || pos.y <= 1.0 || pos.y >= 239.0) {
+      gl_FragColor = vec4(1,1,1,1);
+}
+
+else if (uProgress == 1.0) {
       gl_FragColor = vec4(0,0,0,1);
   }
 

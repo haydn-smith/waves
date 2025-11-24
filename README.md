@@ -15,3 +15,9 @@ This is the boilerplate I use to create video games with [Phaser](https://phaser
 | `npm run build` | Create a production build in the `dist` folder. |
 | `npm run lint` | Lint the codebase. |
 | `npm run typecheck` | Check the codebase for type errors. |
+
+Explore adventure, friendship, and
+kindness as a very smol penguin,
+making waves in a very big world.
+
+# Credits

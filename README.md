@@ -1,5 +1,8 @@
 # Haydn's Phaser Starter
 
+TODO:
+* check you cant open dialogs during cutscenes.
+
 This is the boilerplate I use to create video games with [Phaser](https://phaser.io/).
 
 ## Requirements

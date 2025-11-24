@@ -98,6 +98,10 @@ export class DialogBox extends Phaser.GameObjects.Container {
         }
 
         if (this.inputs.wasJustActive(Action.Action)) {
+          if (this.currentLine === 0 && this.dialog[this.currentDialog].autoPlaySecondLine) {
+            this.updateDialogIndexes();
+          }
+
           this.typewriter.setText(this.resolveNextLine1(), this.resolveNextLine1().length).play();
 
           this.typewriter2.setText(this.resolveNextLine2(), this.resolveNextLine2().length).play();
@@ -150,6 +154,7 @@ export class DialogBox extends Phaser.GameObjects.Container {
     this.states.change('animating');
 
     this.arrow.setAlpha(0);
+    this.setVisible(true);
 
     if (this.sprite.anims.animationManager.exists(this.dialog[this.currentDialog].image)) {
       this.sprite.anims.play(this.dialog[this.currentDialog].image);
@@ -248,7 +253,10 @@ export class DialogBox extends Phaser.GameObjects.Container {
         ease: Phaser.Math.Easing.Back.In,
         duration: 400,
         delay: 50,
-        onComplete: () => this.states.change('idle'),
+        onComplete: () => {
+          this.states.change('idle');
+          this.setVisible(false);
+        },
       });
 
       return 'animating';

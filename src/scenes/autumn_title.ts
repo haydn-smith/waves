@@ -40,7 +40,7 @@ export class AutumnTitle extends Phaser.Scene {
       .of([
         runCallback(() => this.ui.fadeIn(1000, 'Linear')),
         wait(1000),
-        runCallback(() => this.typewriter.typewrite(`3.`)),
+        runCallback(() => this.typewriter.typewrite(`2.`)),
         wait(() => this.typewriter.typewriteDuration()),
         wait(500),
         runCallback(() => this.typewriter2.typewrite(`[sprite:${Sprite.AutumnIcon}] Autumn`)),

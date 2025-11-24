@@ -42,7 +42,7 @@ export class WinterTitle extends Phaser.Scene {
         runCallback(() => cam.shake(2, 0, -1, 200)),
         runCallback(() => this.ui.fadeIn(1000, 'Linear')),
         wait(1000),
-        runCallback(() => this.typewriter.typewrite(`4.`)),
+        runCallback(() => this.typewriter.typewrite(`3.`)),
         wait(() => this.typewriter.typewriteDuration()),
         wait(500),
         runCallback(() => cam.shake(4, 0, -1, 200)),

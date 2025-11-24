@@ -20,4 +20,24 @@ Explore adventure, friendship, and
 kindness as a very smol penguin,
 making waves in a very big world.
 
-# Credits
+# TODO
+* Add title card.
+* Fix freezing in dialog box.
+* Check if the letterboxes all hide correctly
+* Fix alignment in titles
+* Add sounds
+  * Action sound
+  * Storm BG sound
+  * Waves BG sound
+  * Splash sound
+  * Dialog sounds for each conversation
+  * snow pass through sound
+  * watering sound
+  * Fan noises
+  * Magic noise
+* Add music
+* Fix timings
+* Finalise dialog
+* Record tile image GIF
+
+I could not have built this game without my friends. I hope I make waves in their lives, too.

@@ -46,7 +46,7 @@ export const createSnowman = (scene: Phaser.Scene, player: Player, map: Tilemap,
         runCallback(() => {
           player.disableUserInput();
           ui(scene).showLetterbox();
-          camera.zoom(2);
+          camera.zoom(2, 1000);
         }),
         new MoveToTarget(player.movement, map.getPoint('In Front Of Snowman')),
         runCallback(() => {
@@ -107,7 +107,7 @@ export const createSnowman2 = (scene: Phaser.Scene, player: Player, map: Tilemap
           setFlag(Flag.FinalSnowmanCutsceneWatched);
           player.disableUserInput();
           ui(scene).showLetterbox();
-          camera.zoom(2);
+          camera.zoom(2, 1000);
         }),
         new MoveToTarget(player.movement, map.getPoint('In Front Of Snowman')),
         runCallback(() => {
@@ -154,7 +154,7 @@ export const createIceCube = (scene: Phaser.Scene, player: Player, map: Tilemap,
         runCallback(() => {
           player.disableUserInput();
           ui(scene).showLetterbox();
-          camera.zoom(2);
+          camera.zoom(2, 1000);
         }),
         new MoveToTarget(player.movement, map.getPoint('In Front Of Ice Cube')),
         runCallback(() => {
@@ -245,7 +245,7 @@ export const createIceCube2 = (scene: Phaser.Scene, player: Player, map: Tilemap
           setFlag(Flag.FinalIceCubeCutsceneWatched);
           player.disableUserInput();
           ui(scene).showLetterbox();
-          camera.zoom(2);
+          camera.zoom(2, 1000);
         }),
         new MoveToTarget(player.movement, map.getPoint('In Front Of Ice Cube')),
         runCallback(() => {

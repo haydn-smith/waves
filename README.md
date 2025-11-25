@@ -21,8 +21,6 @@ kindness as a very smol penguin,
 making waves in a very big world.
 
 # TODO
-* Add title card.
-* Fix freezing in dialog box.
 * Check if the letterboxes all hide correctly
 * Fix alignment in titles
 * Add sounds

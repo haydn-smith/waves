@@ -13,6 +13,10 @@ export class Typewriter extends Phaser.GameObjects.Container {
 
   private linePadding = scaled(4);
 
+  private unusedTextObjects: Phaser.GameObjects.BitmapText[] = [];
+
+  private tweens: Phaser.Tweens.Tween[] = [];
+
   constructor(
     scene: Phaser.Scene,
     private font: string = Font.DefaultWhite
@@ -25,7 +29,16 @@ export class Typewriter extends Phaser.GameObjects.Container {
   }
 
   public setText(text: string, typeFrom: number = 0): Typewriter {
-    this.textObjects.forEach((to) => to.destroy());
+    this.textObjects.forEach((to) => {
+      if (to.type === 'Sprite') {
+        to.destroy();
+      } else {
+        this.unusedTextObjects.push(to);
+        to.setVisible(false);
+      }
+    });
+    this.tweens.forEach((t) => t.destroy());
+    this.tweens = [];
     this.textWidth = 0;
     this.textHeight = scaled(-12);
     this.typeFrom = typeFrom;
@@ -36,10 +49,19 @@ export class Typewriter extends Phaser.GameObjects.Container {
       const c = chars[index];
 
       if (c !== '[') {
-        const text = this.scene.add
-          .bitmapText(this.textWidth, this.textHeight, this.font, c)
-          .setPostPipeline(Shader.Fade)
-          .setAlpha(index >= typeFrom ? 0 : 1);
+        let text = this.unusedTextObjects.pop();
+
+        if (!text) {
+          text = this.scene.add
+            .bitmapText(this.textWidth, this.textHeight, this.font, c)
+            .setPostPipeline(Shader.Fade)
+            .setVisible(!(index >= typeFrom));
+        } else {
+          text
+            .setPosition(this.textWidth, this.textHeight)
+            .setVisible(!(index >= typeFrom))
+            .setText(c);
+        }
 
         // (text.getPostPipeline(Shader.Fade) as Fade).progress = index >= typeFrom ? 1 : 0;
 
@@ -60,7 +82,7 @@ export class Typewriter extends Phaser.GameObjects.Container {
         const obj = this.scene.add
           .sprite(this.textWidth, this.textHeight, key)
           .setOrigin(0, 0)
-          .setAlpha(index >= typeFrom ? 0 : 1)
+          .setVisible(!(index >= typeFrom))
           .setScale(GlobalScale)
           .setPostPipeline(Shader.Fade);
 
@@ -89,27 +111,29 @@ export class Typewriter extends Phaser.GameObjects.Container {
     this.textObjects.forEach((o, index) => {
       if (index < this.typeFrom) return;
 
-      this.scene.tweens.add({
-        targets: o,
-        duration: 250,
-        delay: (index - this.typeFrom) * 30,
-        props: {
-          y: {
-            ease: 'Back.Out',
-            to: o.y,
-            from: o.y + scaled(16),
+      this.tweens.push(
+        this.scene.tweens.add({
+          targets: o,
+          duration: 250,
+          delay: (index - this.typeFrom) * 30,
+          props: {
+            y: {
+              ease: 'Back.Out',
+              to: o.y,
+              from: o.y + scaled(16),
+            },
+            // glowAlpha: { from: 1, to: 0 },
           },
-          // glowAlpha: { from: 1, to: 0 },
-        },
-        onUpdate: () => {
-          o.setAlpha(1);
-        },
-        // onUpdate: (tween, target, key, current) => {
-        //   if (key === 'glowAlpha') {
-        //     (o.getPostPipeline(Shader.Fade) as Fade).progress = current;
-        //   }
-        // },
-      });
+          onUpdate: () => {
+            o.setVisible(true);
+          },
+          // onUpdate: (tween, target, key, current) => {
+          //   if (key === 'glowAlpha') {
+          //     (o.getPostPipeline(Shader.Fade) as Fade).progress = current;
+          //   }
+          // },
+        })
+      );
     });
 
     return this;

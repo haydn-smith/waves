@@ -83,7 +83,7 @@ export class WinterTitle extends Phaser.Scene {
     );
 
     this.typewriter2.setPosition(
-      this.renderer.width / 2 - this.typewriter2.typewriterWidth() / 2,
+      this.renderer.width / 2 - this.typewriter2.typewriterWidth() / 2 - 5,
       this.renderer.height / 2 + scaled(16)
     );
   }

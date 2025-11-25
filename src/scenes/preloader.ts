@@ -6,7 +6,6 @@ import { Outline } from 'common/objects/shaders/outline';
 import { OutlinePost } from 'common/objects/shaders/outline_post';
 import { SoftLight } from 'common/objects/shaders/soft_light';
 import { Vignette } from 'common/objects/shaders/vignette';
-import { setData } from 'common/utils/data';
 import { logEvent } from 'common/utils/log';
 import { scaled } from 'common/utils/scaled';
 import { Animation, Depth, Font, Scene, Shader, Sound, Sprite, Tilemap, Tileset } from 'constants';
@@ -539,13 +538,11 @@ export class Preloader extends Phaser.Scene {
     // Debug setup.
     localStorage.clear();
     setDebug(false);
-    // setFlag(Flag.SummerWakeUpCutsceneWatched);
-    // setFlag(Flag.AutumnSnowmanSnow2Completed);
     // setFlag(Flag.AutumnSnowmanCompleted);
-    setData('previousScene', Scene.SpringJetty);
+    // setData('previousScene', Scene.SpringJetty);
 
     // Start game.
     this.scene.run(Scene.DialogBox);
-    this.scene.start(Scene.SpringIceCube);
+    this.scene.start(Scene.MainMenu);
   }
 }

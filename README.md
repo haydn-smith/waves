@@ -21,8 +21,6 @@ kindness as a very smol penguin,
 making waves in a very big world.
 
 # TODO
-* Check if the letterboxes all hide correctly
-* Fix alignment in titles
 * Add sounds
   * Action sound
   * Storm BG sound
@@ -38,4 +36,4 @@ making waves in a very big world.
 * Finalise dialog
 * Record tile image GIF
 
-I could not have built this game without my friends. I hope I make waves in their lives, too.
+I could not have built this game without my friends. I hope I can make waves in their lives, too.

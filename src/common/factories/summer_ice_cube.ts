@@ -15,8 +15,9 @@ import { Tilemap } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
 import { PlayDialog } from 'common/sequenceables/play_dialog';
 import { Repeater } from 'common/utils/repeater';
-import { Action, Animation, Depth, Flag, Shader, Sprite } from 'constants';
+import { Action, Animation, Depth, Flag, Shader, Sound, Sprite } from 'constants';
 import { DialogBox } from 'scenes/dialog_box';
+import { spatialAudio } from 'systems/audio';
 import { Camera } from 'systems/camera';
 import { collision } from 'systems/collision';
 import { checkFlag, setFlag } from 'systems/flags';
@@ -124,6 +125,8 @@ export const createFan1 = (
     .setDepth(Depth.Main + 1)
     .stop();
 
+  const sound = spatialAudio(scene, Sound.IceCrack).loop().setPosition(position).setDistance(64).setVolume(0.2);
+
   const cutscene = () =>
     sequence(scene).of([
       runCallback(() => {
@@ -137,6 +140,7 @@ export const createFan1 = (
       wait(1000),
       runCallback(() => {
         sprite.anims.play(Animation.Fan1);
+        sound.play();
         particles.start();
       }),
       wait(2000),
@@ -153,6 +157,7 @@ export const createFan1 = (
 
   return container.on('destroy', () => {
     states.destroy();
+    sound.stop().destroy();
   });
 };
 
@@ -164,6 +169,8 @@ export const createFan1On = (scene: Phaser.Scene, map: Tilemap, ySort: YSortObje
   const coll = collision(scene, rect(-10, -2, 18, 2));
 
   const container = scene.add.container(position.x, position.y, [sprite, coll.toGameObject()]);
+
+  const sound = spatialAudio(scene, Sound.IceCrack).loop().setPosition(position).setDistance(64).setVolume(0.2);
 
   const particles = scene.add
     .particles(position.x - 16, position.y - 16, Sprite.White1px, {
@@ -184,8 +191,11 @@ export const createFan1On = (scene: Phaser.Scene, map: Tilemap, ySort: YSortObje
 
   sprite.anims.play(Animation.Fan1);
   particles.start();
+  sound.play();
 
-  ySort.add(container);
+  ySort.add(container).on('destroy', () => {
+    sound.stop().destroy();
+  });
 };
 
 export const createFan2 = (
@@ -208,6 +218,8 @@ export const createFan2 = (
   const container = scene.add.container(position.x, position.y, [sprite, coll.toGameObject()]);
 
   const userInterface = ui(scene);
+
+  const sound = spatialAudio(scene, Sound.IceCrack).loop().setPosition(position).setDistance(64).setVolume(0.2);
 
   const fanParticles = scene.add
     .particles(position.x - 16, position.y - 16, Sprite.White1px, {
@@ -239,6 +251,7 @@ export const createFan2 = (
       wait(2000),
       runCallback(() => {
         sprite.anims.play(Animation.Fan1);
+        sound.play();
         fanParticles.start();
       }),
       wait(1000),
@@ -255,6 +268,7 @@ export const createFan2 = (
 
   return container.on('destroy', () => {
     states.destroy();
+    sound.stop().destroy();
   });
 };
 
@@ -266,6 +280,8 @@ export const createFan2On = (scene: Phaser.Scene, map: Tilemap, ySort: YSortObje
   const coll = collision(scene, rect(-10, -2, 18, 2));
 
   const container = scene.add.container(position.x, position.y, [sprite, coll.toGameObject()]);
+
+  const sound = spatialAudio(scene, Sound.IceCrack).loop().setPosition(position).setDistance(64).setVolume(0.2);
 
   const particles = scene.add
     .particles(position.x - 16, position.y - 16, Sprite.White1px, {
@@ -286,8 +302,11 @@ export const createFan2On = (scene: Phaser.Scene, map: Tilemap, ySort: YSortObje
 
   sprite.anims.play(Animation.Fan1);
   particles.start();
+  sound.play();
 
-  ySort.add(container);
+  ySort.add(container).on('destroy', () => {
+    sound.stop().destroy();
+  });
 };
 
 export const createIceWall = (scene: Phaser.Scene, player: Player, map: Tilemap, ySort: YSortObjects) => {
@@ -421,6 +440,7 @@ const sequenceItemsAfterFan = (
       }),
       runCallback(() => {
         particles.explode();
+        scene.sound.play(Sound.Explosion, { volume: 0.6 });
       }),
       wait(4000),
       new PlayDialog(DialogBox.get(scene), youHopeIceCubeIsOkay),

@@ -6,8 +6,9 @@ import { Tilemap } from 'common/objects/tilemap';
 import { MoveToTarget } from 'common/sequenceables/move_to_target';
 import { PlayDialog } from 'common/sequenceables/play_dialog';
 import { scaled } from 'common/utils/scaled';
-import { Action, Animation, Depth, Flag, Shader, Sprite } from 'constants';
+import { Action, Animation, Depth, Flag, Shader, Sound, Sprite } from 'constants';
 import { DialogBox } from 'scenes/dialog_box';
+import { audio } from 'systems/audio';
 import { Camera } from 'systems/camera';
 import { Collision, collision } from 'systems/collision';
 import { setFlag } from 'systems/flags';
@@ -132,6 +133,8 @@ export const createOtherPenguinCutscene = (
     ])
     .destroyWhenComplete();
 
+  const activate = audio(scene, Sound.Activate);
+
   const state = states(scene, 'not triggered')
     .add('not triggered', ({ change }) => {
       downArrow.setAlpha(0);
@@ -148,6 +151,7 @@ export const createOtherPenguinCutscene = (
       }
 
       if (inputs.isActive(Action.Action)) {
+        activate.dontLoop().play();
         cutscene.start();
         downArrow.destroy();
         state.destroy();

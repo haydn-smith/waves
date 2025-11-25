@@ -1,5 +1,5 @@
 import { scaled } from 'common/utils/scaled';
-import { Animation, Font, GlobalScale, Shader } from 'constants';
+import { Animation, Font, GlobalScale, Shader, Sound, TypeOfSound } from 'constants';
 import { debugDepth } from 'systems/flags';
 
 export class Typewriter extends Phaser.GameObjects.Container {
@@ -19,7 +19,8 @@ export class Typewriter extends Phaser.GameObjects.Container {
 
   constructor(
     scene: Phaser.Scene,
-    private font: string = Font.DefaultWhite
+    private font: string = Font.DefaultWhite,
+    public sound: TypeOfSound[] = [Sound.Snow3]
   ) {
     super(scene);
 
@@ -123,6 +124,12 @@ export class Typewriter extends Phaser.GameObjects.Container {
               from: o.y + scaled(16),
             },
             // glowAlpha: { from: 1, to: 0 },
+          },
+          onStart: () => {
+            this.scene.sound.play(this.sound[Math.floor(Math.random() * this.sound.length)], {
+              volume: 0.1,
+              detune: 200,
+            });
           },
           onUpdate: () => {
             o.setVisible(true);

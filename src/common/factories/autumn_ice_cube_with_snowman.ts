@@ -10,7 +10,7 @@ import { Tilemap } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
 import { MoveToTarget } from 'common/sequenceables/move_to_target';
 import { Repeater } from 'common/utils/repeater';
-import { Depth, Flag, Sprite } from 'constants';
+import { Depth, Flag, Sound, Sprite } from 'constants';
 import { Camera } from 'systems/camera';
 import { collision } from 'systems/collision';
 import { setFlag } from 'systems/flags';
@@ -108,6 +108,7 @@ export const createSnowBarrierLiftCutscene = (
       runCallback(() => {
         cam.move(map.getPoint('Snowman At Barrier'), 1000);
         snowBarrier.destroy();
+        scene.sound.play(Sound.Explosion, { volume: 0.6 });
         particles2.explode();
         particles.stop();
         snowman.allBalls();

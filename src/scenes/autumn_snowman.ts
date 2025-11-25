@@ -15,7 +15,7 @@ import { YSortObjects } from 'common/objects/y_sort_objects';
 import { MoveToTarget } from 'common/sequenceables/move_to_target';
 import { PlayDialog } from 'common/sequenceables/play_dialog';
 import { logEvent } from 'common/utils/log';
-import { CollisionMask, Depth, Flag, Scene, Sprite, Tilemap, TypeOfFlag } from 'constants';
+import { CollisionMask, Depth, Flag, Scene, Sound, Sprite, Tilemap, TypeOfFlag } from 'constants';
 import { camera } from 'systems/camera';
 import { collisionBorder } from 'systems/collision';
 import { checkFlag, setFlag } from 'systems/flags';
@@ -158,6 +158,7 @@ export class AutumnSnowman extends Phaser.Scene {
             new RunCallback(() => {
               snowman.animationForCount(count + 1);
               cam.shake();
+              this.sound.play(Sound.Explosion, { volume: 0.6 });
               particles.stop();
               particles2.explode();
             }),
@@ -229,6 +230,7 @@ export class AutumnSnowman extends Phaser.Scene {
           new RunCallback(() => {
             snowman.animationForCount(count + 1);
             cam.shake();
+            this.sound.play(Sound.Explosion, { volume: 0.6 });
             particles.stop();
             particles2.explode();
           }),

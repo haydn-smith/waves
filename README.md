@@ -22,18 +22,13 @@ making waves in a very big world.
 
 # TODO
 * Add sounds
-  * Action sound
   * Storm BG sound
   * Waves BG sound
   * Splash sound
-  * Dialog sounds for each conversation
-  * snow pass through sound
-  * watering sound
-  * Fan noises
-  * Magic noise
+  * Watering sound
+  * Fill in remaining conversations
 * Add music
 * Fix timings
 * Finalise dialog
-* Record tile image GIF
 
 I could not have built this game without my friends. I hope I can make waves in their lives, too.

@@ -6,6 +6,7 @@ import { Outline } from 'common/objects/shaders/outline';
 import { OutlinePost } from 'common/objects/shaders/outline_post';
 import { SoftLight } from 'common/objects/shaders/soft_light';
 import { Vignette } from 'common/objects/shaders/vignette';
+import { setData } from 'common/utils/data';
 import { logEvent } from 'common/utils/log';
 import { scaled } from 'common/utils/scaled';
 import { Animation, Depth, Font, Scene, Shader, Sound, Sprite, Tilemap, Tileset } from 'constants';
@@ -267,6 +268,24 @@ export class Preloader extends Phaser.Scene {
     // Audio.
     this.load.audio(Sound.Activate, Sound.Activate);
     this.load.audio(Sound.Music, Sound.Music);
+    this.load.audio(Sound.DialogClose, Sound.DialogClose);
+    this.load.audio(Sound.DialogOpen, Sound.DialogOpen);
+    this.load.audio(Sound.Snow1, Sound.Snow1);
+    this.load.audio(Sound.Snow2, Sound.Snow2);
+    this.load.audio(Sound.Snow3, Sound.Snow3);
+    this.load.audio(Sound.Wind, Sound.Wind);
+    this.load.audio(Sound.Penguin1, Sound.Penguin1);
+    this.load.audio(Sound.Penguin2, Sound.Penguin2);
+    this.load.audio(Sound.Purple1, Sound.Purple1);
+    this.load.audio(Sound.Purple2, Sound.Purple2);
+    this.load.audio(Sound.Purple1, Sound.Purple1);
+    this.load.audio(Sound.Purple2, Sound.Purple2);
+    this.load.audio(Sound.Snowman1, Sound.Snowman1);
+    this.load.audio(Sound.Snowman2, Sound.Snowman2);
+    this.load.audio(Sound.IceCube1, Sound.IceCube1);
+    this.load.audio(Sound.IceCube2, Sound.IceCube2);
+    this.load.audio(Sound.Explosion, Sound.Explosion);
+    this.load.audio(Sound.IceCrack, Sound.IceCrack);
   }
 
   create() {
@@ -539,10 +558,10 @@ export class Preloader extends Phaser.Scene {
     localStorage.clear();
     setDebug(false);
     // setFlag(Flag.AutumnSnowmanCompleted);
-    // setData('previousScene', Scene.SpringJetty);
+    setData('previousScene', Scene.AutumnJetty);
 
     // Start game.
     this.scene.run(Scene.DialogBox);
-    this.scene.start(Scene.MainMenu);
+    this.scene.start(Scene.SpringTitle);
   }
 }

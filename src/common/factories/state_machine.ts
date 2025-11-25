@@ -1,8 +1,9 @@
 import { Dialog } from 'common/objects/dialog_box';
 import { Player } from 'common/objects/player';
 import { PlayDialog } from 'common/sequenceables/play_dialog';
-import { Action, Animation, Depth, Shader, Sprite } from 'constants';
+import { Action, Animation, Depth, Shader, Sound, Sprite } from 'constants';
 import { DialogBox } from 'scenes/dialog_box';
+import { audio } from 'systems/audio';
 import { Collision } from 'systems/collision';
 import { runCallback, sequence } from 'systems/sequence';
 import { states } from 'systems/states';
@@ -87,6 +88,8 @@ export const createDialogBoxStates = (
   shouldRunDialog?: () => boolean,
   arrowOffset: number = 0
 ) => {
+  const activate = audio(scene, Sound.Activate);
+
   const arrow = scene.add
     .sprite(position.x, position.y - 16 + arrowOffset, Sprite.DownArrow)
     .play(Animation.DownArrow)
@@ -117,6 +120,7 @@ export const createDialogBoxStates = (
         if (!trigger.intersects(player.collision)) change('idle');
 
         if (inputs.isActive(Action.Action)) {
+          activate.dontLoop().play();
           dialog().start().destroyWhenComplete();
           arrow.setAlpha(0);
           change('dialog');
@@ -129,6 +133,7 @@ export const createDialogBoxStates = (
   state.toGameObject().on('destroy', () => {
     arrow.destroy();
     inputs.destroy();
+    activate.destroy();
   });
 
   return state;
@@ -150,6 +155,8 @@ export const createCallbackOnActivateOnce = (
 
   const inputs = actionInput(scene);
 
+  const activate = audio(scene, Sound.Activate);
+
   const state = states(scene, 'idle')
     .add('idle', ({ change }) => {
       arrow.setAlpha(0);
@@ -162,6 +169,7 @@ export const createCallbackOnActivateOnce = (
       if (!trigger.intersects(player.collision)) change('idle');
 
       if (inputs.isActive(Action.Action)) {
+        activate.play();
         fn();
         arrow.setAlpha(0);
         change('dialog');
@@ -171,6 +179,7 @@ export const createCallbackOnActivateOnce = (
   state.toGameObject().on('destroy', () => {
     arrow.destroy();
     inputs.destroy();
+    activate.destroy();
   });
 
   return state;

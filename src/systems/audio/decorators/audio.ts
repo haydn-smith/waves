@@ -3,6 +3,47 @@ import { Audio as AudioObject } from 'systems/audio/objects/audio';
 export class Audio {
   constructor(private audio: AudioObject) {}
 
+  public fadeIn(volume: number): this {
+    this.setVolume(0);
+
+    this.audio.scene.tweens
+      .add({
+        targets: this.audio,
+        props: {
+          volume: { from: 0, to: volume },
+        },
+        duration: 3000,
+        onUpdate: (_tween, _target, _key, current) => {
+          this.setVolume(current);
+        },
+      })
+      .play();
+
+    this.play();
+
+    return this;
+  }
+
+  public fadeOut(): this {
+    this.audio.scene.tweens
+      .add({
+        targets: this.audio,
+        props: {
+          volume: { to: 0, from: this.volume() },
+        },
+        duration: 3000,
+        onUpdate: (_tween, _target, _key, current) => {
+          this.setVolume(current);
+        },
+        onComplete: () => {
+          this.stop();
+        },
+      })
+      .play();
+
+    return this;
+  }
+
   public destroy(): void {
     this.audio.destroy();
   }

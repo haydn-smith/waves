@@ -2,7 +2,8 @@ import { Fade } from 'common/objects/shaders/fade';
 import { Typewriter } from 'common/objects/typewriter';
 import { logEvent } from 'common/utils/log';
 import { scaled } from 'common/utils/scaled';
-import { Depth, Scene, Shader, Sprite } from 'constants';
+import { Depth, Scene, Shader, Sound, Sprite } from 'constants';
+import { audio } from 'systems/audio';
 import { camera } from 'systems/camera';
 import { runCallback, runTween, sequence, wait } from 'systems/sequence';
 import { ui, UserInterface } from 'systems/ui';
@@ -71,6 +72,8 @@ export class SpringTitle extends Phaser.Scene {
       ])
       .start()
       .destroyWhenComplete();
+
+    audio(this, Sound.Wind).loop().fadeIn(0.1);
   }
 
   update() {

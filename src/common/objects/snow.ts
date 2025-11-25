@@ -1,6 +1,7 @@
 import { rect } from 'common/factories/phaser';
 import { createCallbackOnAnyEnterAndExit } from 'common/factories/state_machine';
-import { CollisionTag, Sprite, TypeOfSprite } from 'constants';
+import { CollisionTag, Sound, Sprite, TypeOfSprite } from 'constants';
+import { audio } from 'systems/audio';
 import { Collision, collision } from 'systems/collision';
 
 export class Snow extends Phaser.GameObjects.Container {
@@ -40,8 +41,13 @@ export class Snow extends Phaser.GameObjects.Container {
       x: { from: this.sprite.x, to: this.sprite.x + 3 },
     });
 
+    const audioKey: string = Sound.Snow2;
+
+    const passThroughAudio = audio(scene, audioKey);
+
     const states = createCallbackOnAnyEnterAndExit(scene, interactionArea, (other: Collision) => {
       if (other.hasTag(CollisionTag.ThrowsSnow)) {
+        passThroughAudio.setVolume(0.3).dontLoop().play();
         throwSnow.explode();
         shake.play();
       }

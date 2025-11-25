@@ -1,12 +1,14 @@
 import { actionInput } from 'common/factories/input';
 import { scaled } from 'common/utils/scaled';
-import { Action, Animation, Sprite, TypeOfAnimation, TypeOfSprite } from 'constants';
+import { Action, Animation, Sound, Sprite, TypeOfAnimation, TypeOfSound, TypeOfSprite } from 'constants';
+import { audio, Audio } from 'systems/audio';
 import { Input } from 'systems/input';
 import { states, States } from 'systems/states';
 import { Typewriter } from './typewriter';
 
 export type Dialog = {
   image: TypeOfSprite | TypeOfAnimation;
+  sound?: TypeOfSound[];
   line1: string[];
   line2: string[];
   autoPlaySecondLine?: boolean;
@@ -33,6 +35,10 @@ export class DialogBox extends Phaser.GameObjects.Container {
 
   private arrow: Phaser.GameObjects.Sprite;
 
+  private openAudio: Audio;
+  private closeAudio: Audio;
+  private activateAudio: Audio;
+
   constructor(scene: Phaser.Scene) {
     super(scene);
 
@@ -41,6 +47,10 @@ export class DialogBox extends Phaser.GameObjects.Container {
     this.setPosition(this.scene.renderer.width / 2, this.scene.renderer.height + scaled(32));
 
     this.add(this.scene.add.sprite(0, 0, Sprite.DialogBox).play(Animation.DialogBox).setScale(scaled(2)));
+
+    this.openAudio = audio(scene, Sound.DialogOpen);
+    this.closeAudio = audio(scene, Sound.DialogClose);
+    this.activateAudio = audio(scene, Sound.Activate);
 
     this.inputs = actionInput(scene);
 
@@ -81,6 +91,9 @@ export class DialogBox extends Phaser.GameObjects.Container {
 
         this.typewriter2.setText(this.resolveNextLine2(), this.resolveCurrentLine2().length).play();
 
+        this.typewriter.sound = this.dialog[this.currentDialog].sound ?? [Sound.Snow3];
+        this.typewriter2.sound = this.dialog[this.currentDialog].sound ?? [Sound.Snow3];
+
         change('writing');
       })
       .add('writing', ({ change, timeInState }) => {
@@ -98,6 +111,8 @@ export class DialogBox extends Phaser.GameObjects.Container {
         }
 
         if (this.inputs.wasJustActive(Action.Action)) {
+          this.activateAudio.play().dontLoop();
+
           if (this.currentLine === 0 && this.dialog[this.currentDialog].autoPlaySecondLine) {
             this.updateDialogIndexes();
           }
@@ -113,6 +128,8 @@ export class DialogBox extends Phaser.GameObjects.Container {
         downArrow.setAlpha(1);
 
         if (this.inputs.wasJustActive(Action.Action)) {
+          this.activateAudio.play().dontLoop();
+
           downArrow.setAlpha(0);
 
           this.scene.tweens.add({
@@ -152,6 +169,8 @@ export class DialogBox extends Phaser.GameObjects.Container {
     if (this.states.current() !== 'idle') return this;
 
     this.states.change('animating');
+
+    this.openAudio.setVolume(0.2).play().dontLoop();
 
     this.arrow.setAlpha(0);
     this.setVisible(true);
@@ -260,6 +279,8 @@ export class DialogBox extends Phaser.GameObjects.Container {
           this.sprite.setVisible(false);
         },
       });
+
+      this.closeAudio.setVolume(0.2).play().dontLoop();
 
       return 'animating';
     }

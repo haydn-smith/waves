@@ -8,7 +8,7 @@ export class Animator extends Phaser.GameObjects.GameObject {
 
   private idleAnimations: Partial<Record<'north' | 'south' | 'east', TypeOfAnimation>> = {};
 
-  private states: States<'movement' | 'custom', 'movement'>;
+  public states: States<'movement' | 'custom', 'movement'>;
 
   constructor(
     scene: Phaser.Scene,

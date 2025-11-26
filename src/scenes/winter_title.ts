@@ -1,5 +1,6 @@
 import { vec2 } from 'common/factories/phaser';
 import { Typewriter } from 'common/objects/typewriter';
+import { fadeAudioVolume, getWindAudio } from 'common/utils/getWindAudio';
 import { logEvent } from 'common/utils/log';
 import { scaled } from 'common/utils/scaled';
 import { Depth, Scene, Shader, Sprite } from 'constants';
@@ -42,7 +43,16 @@ export class WinterTitle extends Phaser.Scene {
         runCallback(() => cam.shake(2, 0, -1, 200)),
         runCallback(() => this.ui.fadeIn(1000, 'Linear')),
         wait(1000),
-        runCallback(() => this.typewriter.typewrite(`3.`)),
+        runCallback(() => {
+          this.ui.hideLetterbox();
+
+          this.typewriter.typewrite(`3.`);
+
+          const wind = getWindAudio(this);
+          wind.setVolume(0);
+          fadeAudioVolume(this, wind, 0.4);
+          wind.play();
+        }),
         wait(() => this.typewriter.typewriteDuration()),
         wait(500),
         runCallback(() => cam.shake(4, 0, -1, 200)),

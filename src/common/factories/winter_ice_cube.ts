@@ -12,6 +12,7 @@ import { Tilemap } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
 import { MoveToTarget } from 'common/sequenceables/move_to_target';
 import { PlayDialog } from 'common/sequenceables/play_dialog';
+import { fadeAudioVolume, getWindAudio } from 'common/utils/getWindAudio';
 import { Repeater } from 'common/utils/repeater';
 import { Action, Animation, Sprite } from 'constants';
 import { DialogBox } from 'scenes/dialog_box';
@@ -93,6 +94,9 @@ export const createStorm = (scene: Phaser.Scene, player: Player, map: Tilemap, c
       player.movement.setSpeed(16);
       camera.shake(8, 0, -1, 100);
       camera.zoom(2, 1000);
+
+      const wind = getWindAudio(scene);
+      fadeAudioVolume(scene, wind, 1, 300);
     },
     () => {
       player.animator.setMovementAnimations(Animation.PlayerRunUp, Animation.PlayerRunDown, Animation.PlayerRunRight);
@@ -101,6 +105,9 @@ export const createStorm = (scene: Phaser.Scene, player: Player, map: Tilemap, c
       player.movement.setAcceleration(128);
       camera.shake(2, 0, -1, 200);
       camera.zoom(1, 1000);
+
+      const wind = getWindAudio(scene);
+      fadeAudioVolume(scene, wind, 0.4, 300);
     },
     (delta: number) => {
       if (

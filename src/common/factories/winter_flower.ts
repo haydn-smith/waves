@@ -3,6 +3,7 @@ import { Storm } from 'common/objects/storm';
 import { Tilemap } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
 import { MoveToTarget } from 'common/sequenceables/move_to_target';
+import { fadeAudioVolume, getWindAudio } from 'common/utils/getWindAudio';
 import { Action, Animation, Depth, Flag, Scene, Sprite } from 'constants';
 import { Camera } from 'systems/camera';
 import { collision } from 'systems/collision';
@@ -54,7 +55,12 @@ export const createFlower = (
         sprite.anims.play(Animation.MainPlant);
       }),
       wait(3000),
-      runCallback(() => ui(scene).fadeOut(3000)),
+      runCallback(() => {
+        ui(scene).fadeOut(3000);
+
+        const wind = getWindAudio(scene);
+        fadeAudioVolume(scene, wind, 0);
+      }),
       wait(6000),
       runCallback(() => scene.scene.start(Scene.SpringAgainTitle)),
     ])
@@ -77,6 +83,9 @@ export const createStorm = (scene: Phaser.Scene, player: Player, map: Tilemap, c
       player.movement.setSpeed(16);
       camera.shake(8, 0, -1, 100);
       camera.zoom(2, 1000);
+
+      const wind = getWindAudio(scene);
+      fadeAudioVolume(scene, wind, 0.8, 300);
     },
     () => {
       player.animator.setMovementAnimations(Animation.PlayerRunUp, Animation.PlayerRunDown, Animation.PlayerRunRight);
@@ -85,6 +94,9 @@ export const createStorm = (scene: Phaser.Scene, player: Player, map: Tilemap, c
       player.movement.setAcceleration(128);
       camera.shake(2, 0, -1, 200);
       camera.zoom(1, 1000);
+
+      const wind = getWindAudio(scene);
+      fadeAudioVolume(scene, wind, 0.4, 300);
     },
     (delta: number) => {
       if (

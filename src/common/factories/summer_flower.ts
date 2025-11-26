@@ -4,6 +4,7 @@ import { Tilemap } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
 import { MoveToTarget } from 'common/sequenceables/move_to_target';
 import { PlayDialog } from 'common/sequenceables/play_dialog';
+import { fadeAudioVolume, getWindAudio } from 'common/utils/getWindAudio';
 import { Animation, Depth, Flag, Scene, Sprite } from 'constants';
 import { DialogBox } from 'scenes/dialog_box';
 import { Camera } from 'systems/camera';
@@ -91,7 +92,12 @@ export const createFlower = (
         player.sprite.flipX = false;
       }),
       wait(3000),
-      runCallback(() => ui(scene).fadeOut(3000)),
+      runCallback(() => {
+        ui(scene).fadeOut(3000);
+
+        const wind = getWindAudio(scene);
+        fadeAudioVolume(scene, wind, 0);
+      }),
       wait(3000),
       runCallback(() => scene.scene.start(Scene.AutumnTitle)),
     ])

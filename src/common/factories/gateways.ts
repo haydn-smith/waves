@@ -16,7 +16,8 @@ export const createGateway = (
   direction: Phaser.Math.Vector2,
   nextScene: TypeOfScene,
   currScene: TypeOfScene,
-  onEnteredGateway?: () => void
+  onEnteredGateway?: () => void,
+  onExitGateway?: () => void
 ) => {
   const trigger = collision(scene, rectangle).notSolid();
 
@@ -65,6 +66,7 @@ export const createGateway = (
           .of([
             runCallback(() => player.disableUserInput()),
             runCallback(() => player.movement.moveTo(moveFrom)),
+            runCallback(() => onExitGateway?.()),
             runCallback(() => ui(scene).fadeOut(500)),
             wait(500),
             runCallback(() => setData('previousScene', currScene)),

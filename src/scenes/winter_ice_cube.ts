@@ -6,6 +6,7 @@ import { Storm } from 'common/objects/storm';
 import { Tilemap as TilemapObject } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
 import { MoveToTarget } from 'common/sequenceables/move_to_target';
+import { fadeAudioVolume, getWindAudio } from 'common/utils/getWindAudio';
 import { logEvent } from 'common/utils/log';
 import { Depth, Flag, Scene, Sprite, Tilemap } from 'constants';
 import { camera, Camera } from 'systems/camera';
@@ -75,7 +76,12 @@ export class WinterIceCube extends Phaser.Scene {
       this.camera,
       Phaser.Math.Vector2.RIGHT,
       Scene.WinterFlower,
-      Scene.WinterIceCube
+      Scene.WinterIceCube,
+      () => {},
+      () => {
+        const wind = getWindAudio(this);
+        fadeAudioVolume(this, wind, 0.4, 300);
+      }
     );
 
     if (!checkFlag(Flag.WinterIntroCutsceneWatched)) {

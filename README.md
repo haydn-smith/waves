@@ -22,11 +22,12 @@ making waves in a very big world.
 
 # TODO
 * Add sounds
-  * Storm BG sound
   * Waves BG sound
   * Splash sound
   * Watering sound
-  * Fill in remaining conversations
+* Make snowballs faster
+* Make some of the hit areas bigger
+* Make sure the player moves when changing scenes
 * Add music
 * Fix timings
 * Finalise dialog

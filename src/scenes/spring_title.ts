@@ -1,9 +1,9 @@
 import { Fade } from 'common/objects/shaders/fade';
 import { Typewriter } from 'common/objects/typewriter';
+import { fadeAudioVolume, getWindAudio } from 'common/utils/getWindAudio';
 import { logEvent } from 'common/utils/log';
 import { scaled } from 'common/utils/scaled';
-import { Depth, Scene, Shader, Sound, Sprite } from 'constants';
-import { audio } from 'systems/audio';
+import { Depth, Scene, Shader, Sprite } from 'constants';
 import { camera } from 'systems/camera';
 import { runCallback, runTween, sequence, wait } from 'systems/sequence';
 import { ui, UserInterface } from 'systems/ui';
@@ -42,7 +42,14 @@ export class SpringTitle extends Phaser.Scene {
       .of([
         runCallback(() => this.ui.fadeIn(1000, 'Linear')),
         wait(1000),
-        runCallback(() => this.typewriter.typewrite(`Prologue.`)),
+        runCallback(() => {
+          this.typewriter.typewrite(`Prologue.`);
+
+          const wind = getWindAudio(this);
+          wind.setVolume(0);
+          fadeAudioVolume(this, wind, 0.1);
+          wind.play();
+        }),
         wait(() => this.typewriter.typewriteDuration()),
         wait(500),
         runCallback(() => this.typewriter2.typewrite(`[sprite:${Sprite.SpringIcon}] Spring`)),
@@ -72,8 +79,6 @@ export class SpringTitle extends Phaser.Scene {
       ])
       .start()
       .destroyWhenComplete();
-
-    audio(this, Sound.Wind).loop().fadeIn(0.1);
   }
 
   update() {

@@ -1,19 +1,22 @@
 import { Dialog } from 'common/objects/dialog_box';
-import { Animation } from 'constants';
+import { Animation, Sound } from 'constants';
 
 export const snowmanLeaves1: Dialog = [
   {
     image: Animation.SnowmanDialog,
+    sound: [Sound.Snowman1, Sound.Snowman2],
     line1: ['Well then kiddo...'],
     line2: ['...My friend.'],
   },
   {
     image: Animation.SnowmanDialog,
+    sound: [Sound.Snowman1, Sound.Snowman2],
     line1: ["It seems it's that time once more..."],
     line2: ['...Time to leave, ', 'for now.'],
   },
   {
     image: Animation.SnowmanDialog,
+    sound: [Sound.Snowman1, Sound.Snowman2],
     line1: ['I must say though, it has indeed been'],
     line2: ['a good time!'],
     autoPlaySecondLine: true,
@@ -23,6 +26,7 @@ export const snowmanLeaves1: Dialog = [
 export const snowmanLeaves2 = [
   {
     image: Animation.SnowmanDialog,
+    sound: [Sound.Snowman1, Sound.Snowman2],
     line1: ['...'],
     line2: ["See ya round, ol' chap."],
   },
@@ -31,28 +35,33 @@ export const snowmanLeaves2 = [
 export const iceCubeLeaves1: Dialog = [
   {
     image: Animation.IceCubeDialog,
+    sound: [Sound.IceCube1, Sound.IceCube2],
     line1: ['Hiya!'],
     line2: ['You know...'],
   },
   {
     image: Animation.IceCubeDialog,
+    sound: [Sound.IceCube1, Sound.IceCube2],
     line1: ["I don't think I want to melt away"],
     line2: ['this year too.'],
     autoPlaySecondLine: true,
   },
   {
     image: Animation.IceCubeDialog,
+    sound: [Sound.IceCube1, Sound.IceCube2],
     line1: ['So... ', 'Sooooooo...'],
     line2: ["...I'm going to have to leave!"],
   },
   {
     image: Animation.IceCubeDialog,
+    sound: [Sound.IceCube1, Sound.IceCube2],
     line1: ['Off I go! In search of'],
     line2: ['cooler water!'],
     autoPlaySecondLine: true,
   },
   {
     image: Animation.IceCubeDialog,
+    sound: [Sound.IceCube1, Sound.IceCube2],
     line1: ["I'll always remember this time we "],
     line2: ['spent hanging out here.'],
     autoPlaySecondLine: true,
@@ -62,6 +71,7 @@ export const iceCubeLeaves1: Dialog = [
 export const iceCubeLeaves2 = [
   {
     image: Animation.IceCubeDialog,
+    sound: [Sound.IceCube1, Sound.IceCube2],
     line1: ['Hey!'],
     line2: ['Stay cool... ', "And I'll see you again soon!"],
   },
@@ -70,11 +80,13 @@ export const iceCubeLeaves2 = [
 export const snowBarrier1 = [
   {
     image: Animation.ThinkingDialog,
+    sound: [Sound.Purple1, Sound.Purple2],
     line1: ['...'],
     line2: ["There's no way to get through."],
   },
   {
     image: Animation.ThinkingDialog,
+    sound: [Sound.Purple1, Sound.Purple2],
     line1: ['This time...'],
     line2: ['...not even magic can help.'],
   },
@@ -83,6 +95,7 @@ export const snowBarrier1 = [
 export const snowBarrier2 = [
   {
     image: Animation.ThinkingDialog,
+    sound: [Sound.Purple1, Sound.Purple2],
     line1: ['...'],
     line2: ['You wonder if the little plant is doing okay.'],
   },
@@ -91,17 +104,20 @@ export const snowBarrier2 = [
 export const playerLeaves: Dialog = [
   {
     image: Animation.ThinkingDialog,
+    sound: [Sound.Purple1, Sound.Purple2],
     line1: ['...'],
     line2: ['It seems your time here is done.'],
   },
   {
     image: Animation.ThinkingDialog,
+    sound: [Sound.Purple1, Sound.Purple2],
     line1: ['Moving through moments, like waves'],
     line2: ['in an ocean.'],
     autoPlaySecondLine: true,
   },
   {
     image: Animation.ThinkingDialog,
+    sound: [Sound.Purple1, Sound.Purple2],
     line1: ['...'],
     line2: ['The next adventure awaits.'],
   },

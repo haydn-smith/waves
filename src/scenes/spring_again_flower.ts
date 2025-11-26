@@ -2,6 +2,7 @@ import { Snow } from 'common/objects/snow';
 import { Storm } from 'common/objects/storm';
 import { Tilemap as TilemapObject } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
+import { fadeAudioVolume, getWindAudio } from 'common/utils/getWindAudio';
 import { logEvent } from 'common/utils/log';
 import { Animation, Depth, Scene, Sprite, Tilemap } from 'constants';
 import { camera, Camera } from 'systems/camera';
@@ -63,6 +64,9 @@ export class SpringAgainFlower extends Phaser.Scene {
         wait(12000),
         runCallback(() => {
           ui(this).fadeOut(2000);
+
+          const wind = getWindAudio(this);
+          fadeAudioVolume(this, wind, 0);
         }),
         wait(2000),
         runCallback(() => this.scene.start(Scene.Finish)),

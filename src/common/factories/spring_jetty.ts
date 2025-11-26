@@ -104,6 +104,8 @@ export const createOtherPenguinCutscene = (
         duration: 500,
       }),
       runCallback(() => {
+        scene.sound.play(Sound.Splash, { volume: 0.4 });
+
         penguin.animator.setMovementAnimations(
           Animation.PlayerSwimUp,
           Animation.PlayerSwimDown,

@@ -14,7 +14,7 @@ import { Tilemap } from 'common/objects/tilemap';
 import { MoveToTarget } from 'common/sequenceables/move_to_target';
 import { PlayDialog } from 'common/sequenceables/play_dialog';
 import { Repeater } from 'common/utils/repeater';
-import { Animation, Depth, Flag, Scene, Sprite } from 'constants';
+import { Animation, Depth, Flag, Scene, Sound, Sprite } from 'constants';
 import { DialogBox } from 'scenes/dialog_box';
 import { Camera } from 'systems/camera';
 import { collision } from 'systems/collision';
@@ -324,6 +324,7 @@ export const createFinalCutscene = (
           duration: 500,
         }),
         runCallback(() => {
+          scene.sound.play(Sound.Splash, { volume: 0.4 });
           snowman.sprite.anims.play(Animation.SnowmanSwimRight);
         }),
         wait(1000),
@@ -350,6 +351,7 @@ export const createFinalCutscene = (
           duration: 500,
         }),
         runCallback(() => {
+          scene.sound.play(Sound.Splash, { volume: 0.4 });
           iceCube.getByName('Sprite').anims.play(Animation.IceCubeSwimRight);
         }),
         wait(1000),
@@ -388,6 +390,8 @@ export const createFinalCutscene = (
           duration: 500,
         }),
         runCallback(() => {
+          scene.sound.play(Sound.Splash, { volume: 0.4 });
+
           player.animator.setMovementAnimations(
             Animation.PlayerSwimRight,
             Animation.PlayerSwimRight,

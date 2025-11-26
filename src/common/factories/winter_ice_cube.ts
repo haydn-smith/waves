@@ -96,7 +96,7 @@ export const createStorm = (scene: Phaser.Scene, player: Player, map: Tilemap, c
       camera.zoom(2, 1000);
 
       const wind = getWindAudio(scene);
-      fadeAudioVolume(scene, wind, 1, 300);
+      fadeAudioVolume(scene, wind, 0.8, 300);
     },
     () => {
       player.animator.setMovementAnimations(Animation.PlayerRunUp, Animation.PlayerRunDown, Animation.PlayerRunRight);

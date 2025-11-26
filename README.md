@@ -1,6 +1,8 @@
-# Haydn's Phaser Starter
+# Smol Penguin
 
-This is the boilerplate I use to create video games with [Phaser](https://phaser.io/).
+Explore adventure, friendship, and kindness as a very smol penguin, making waves in a very big world.
+
+[Play the game here!](https://badmojoverybad.itch.io/smol-penguin)
 
 ## Requirements
 
@@ -16,20 +18,16 @@ This is the boilerplate I use to create video games with [Phaser](https://phaser
 | `npm run lint` | Lint the codebase. |
 | `npm run typecheck` | Check the codebase for type errors. |
 
-Explore adventure, friendship, and
-kindness as a very smol penguin,
-making waves in a very big world.
-
 # TODO
-* Add sounds
-  * Waves BG sound
-  * Splash sound
-  * Watering sound
+THURSDAY:
 * Make snowballs faster
 * Make some of the hit areas bigger
 * Make sure the player moves when changing scenes
-* Add music
 * Fix timings
 * Finalise dialog
+
+FRIDAY
+* Waves sound
+* Music
 
 I could not have built this game without my friends. I hope I can make waves in their lives, too.

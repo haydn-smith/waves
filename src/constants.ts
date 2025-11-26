@@ -299,8 +299,8 @@ export const Sound = {
   DialogOpen: 'audio/dialog_open.mp3',
   DialogClose: 'audio/dialog_close.mp3',
   Wind: 'audio/wind.mp3',
-  Penguin1: 'audio/player_1.mp3',
-  Penguin2: 'audio/player_2.mp3',
+  Penguin1: 'audio/snowman_1.mp3',
+  Penguin2: 'audio/snowman_2.mp3',
   Purple1: 'audio/purple_1.mp3',
   Purple2: 'audio/purple_2.mp3',
   Snowman1: 'audio/pink_1.mp3',
@@ -309,6 +309,8 @@ export const Sound = {
   IceCube2: 'audio/ice_cube_2.mp3',
   Explosion: 'audio/explosion.mp3',
   IceCrack: 'audio/ice_crack.mp3',
+  Watering: 'audio/watering.mp3',
+  Splash: 'audio/splash.mp3',
 } as const;
 export type KeyOfSound = keyof typeof Sound;
 export type TypeOfSound = (typeof Sound)[KeyOfSound];

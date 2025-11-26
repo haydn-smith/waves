@@ -5,7 +5,7 @@ import { YSortObjects } from 'common/objects/y_sort_objects';
 import { MoveToTarget } from 'common/sequenceables/move_to_target';
 import { PlayDialog } from 'common/sequenceables/play_dialog';
 import { fadeAudioVolume, getWindAudio } from 'common/utils/getWindAudio';
-import { Animation, Flag, Scene, Sprite } from 'constants';
+import { Animation, Flag, Scene, Sound, Sprite } from 'constants';
 import { DialogBox } from 'scenes/dialog_box';
 import { Camera } from 'systems/camera';
 import { collision } from 'systems/collision';
@@ -31,6 +31,9 @@ export const createFlower = (
 
   const trigger = collision(scene, map.getArea('Trigger Flower Cutscene')).notSolid();
 
+  const watering = scene.sound.add(Sound.Watering, { loop: true, volume: 0 });
+  watering.play();
+
   const cutscene = sequence(scene)
     .of([
       runCallback(() => setFlag(Flag.AutumnWaterFlowerCutsceneWatched)),
@@ -50,11 +53,18 @@ export const createFlower = (
       wait(1000),
       new PlayDialog(DialogBox.get(scene), autumnFlower),
       wait(1000),
-      runCallback(() => player.animator.playAnimation(Animation.PlayerWater)),
+      runCallback(() => {
+        player.animator.playAnimation(Animation.PlayerWater);
+        fadeAudioVolume(scene, watering, 0.1, 200);
+      }),
       wait(3000),
-      runCallback(() => player.animator.playMovementAndIdleAnimations()),
+      runCallback(() => {
+        player.animator.playMovementAndIdleAnimations();
+        fadeAudioVolume(scene, watering, 0, 200);
+      }),
       wait(1000),
       runCallback(() => {
+        watering.destroy();
         player.animator.playAnimation(Animation.PlayerRunRight, true);
       }),
       new MoveToTarget(player.movement, map.getPoint('Back From Flower')),

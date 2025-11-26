@@ -6,7 +6,6 @@ import { Outline } from 'common/objects/shaders/outline';
 import { OutlinePost } from 'common/objects/shaders/outline_post';
 import { SoftLight } from 'common/objects/shaders/soft_light';
 import { Vignette } from 'common/objects/shaders/vignette';
-import { setData } from 'common/utils/data';
 import { logEvent } from 'common/utils/log';
 import { scaled } from 'common/utils/scaled';
 import { Animation, Depth, Font, Scene, Shader, Sound, Sprite, Tilemap, Tileset } from 'constants';
@@ -286,6 +285,8 @@ export class Preloader extends Phaser.Scene {
     this.load.audio(Sound.IceCube2, Sound.IceCube2);
     this.load.audio(Sound.Explosion, Sound.Explosion);
     this.load.audio(Sound.IceCrack, Sound.IceCrack);
+    this.load.audio(Sound.Watering, Sound.Watering);
+    this.load.audio(Sound.Splash, Sound.Splash);
   }
 
   create() {
@@ -558,10 +559,10 @@ export class Preloader extends Phaser.Scene {
     localStorage.clear();
     setDebug(false);
     // setFlag(Flag.AutumnSnowmanCompleted);
-    setData('previousScene', Scene.AutumnIceCubeWithSnowman);
+    // setData('previousScene', Scene.SpringIceCube);
 
     // Start game.
     this.scene.run(Scene.DialogBox);
-    this.scene.start(Scene.AutumnFlower);
+    this.scene.start(Scene.MainMenu);
   }
 }

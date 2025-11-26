@@ -63,12 +63,12 @@ export class SpringAgainFlower extends Phaser.Scene {
         }),
         wait(12000),
         runCallback(() => {
-          ui(this).fadeOut(2000);
+          ui(this).fadeOut(3000);
 
           const wind = getWindAudio(this);
           fadeAudioVolume(this, wind, 0);
         }),
-        wait(2000),
+        wait(3000),
         runCallback(() => this.scene.start(Scene.Finish)),
       ])
       .start();

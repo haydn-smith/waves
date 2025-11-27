@@ -1,5 +1,7 @@
 import { Inputtable } from 'systems/input/contracts/inputtable';
 
+const keys: Record<number, Phaser.Input.Keyboard.Key> = {};
+
 export class KeyboardInput extends Phaser.GameObjects.GameObject implements Inputtable {
   private key?: Phaser.Input.Keyboard.Key;
 
@@ -10,7 +12,15 @@ export class KeyboardInput extends Phaser.GameObjects.GameObject implements Inpu
   constructor(scene: Phaser.Scene, key: string | number) {
     super(scene, 'Keyboard Input');
 
-    this.key = this.scene.input.keyboard?.addKey(key);
+    this.key = this.scene.input.keyboard?.addKey(keys[Number(key)] ?? key);
+  }
+
+  public destroy() {
+    if (this.key) {
+      keys[this.key?.keyCode ?? 0] = this.key;
+    }
+
+    super.destroy();
   }
 
   public isPressed(): number {

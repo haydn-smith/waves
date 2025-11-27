@@ -186,7 +186,7 @@
                  "y":270
                 }, 
                 {
-                 "height":22,
+                 "height":29,
                  "id":19,
                  "name":"Fan 1 Trigger",
                  "rotation":0,
@@ -194,10 +194,10 @@
                  "visible":true,
                  "width":36,
                  "x":312,
-                 "y":319
+                 "y":312
                 }, 
                 {
-                 "height":21,
+                 "height":25,
                  "id":20,
                  "name":"Fan 2 Trigger",
                  "rotation":0,

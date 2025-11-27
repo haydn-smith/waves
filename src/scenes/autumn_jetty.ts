@@ -68,15 +68,25 @@ export class AutumnJetty extends Phaser.Scene {
       map.getArea('Camera Bounds').height
     );
 
-    createGateway(
-      this,
-      map.getArea('Ice Cube Area Trigger'),
-      this.player,
-      this.camera,
-      Phaser.Math.Vector2.RIGHT,
-      Scene.AutumnIceCube,
-      Scene.AutumnJetty
-    );
+    checkFlag(Flag.AutumnSnowmanCompleted)
+      ? createGateway(
+          this,
+          map.getArea('Ice Cube Area Trigger'),
+          this.player,
+          this.camera,
+          Phaser.Math.Vector2.RIGHT,
+          Scene.AutumnIceCubeWithSnowman,
+          Scene.AutumnJetty
+        )
+      : createGateway(
+          this,
+          map.getArea('Ice Cube Area Trigger'),
+          this.player,
+          this.camera,
+          Phaser.Math.Vector2.RIGHT,
+          Scene.AutumnIceCube,
+          Scene.AutumnJetty
+        );
 
     if (!checkFlag(Flag.AutumnWakeUpCutsceneWatched)) {
       ui(this).black();

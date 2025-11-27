@@ -25,7 +25,7 @@ export class Jetty extends Phaser.GameObjects.Container {
       .add({
         targets: this.wavesAudio,
         props: {
-          volume: { from: 0, to: 1 },
+          volume: { from: 0, to: 0.8 },
         },
         duration: 3000,
         onUpdate: (_tween, _target, _key, current) => {

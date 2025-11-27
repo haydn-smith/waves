@@ -125,7 +125,7 @@ export const createFan1 = (
     .setDepth(Depth.Main + 1)
     .stop();
 
-  const sound = spatialAudio(scene, Sound.IceCrack).loop().setPosition(position).setDistance(64).setVolume(0.2);
+  const sound = spatialAudio(scene, Sound.IceCrack).loop().setPosition(position).setDistance(64).setVolume(0).play();
 
   const cutscene = () =>
     sequence(scene).of([
@@ -140,7 +140,18 @@ export const createFan1 = (
       wait(1000),
       runCallback(() => {
         sprite.anims.play(Animation.Fan1);
-        sound.play();
+        scene.tweens
+          .add({
+            targets: sound,
+            props: {
+              volume: { from: 0, to: 0.2 },
+            },
+            duration: 100,
+            onUpdate: (_tween, _target, _key, current) => {
+              sound.setVolume(current);
+            },
+          })
+          .play();
         particles.start();
       }),
       wait(2000),
@@ -219,7 +230,7 @@ export const createFan2 = (
 
   const userInterface = ui(scene);
 
-  const sound = spatialAudio(scene, Sound.IceCrack).loop().setPosition(position).setDistance(64).setVolume(0.2);
+  const sound = spatialAudio(scene, Sound.IceCrack).loop().setPosition(position).setDistance(64).setVolume(0).play();
 
   const fanParticles = scene.add
     .particles(position.x - 16, position.y - 16, Sprite.White1px, {
@@ -251,7 +262,18 @@ export const createFan2 = (
       wait(2000),
       runCallback(() => {
         sprite.anims.play(Animation.Fan1);
-        sound.play();
+        scene.tweens
+          .add({
+            targets: sound,
+            props: {
+              volume: { from: 0, to: 0.2 },
+            },
+            duration: 100,
+            onUpdate: (_tween, _target, _key, current) => {
+              sound.setVolume(current);
+            },
+          })
+          .play();
         fanParticles.start();
       }),
       wait(1000),

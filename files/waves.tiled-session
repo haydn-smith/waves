@@ -30,11 +30,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 3,
+            "scale": 5.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 281.66666666666663,
-                "y": 362.66666666666663
+                "x": 297.8181818181818,
+                "y": 301.4545454545455
             }
         },
         "autumn_ice_cube_area.tmx#snow": {
@@ -72,11 +72,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 2,
+            "scale": 8,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 207.5,
-                "y": 275.5
+                "x": 265.5,
+                "y": 288.125
             }
         },
         "autumn_snowman_area.tmx#snow": {
@@ -187,11 +187,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 1.5,
+            "scale": 5.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 256,
-                "y": 255.99999999999997
+                "x": 321.8181818181818,
+                "y": 261.6363636363636
             }
         },
         "summer_ice_cube_area.tmx#snow": {
@@ -243,8 +243,8 @@
             "scale": 4.0401,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 255.93425905299375,
-                "y": 254.4491472983342
+                "x": 335.14021930150244,
+                "y": 267.0725972129403
             }
         },
         "winter_ice_cube_area.tmx#snow": {

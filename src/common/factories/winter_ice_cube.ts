@@ -62,7 +62,7 @@ export const createIceCube = (scene: Phaser.Scene, player: Player, map: Tilemap,
 
   const sprite = scene.add.sprite(0, -5, Sprite.IceCubeFrozen);
 
-  const coll = collision(scene, rect(-16, -4, 32, 8));
+  const coll = collision(scene, rect(-16, -3, 32, 8));
 
   const trigger = collision(scene, map.getArea('Ice Cube Trigger')).notSolid();
 

@@ -45,6 +45,10 @@ export class Snow extends Phaser.GameObjects.Container {
 
     const passThroughAudio = audio(scene, audioKey);
 
+    this.on('destory', () => {
+      passThroughAudio.destroy();
+    });
+
     const states = createCallbackOnAnyEnterAndExit(scene, interactionArea, (other: Collision) => {
       if (other.hasTag(CollisionTag.ThrowsSnow)) {
         passThroughAudio.setVolume(0.3).dontLoop().play();

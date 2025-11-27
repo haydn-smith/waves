@@ -269,12 +269,12 @@
   <object id="9" name="Snow 2" x="322" y="287">
    <point/>
   </object>
-  <object id="13" name="Ice Cube Trigger" x="280" y="244" width="28" height="29"/>
+  <object id="13" name="Ice Cube Trigger" x="280" y="244" width="28" height="34"/>
   <object id="16" name="Snowman Area Gateway" x="248" y="176" width="16" height="16"/>
   <object id="17" name="Snow Barrier" x="144" y="296">
    <point/>
   </object>
-  <object id="18" name="Snow Barrier Body" x="160" y="281" width="9" height="31"/>
+  <object id="18" name="Snow Barrier Body" x="151" y="281" width="9" height="31"/>
   <object id="19" name="Snow Barrier Trigger" x="160" y="272" width="26" height="49"/>
   <object id="20" name="Camera Bounds" x="24" y="97" width="463" height="332"/>
   <object id="21" name="Snow 1" x="212" y="289">

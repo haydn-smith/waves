@@ -272,8 +272,8 @@
   <object id="17" name="Fan 2" x="330" y="270">
    <point/>
   </object>
-  <object id="19" name="Fan 1 Trigger" x="312" y="319" width="36" height="22"/>
-  <object id="20" name="Fan 2 Trigger" x="312" y="255" width="35" height="21"/>
+  <object id="19" name="Fan 1 Trigger" x="312" y="312" width="36" height="29"/>
+  <object id="20" name="Fan 2 Trigger" x="312" y="255" width="35" height="25"/>
   <object id="22" name="Ice Cube Blown To" x="160" y="293">
    <point/>
   </object>

@@ -79,6 +79,7 @@ export const createFlower = (
         player.animator.playMovementAndIdleAnimations();
         fadeAudioVolume(scene, watering, 0, 200);
         particles.explode();
+        sprite.anims.play(Animation.MainPlant);
       }),
       runCallback(() => player.animator.playMovementAndIdleAnimations()),
       wait(1000),

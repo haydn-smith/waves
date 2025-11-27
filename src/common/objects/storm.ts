@@ -46,10 +46,10 @@ export class Storm extends Phaser.GameObjects.GameObject {
         emitZone: {
           type: 'random',
           source: new Phaser.Geom.Rectangle(
-            this.scene.renderer.width * -1,
-            this.scene.renderer.height * -1,
-            this.scene.renderer.width * 3,
-            this.scene.renderer.height * 3
+            this.scene.renderer.width * -0.5,
+            this.scene.renderer.height * -0.5,
+            this.scene.renderer.width * 1.5,
+            this.scene.renderer.height * 1.5
           ) as Phaser.Types.GameObjects.Particles.RandomZoneSource,
         },
       })
@@ -131,20 +131,20 @@ export class Storm extends Phaser.GameObjects.GameObject {
 
   private updateSnowstormParticles(factor: number) {
     this.smallSnow.updateConfig({
-      speed: { min: 5 * this.smallScrollFactor * factor, max: 10 * this.smallScrollFactor * factor },
-      frequency: 100 / factor,
+      speed: { min: 6 * this.smallScrollFactor * factor, max: 10 * this.smallScrollFactor * factor },
+      frequency: 200 / factor,
       quantity: 1 * factor * 9,
     });
 
     this.mediumSnow.updateConfig({
-      speed: { min: 10 * this.smallScrollFactor * factor, max: 20 * this.smallScrollFactor * factor },
-      frequency: 500 / factor,
+      speed: { min: 12 * this.smallScrollFactor * factor, max: 20 * this.smallScrollFactor * factor },
+      frequency: 1000 / factor,
       quantity: 1 * factor * 9,
     });
 
     this.largeSnow.updateConfig({
-      speed: { min: 20 * this.smallScrollFactor * factor, max: 40 * this.smallScrollFactor * factor },
-      frequency: 3000 / factor,
+      speed: { min: 24 * this.smallScrollFactor * factor, max: 40 * this.smallScrollFactor * factor },
+      frequency: 6000 / factor,
       quantity: 1 * factor * 9,
     });
   }

@@ -20,7 +20,6 @@ Explore adventure, friendship, and kindness as a very smol penguin, making waves
 
 # TODO
 THURSDAY:
-* Make some of the hit areas bigger
 * Make sure the player moves when changing scenes
 * Fix timings
 * Finalise dialog

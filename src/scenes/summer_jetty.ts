@@ -82,7 +82,7 @@ export class SummerJetty extends Phaser.Scene {
           wait(600),
           runCallback(() => cam.zoom(1, 800)),
           runCallback(() => ui(this).hideLetterbox()),
-          wait(800),
+          wait(600),
           runCallback(() => player.enableUserInput()),
         ])
         .destroyWhenComplete()

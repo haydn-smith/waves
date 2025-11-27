@@ -2,7 +2,7 @@ import { clamp, normalize } from 'common/utils/math';
 import { debugDepth, isDebug } from 'systems/flags';
 
 export class SpatialAudio extends Phaser.GameObjects.Container {
-  private sound: Phaser.Sound.WebAudioSound | Phaser.Sound.HTML5AudioSound | Phaser.Sound.NoAudioSound;
+  public sound: Phaser.Sound.WebAudioSound | Phaser.Sound.HTML5AudioSound | Phaser.Sound.NoAudioSound;
 
   private graphics: Phaser.GameObjects.Graphics;
 

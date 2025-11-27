@@ -311,6 +311,7 @@ export const Sound = {
   IceCrack: 'audio/ice_crack.mp3',
   Watering: 'audio/watering.mp3',
   Splash: 'audio/splash.mp3',
+  Waves: 'audio/waves.mp3',
 } as const;
 export type KeyOfSound = keyof typeof Sound;
 export type TypeOfSound = (typeof Sound)[KeyOfSound];

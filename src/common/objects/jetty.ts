@@ -1,5 +1,6 @@
-import { rect } from 'common/factories/phaser';
-import { Animation, Depth, Sprite } from 'constants';
+import { rect, vec2 } from 'common/factories/phaser';
+import { Animation, Depth, Sound, Sprite } from 'constants';
+import { spatialAudio, SpatialAudio } from 'systems/audio';
 import { Collision, collision } from 'systems/collision';
 
 export class Jetty extends Phaser.GameObjects.Container {
@@ -11,10 +12,27 @@ export class Jetty extends Phaser.GameObjects.Container {
 
   private collisions: Collision[];
 
+  private wavesAudio: SpatialAudio;
+
   constructor(scene: Phaser.Scene) {
     const tiledSprite = scene.add.tileSprite(120, 0, 320, 480, Sprite.Waves).setDepth(Depth.Background - 1);
 
     super(scene);
+
+    this.wavesAudio = spatialAudio(scene, Sound.Waves).setDistance(200).setPosition(vec2(32, 0)).loop().play();
+
+    scene.tweens
+      .add({
+        targets: this.wavesAudio,
+        props: {
+          volume: { from: 0, to: 1 },
+        },
+        duration: 3000,
+        onUpdate: (_tween, _target, _key, current) => {
+          this.wavesAudio.setVolume(current);
+        },
+      })
+      .play();
 
     this.sprite = scene.add.sprite(-2, 0, Sprite.Jetty);
 
@@ -47,6 +65,7 @@ export class Jetty extends Phaser.GameObjects.Container {
       c4.toGameObject(),
       c5.toGameObject(),
       this.waves,
+      this.wavesAudio.toGameObject(),
     ]).setDepth(Depth.Main - 1);
 
     this.addToUpdateList();

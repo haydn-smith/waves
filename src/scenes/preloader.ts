@@ -287,6 +287,7 @@ export class Preloader extends Phaser.Scene {
     this.load.audio(Sound.IceCrack, Sound.IceCrack);
     this.load.audio(Sound.Watering, Sound.Watering);
     this.load.audio(Sound.Splash, Sound.Splash);
+    this.load.audio(Sound.Waves, Sound.Waves);
   }
 
   create() {

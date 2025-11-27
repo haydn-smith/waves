@@ -72,4 +72,12 @@ export class SpatialAudio {
 
     return this;
   }
+
+  public toGameObject() {
+    return this.audio;
+  }
+
+  public toSound() {
+    return this.audio.sound;
+  }
 }

@@ -43,9 +43,8 @@ export const createFlower = (
       runCallback(() => camera.pauseFollow().move(position, 2000)),
       wait(2200),
       new MoveToTarget(player.movement, map.getPoint('Next To Flower')),
-      wait(200),
       runCallback(() => player.movement.faceDirection(Phaser.Math.Vector2.LEFT)),
-      wait(1000),
+      wait(600),
       runCallback(() => {
         player.animator.states.change('custom');
         player.sprite.anims.stop();
@@ -56,12 +55,12 @@ export const createFlower = (
       }),
       wait(3000),
       runCallback(() => {
-        ui(scene).fadeOut(3000);
+        ui(scene).fadeOut(2000);
 
         const wind = getWindAudio(scene);
         fadeAudioVolume(scene, wind, 0);
       }),
-      wait(6000),
+      wait(4000),
       runCallback(() => scene.scene.start(Scene.SpringAgainTitle)),
     ])
     .destroyWhenComplete();

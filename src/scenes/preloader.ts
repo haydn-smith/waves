@@ -558,9 +558,9 @@ export class Preloader extends Phaser.Scene {
 
     // Debug setup.
     localStorage.clear();
-    setDebug(false);
+    setDebug(true);
     // setFlag(Flag.AutumnSnowmanCompleted);
-    // setData('previousScene', Scene.AutumnJetty);
+    // setData('previousScene', Scene.SpringIceCube);
 
     // Start game.
     this.scene.run(Scene.DialogBox);

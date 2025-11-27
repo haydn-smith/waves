@@ -234,7 +234,7 @@ export const createIceCube2 = (scene: Phaser.Scene, player: Player, map: Tilemap
 
   const area = collision(scene, map.getArea('Ice Cube Interaction')).notSolid();
 
-  const move = movement(scene, container, body).setSpeed(8);
+  const move = movement(scene, container, body).setSpeed(16);
 
   container.add([sprite, body.toGameObject(), move.toGameObject().setName('Movement')]);
 

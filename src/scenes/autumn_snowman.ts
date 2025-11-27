@@ -150,11 +150,11 @@ export class AutumnSnowman extends Phaser.Scene {
               cam.pauseFollow();
               cam.move(map.getPoint('Snowman'), 2000);
             }),
-            wait(2000),
+            wait(1800),
             new RunCallback(() => {
               particles.start().resume();
             }),
-            new Wait(3000),
+            new Wait(2000),
             new RunCallback(() => {
               snowman.animationForCount(count + 1);
               cam.shake();
@@ -163,14 +163,14 @@ export class AutumnSnowman extends Phaser.Scene {
               particles2.explode();
             }),
             runCallback(() => snow.destroy()),
-            new Wait(1000),
+            new Wait(600),
             runCallback(() => snow.destroy()),
             new PlayDialog(DialogBox.get(this), this.resolveSnowmanDialog(count)),
-            wait(1000),
+            wait(400),
             new MoveToTarget(player.movement, map.getPoint('Player During Snowman Build')),
             runCallback(() => player.movement.faceDirection(Phaser.Math.Vector2.DOWN)),
             new PlayDialog(DialogBox.get(this), completeSnowman),
-            wait(500),
+            wait(400),
             new MoveToTarget(snowman.movement, map.getPoint('Snowman Path 1')),
             new MoveToTarget(snowman.movement, map.getPoint('Snowman Path 2')),
             new MoveToTarget(snowman.movement, map.getPoint('Snowman Path 3')),
@@ -185,18 +185,14 @@ export class AutumnSnowman extends Phaser.Scene {
             new MoveToTarget(snowman.movement, map.getPoint('Snowman Path 12')),
             new MoveToTarget(snowman.movement, map.getPoint('Snowman Path 13')),
             new MoveToTarget(snowman.movement, map.getPoint('Snowman Path 14')),
-            wait(500),
+            wait(400),
             runCallback(() => {
               ui(this).hideLetterbox();
-              cam.zoom(1, 1000);
+              cam.zoom(1, 800);
               cam.resumeFollow();
-            }),
-            wait(1000),
-            runCallback(() => {
               gateway.destroy();
               snowman.destroy();
               this.isSnowmanDialogActive = true;
-              player.enableUserInput();
               createGateway(
                 this,
                 map.getArea('Ice Cube Area Gateway'),
@@ -206,6 +202,10 @@ export class AutumnSnowman extends Phaser.Scene {
                 Scene.AutumnIceCubeWithSnowman,
                 Scene.AutumnSnowman
               );
+            }),
+            wait(600),
+            runCallback(() => {
+              player.enableUserInput();
             }),
           ])
           .destroyWhenComplete();
@@ -222,11 +222,11 @@ export class AutumnSnowman extends Phaser.Scene {
             cam.pauseFollow();
             cam.move(map.getPoint('Snowman'), 2000);
           }),
-          wait(2000),
+          wait(1800),
           new RunCallback(() => {
             particles.start().resume();
           }),
-          new Wait(3000),
+          new Wait(2000),
           new RunCallback(() => {
             snowman.animationForCount(count + 1);
             cam.shake();
@@ -235,15 +235,15 @@ export class AutumnSnowman extends Phaser.Scene {
             particles2.explode();
           }),
           runCallback(() => snow.destroy()),
-          new Wait(1000),
+          new Wait(600),
           new PlayDialog(DialogBox.get(this), this.resolveSnowmanDialog(count)),
-          wait(500),
+          wait(400),
           runCallback(() => {
             ui(this).hideLetterbox();
-            cam.zoom(1, 1000);
+            cam.zoom(1, 800);
             cam.resumeFollow();
           }),
-          wait(1000),
+          wait(600),
           runCallback(() => {
             this.isSnowmanDialogActive = true;
             player.enableUserInput();

@@ -89,7 +89,7 @@ export class SpringAgainJetty extends Phaser.Scene {
           this.ui.fadeIn();
           this.player.movement.setSpeed(8);
         }),
-        wait(2000),
+        wait(1600),
         new MoveToTarget(this.player.movement, map.getPoint('Player Move To Opening')),
         runCallback(() => this.player.movement.faceDirection(Phaser.Math.Vector2.LEFT)),
         wait(1000),
@@ -101,7 +101,7 @@ export class SpringAgainJetty extends Phaser.Scene {
           this.player.movement.setSpeed(40);
           this.player.enableUserInput();
           this.ui.hideLetterbox();
-          this.camera.zoom(1, 1000);
+          this.camera.zoom(1, 800);
         }),
       ])
       .start()

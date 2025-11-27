@@ -104,14 +104,14 @@ export class AutumnJetty extends Phaser.Scene {
           runCallback(() => this.ui.fadeIn(2000)),
           wait(4000),
           playAnimation(this.player.sprite, Animation.PlayerWakeUp),
-          wait(1000),
+          wait(600),
           runCallback(() => this.player.animator.playAnimation(Animation.PlayerWave)),
-          wait(2000),
+          wait(1500),
           runCallback(() => this.player.animator.playMovementAndIdleAnimations()),
-          wait(1000),
+          wait(600),
           runCallback(() => this.camera.zoom(1, 800)),
           runCallback(() => this.ui.hideLetterbox()),
-          wait(800),
+          wait(600),
           runCallback(() => this.player.enableUserInput()),
         ])
         .destroyWhenComplete()

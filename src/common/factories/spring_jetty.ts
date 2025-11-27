@@ -119,7 +119,6 @@ export const createOtherPenguinCutscene = (
       wait(1000),
       runCallback(() => penguin.movement.setSpeed(16)),
       new MoveToTarget(penguin.movement, map.getPoint('Swim To')),
-      wait(1000),
       runCallback(() => {
         penguin.destroy();
         camera.zoom(1, 800);

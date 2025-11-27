@@ -73,15 +73,15 @@ export class SummerIceCube extends Phaser.Scene {
         cam.pauseFollow();
         cam.move(vec2(map.getPoint('Ice Cube').x, map.getPoint('Ice Cube').y + 16), 2000);
       }),
-      wait(2000),
+      wait(1800),
       new PlayDialog(DialogBox.get(this), iceCubeIntro),
       wait(500),
       runCallback(() => {
         userInterface.hideLetterbox();
-        cam.zoom(1, 1000);
+        cam.zoom(1, 800);
         cam.resumeFollow();
       }),
-      wait(1000),
+      wait(600),
       runCallback(() => {
         player.enableUserInput();
       }),

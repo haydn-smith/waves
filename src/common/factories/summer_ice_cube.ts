@@ -259,7 +259,7 @@ export const createFan2 = (
         cam.pauseFollow();
         cam.move(map.getPoint('Fan 2'), 2000);
       }),
-      wait(2000),
+      wait(1000),
       runCallback(() => {
         sprite.anims.play(Animation.Fan1);
         scene.tweens
@@ -464,9 +464,9 @@ const sequenceItemsAfterFan = (
         particles.explode();
         scene.sound.play(Sound.Explosion, { volume: 0.6 });
       }),
-      wait(4000),
+      wait(1400),
       new PlayDialog(DialogBox.get(scene), youHopeIceCubeIsOkay),
-      wait(500),
+      wait(200),
       runCallback(() => {
         iceCube.destroy();
         iceWall.destroy();
@@ -474,10 +474,10 @@ const sequenceItemsAfterFan = (
         createIceCubeAfterPuzzle(scene, player, map, ySort);
         createWindyArea(scene, player, map);
         userInterface.hideLetterbox();
-        cam.zoom(1, 1000);
+        cam.zoom(1, 800);
         cam.resumeFollow();
       }),
-      wait(1000),
+      wait(600),
       runCallback(() => {
         player.enableUserInput();
       }),
@@ -488,10 +488,10 @@ const sequenceItemsAfterFan = (
     new PlayDialog(DialogBox.get(scene), iceCubeOnOneFan),
     runCallback(() => {
       userInterface.hideLetterbox();
-      cam.zoom(1, 1000);
+      cam.zoom(1, 800);
       cam.resumeFollow();
     }),
-    wait(1000),
+    wait(600),
     runCallback(() => {
       player.enableUserInput();
     }),

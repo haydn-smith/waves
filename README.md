@@ -19,11 +19,11 @@ Explore adventure, friendship, and kindness as a very smol penguin, making waves
 | `npm run typecheck` | Check the codebase for type errors. |
 
 # TODO
-THURSDAY:
-* Fix timings
-* Finalise dialog
-
 FRIDAY
+* Finalise dialog
 * Music
+
+SUNDAY
+* Playtest
 
 I could not have built this game without my friends. I hope I can make waves in their lives, too.

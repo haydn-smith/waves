@@ -57,13 +57,13 @@ export const createSnow1 = (
 
   const sprite = scene.add.sprite(0, -8, Sprite.Snowball);
 
-  const coll = collision(scene, rect(-4, -8, 8, 8))
+  const coll = collision(scene, rect(-6, -12, 12, 12))
     .tag(CollisionTag.Pushable)
     .mask(CollisionMask.Default | CollisionMask.Pushable);
 
   const container = scene.add.container(position.x, position.y, [sprite, coll.toGameObject()]);
 
-  const move = movement(scene, container, coll).moveWithoutVelocity().setSpeed(32);
+  const move = movement(scene, container, coll).moveWithoutVelocity().setSpeed(80);
 
   const trigger = collision(scene, map.getArea('Snowman Piece Trigger')).notSolid().mask(CollisionMask.Pushable);
 
@@ -93,7 +93,7 @@ export const createSnow2 = (
 
   const sprite = scene.add.sprite(0, -8, Sprite.Snowball);
 
-  const coll = collision(scene, rect(-4, -8, 8, 8))
+  const coll = collision(scene, rect(-6, -12, 12, 12))
     .tag(CollisionTag.Pushable)
     .mask(CollisionMask.Default | CollisionMask.Pushable);
 
@@ -108,7 +108,7 @@ export const createSnow2 = (
 
   const container = scene.add.container(position.x, position.y, [sprite, coll.toGameObject()]);
 
-  const move = movement(scene, container, coll).moveWithoutVelocity().setSpeed(32);
+  const move = movement(scene, container, coll).moveWithoutVelocity().setSpeed(80);
 
   coll.toGameObject().movement = move;
 
@@ -128,7 +128,7 @@ export const createSnow3 = (
 
   const sprite = scene.add.sprite(0, -8, Sprite.Snowball);
 
-  const coll = collision(scene, rect(-4, -8, 8, 8))
+  const coll = collision(scene, rect(-6, -12, 12, 12))
     .tag(CollisionTag.Pushable)
     .mask(CollisionMask.Default | CollisionMask.Pushable);
 
@@ -142,7 +142,7 @@ export const createSnow3 = (
   });
   const container = scene.add.container(position.x, position.y, [sprite, coll.toGameObject()]);
 
-  const move = movement(scene, container, coll).moveWithoutVelocity().setSpeed(32);
+  const move = movement(scene, container, coll).moveWithoutVelocity().setSpeed(80);
 
   coll.toGameObject().movement = move;
 

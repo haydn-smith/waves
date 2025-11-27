@@ -260,13 +260,13 @@
   <object id="3" name="Snowman" x="240" y="304">
    <point/>
   </object>
-  <object id="4" name="Snowman Piece 1" x="240" y="252">
+  <object id="4" name="Snowman Piece 1" x="240" y="254">
    <point/>
   </object>
-  <object id="5" name="Snowman Piece 2" x="301" y="272">
+  <object id="5" name="Snowman Piece 2" x="299" y="272">
    <point/>
   </object>
-  <object id="6" name="Snowman Piece 3" x="179" y="272">
+  <object id="6" name="Snowman Piece 3" x="181" y="272">
    <point/>
   </object>
   <object id="8" name="Snowman Trigger" x="219" y="288" width="41" height="32"/>

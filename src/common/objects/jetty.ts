@@ -19,7 +19,12 @@ export class Jetty extends Phaser.GameObjects.Container {
 
     super(scene);
 
-    this.wavesAudio = spatialAudio(scene, Sound.Waves).setDistance(200).setPosition(vec2(32, 0)).loop().play();
+    this.wavesAudio = spatialAudio(scene, Sound.Waves)
+      .setDistance(200)
+      .setPosition(vec2(32, 0))
+      .setVolume(0)
+      .loop()
+      .play();
 
     scene.tweens
       .add({

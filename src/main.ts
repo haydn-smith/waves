@@ -47,9 +47,9 @@ if (process.env.PHASER_SENTRY_DSN) {
     release: process.env.GIT_SHA,
     // @ts-expect-error Injected environment variable.
     environment: process.env.PHASER_ENVIRONMENT,
-    tracesSampleRate: 1.0,
+    tracesSampleRate: 0.2,
     enableLogs: true,
-    replaysSessionSampleRate: 1.0,
+    replaysSessionSampleRate: 0.2,
     replaysOnErrorSampleRate: 1.0,
   });
 }

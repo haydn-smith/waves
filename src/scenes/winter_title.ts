@@ -41,14 +41,19 @@ export class WinterTitle extends Phaser.Scene {
     sequence(this)
       .of([
         runCallback(() => {
+          getAudioSingleton(this, Sound.MusicWinter).setVolume(0);
+        }),
+        runCallback(() => {
           cam.shake(2, 0, -1, 200);
-
-          const music = getAudioSingleton(this, Sound.MusicWinter).setVolume(0);
+        }),
+        runCallback(() => this.ui.fadeIn(1000, 'Linear')),
+        wait(500),
+        runCallback(() => {
+          const music = getAudioSingleton(this, Sound.MusicWinter);
           music.play();
           fadeAudioVolume(this, music, 0.4, 3800);
         }),
-        runCallback(() => this.ui.fadeIn(1000, 'Linear')),
-        wait(1000),
+        wait(500),
         runCallback(() => {
           this.ui.hideLetterbox();
 

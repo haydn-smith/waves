@@ -71,14 +71,17 @@ export class SummerJetty extends Phaser.Scene {
           runCallback(() => player.animator.playAnimation(Animation.PlayerSleep)),
           runCallback(() => player.disableUserInput()),
           runCallback(() => ui(this).showLetterbox()),
+          runCallback(() => cam.zoom(2)),
           runCallback(() => {
-            cam.zoom(2);
-
-            const music = getAudioSingleton(this, Sound.MusicSummer).setVolume(0);
+            getAudioSingleton(this, Sound.MusicSummer).setVolume(0);
+          }),
+          wait(500),
+          runCallback(() => {
+            const music = getAudioSingleton(this, Sound.MusicSummer);
             music.play();
             fadeAudioVolume(this, music, 0.4, 8000);
           }),
-          wait(1000),
+          wait(500),
           runCallback(() => ui(this).fadeIn(2000)),
           wait(4000),
           playAnimation(player.sprite, Animation.PlayerWakeUp),

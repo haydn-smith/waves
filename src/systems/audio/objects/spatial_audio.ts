@@ -1,10 +1,13 @@
 import { clamp, normalize } from 'common/utils/math';
 import { debugDepth, isDebug } from 'systems/flags';
+import { runCallback, sequence, wait } from 'systems/sequence';
 
 export class SpatialAudio extends Phaser.GameObjects.Container {
   public sound: Phaser.Sound.WebAudioSound | Phaser.Sound.HTML5AudioSound | Phaser.Sound.NoAudioSound;
 
   private graphics: Phaser.GameObjects.Graphics;
+
+  private isDestroyed = false;
 
   constructor(
     scene: Phaser.Scene,
@@ -26,10 +29,6 @@ export class SpatialAudio extends Phaser.GameObjects.Container {
       this.graphics.setDepth(debugDepth()).fillStyle(0xff0000, 1).fillPoint(d.translateX, d.translateY, 2);
     }
 
-    if (!this.sound.isPlaying) {
-      return;
-    }
-
     const camera = this.scene.cameras.main;
 
     const distanceTo = new Phaser.Math.Vector2(
@@ -45,6 +44,8 @@ export class SpatialAudio extends Phaser.GameObjects.Container {
   }
 
   public destroy(fromScene?: boolean): void {
+    this.isDestroyed = true;
+
     this.sound.destroy();
 
     this.graphics.destroy();
@@ -89,7 +90,17 @@ export class SpatialAudio extends Phaser.GameObjects.Container {
   }
 
   public play() {
-    this.sound.isPaused ? this.sound.resume() : this.sound.play();
+    sequence(this.scene)
+      .of([
+        wait(50),
+        runCallback(() => {
+          if (!this.isDestroyed) {
+            this.sound.isPaused ? this.sound.resume() : this.sound.play();
+          }
+        }),
+      ])
+      .start()
+      .destroyWhenComplete();
 
     return this;
   }

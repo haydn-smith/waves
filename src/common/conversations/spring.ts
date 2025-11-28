@@ -32,7 +32,7 @@ export const otherPenguinGoodbye = [
   {
     image: Animation.OtherPenguinDialog,
     sound: [Sound.Penguin1, Sound.Penguin2],
-    line1: ['What can one small pengiun do...'],
+    line1: ['What can one small penguin do...'],
     line2: ['Against the adversities of the Antarctic?'],
   },
   {

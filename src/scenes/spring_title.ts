@@ -40,15 +40,18 @@ export class SpringTitle extends Phaser.Scene {
 
     sequence(this)
       .of([
-        runCallback(() => this.ui.fadeIn(1000, 'Linear')),
+        runCallback(() => {
+          this.ui.fadeIn(1000, 'Linear');
+          const wind = getWindAudio(this);
+          wind.setVolume(0);
+        }),
         wait(1000),
         runCallback(() => {
           this.typewriter.typewrite(`Prologue.`);
 
           const wind = getWindAudio(this);
-          wind.setVolume(0);
-          fadeAudioVolume(this, wind, 0.1);
           wind.play();
+          fadeAudioVolume(this, wind, 0.1);
         }),
         wait(() => this.typewriter.typewriteDuration()),
         wait(500),

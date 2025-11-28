@@ -312,6 +312,10 @@ export const Sound = {
   Watering: 'audio/watering.mp3',
   Splash: 'audio/splash.mp3',
   Waves: 'audio/waves.mp3',
+  MusicSpring: 'audio/music_spring.mp3',
+  MusicSummer: 'audio/music_summer.mp3',
+  MusicAutumn: 'audio/music_autumn.mp3',
+  MusicWinter: 'audio/music_winter.mp3',
 } as const;
 export type KeyOfSound = keyof typeof Sound;
 export type TypeOfSound = (typeof Sound)[KeyOfSound];

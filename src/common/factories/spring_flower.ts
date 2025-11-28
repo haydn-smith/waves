@@ -12,7 +12,7 @@ import { Tilemap } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
 import { MoveToTarget } from 'common/sequenceables/move_to_target';
 import { PlayDialog } from 'common/sequenceables/play_dialog';
-import { fadeAudioVolume, getWindAudio } from 'common/utils/getWindAudio';
+import { fadeAudioVolume, getAudioSingleton, getWindAudio } from 'common/utils/getWindAudio';
 import { Repeater } from 'common/utils/repeater';
 import { Animation, Flag, Scene, Sound, Sprite } from 'constants';
 import { DialogBox } from 'scenes/dialog_box';
@@ -85,6 +85,9 @@ export const createFlower = (
       runCallback(() => player.sprite.anims.playReverse(Animation.PlayerWakeUp)),
       wait(2000),
       runCallback(() => {
+        const music = getAudioSingleton(scene, Sound.MusicSpring);
+        fadeAudioVolume(scene, music, 0, 4000);
+
         player.sprite.anims.play(Animation.PlayerSleep);
         player.sprite.flipX = false;
       }),

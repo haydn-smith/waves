@@ -6,8 +6,9 @@ import { Snow } from 'common/objects/snow';
 import { Storm } from 'common/objects/storm';
 import { Tilemap as TilemapObject } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
+import { fadeAudioVolume, getAudioSingleton } from 'common/utils/getWindAudio';
 import { logEvent } from 'common/utils/log';
-import { Animation, Depth, Flag, Scene, Sprite, Tilemap } from 'constants';
+import { Animation, Depth, Flag, Scene, Sound, Sprite, Tilemap } from 'constants';
 import { camera } from 'systems/camera';
 import { checkFlag, setFlag } from 'systems/flags';
 import { playAnimation, runCallback, sequence, wait } from 'systems/sequence';
@@ -70,7 +71,13 @@ export class SummerJetty extends Phaser.Scene {
           runCallback(() => player.animator.playAnimation(Animation.PlayerSleep)),
           runCallback(() => player.disableUserInput()),
           runCallback(() => ui(this).showLetterbox()),
-          runCallback(() => cam.zoom(2)),
+          runCallback(() => {
+            cam.zoom(2);
+
+            const music = getAudioSingleton(this, Sound.MusicSummer).setVolume(0);
+            music.play();
+            fadeAudioVolume(this, music, 0.4, 8000);
+          }),
           wait(1000),
           runCallback(() => ui(this).fadeIn(2000)),
           wait(4000),

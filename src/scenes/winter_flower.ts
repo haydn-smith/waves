@@ -5,8 +5,9 @@ import { Snow } from 'common/objects/snow';
 import { Storm } from 'common/objects/storm';
 import { Tilemap as TilemapObject } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
+import { fadeAudioVolume, getAudioSingleton } from 'common/utils/getWindAudio';
 import { logEvent } from 'common/utils/log';
-import { Depth, Scene, Sprite, Tilemap } from 'constants';
+import { Depth, Scene, Sound, Sprite, Tilemap } from 'constants';
 import { camera, Camera } from 'systems/camera';
 import { ui, UserInterface } from 'systems/ui';
 
@@ -70,7 +71,11 @@ export class WinterFlower extends Phaser.Scene {
       this.camera,
       Phaser.Math.Vector2.LEFT,
       Scene.WinterIceCube,
-      Scene.WinterFlower
+      Scene.WinterFlower,
+      () => {
+        const music = getAudioSingleton(this, Sound.MusicWinter);
+        fadeAudioVolume(this, music, 0.4, 100);
+      }
     );
 
     createFlower(this, map, this.player, this.ySortObjects, this.camera);

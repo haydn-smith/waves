@@ -13,6 +13,7 @@ import { Snowman } from 'common/objects/snowman';
 import { Tilemap } from 'common/objects/tilemap';
 import { MoveToTarget } from 'common/sequenceables/move_to_target';
 import { PlayDialog } from 'common/sequenceables/play_dialog';
+import { fadeAudioVolume, getAudioSingleton } from 'common/utils/getWindAudio';
 import { Repeater } from 'common/utils/repeater';
 import { Animation, Depth, Flag, Scene, Sound, Sprite } from 'constants';
 import { DialogBox } from 'scenes/dialog_box';
@@ -324,7 +325,7 @@ export const createFinalCutscene = (
           duration: 500,
         }),
         runCallback(() => {
-          scene.sound.play(Sound.Splash, { volume: 0.4 });
+          scene.sound.play(Sound.Splash, { volume: 0.6 });
           snowman.sprite.anims.play(Animation.SnowmanSwimRight);
         }),
         wait(1000),
@@ -351,7 +352,7 @@ export const createFinalCutscene = (
           duration: 500,
         }),
         runCallback(() => {
-          scene.sound.play(Sound.Splash, { volume: 0.4 });
+          scene.sound.play(Sound.Splash, { volume: 0.6 });
           iceCube.getByName('Sprite').anims.play(Animation.IceCubeSwimRight);
         }),
         wait(1000),
@@ -363,6 +364,12 @@ export const createFinalCutscene = (
         new MoveToTarget(player.movement, map.getPoint('Edge')),
         runCallback(() => camera.unfollow()),
         new PlayDialog(DialogBox.get(scene), playerLeaves),
+        runCallback(() => {
+          const music = getAudioSingleton(scene, Sound.MusicSpring).setVolume(0);
+          music.setSeek(0);
+          music.play();
+          fadeAudioVolume(scene, music, 0.4, 4000);
+        }),
         wait(500),
         runCallback(() => player.movement.faceDirection(Phaser.Math.Vector2.DOWN)),
         wait(800),
@@ -390,7 +397,7 @@ export const createFinalCutscene = (
           duration: 500,
         }),
         runCallback(() => {
-          scene.sound.play(Sound.Splash, { volume: 0.4 });
+          scene.sound.play(Sound.Splash, { volume: 0.6 });
 
           player.animator.setMovementAnimations(
             Animation.PlayerSwimRight,

@@ -1,8 +1,8 @@
 import { Typewriter } from 'common/objects/typewriter';
-import { fadeAudioVolume, getWindAudio } from 'common/utils/getWindAudio';
+import { fadeAudioVolume, getAudioSingleton, getWindAudio } from 'common/utils/getWindAudio';
 import { logEvent } from 'common/utils/log';
 import { scaled } from 'common/utils/scaled';
-import { Depth, Scene, Shader, Sprite } from 'constants';
+import { Depth, Scene, Shader, Sound, Sprite } from 'constants';
 import { camera } from 'systems/camera';
 import { runCallback, runTween, sequence, wait } from 'systems/sequence';
 import { ui, UserInterface } from 'systems/ui';
@@ -43,6 +43,9 @@ export class SpringAgainTitle extends Phaser.Scene {
         wait(1000),
         runCallback(() => {
           this.typewriter.typewrite(`Epilogue.`);
+
+          const music = getAudioSingleton(this, Sound.MusicWinter);
+          fadeAudioVolume(this, music, 0, 2000);
 
           const wind = getWindAudio(this);
           wind.setVolume(0);

@@ -6,8 +6,9 @@ import { Snow } from 'common/objects/snow';
 import { Storm } from 'common/objects/storm';
 import { Tilemap as TilemapObject } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
+import { fadeAudioVolume, getAudioSingleton } from 'common/utils/getWindAudio';
 import { logEvent } from 'common/utils/log';
-import { Animation, Depth, Flag, Scene, Sprite, Tilemap } from 'constants';
+import { Animation, Depth, Flag, Scene, Sound, Sprite, Tilemap } from 'constants';
 import { camera, Camera } from 'systems/camera';
 import { checkFlag, setFlag } from 'systems/flags';
 import { playAnimation, runCallback, sequence, wait } from 'systems/sequence';
@@ -99,7 +100,13 @@ export class AutumnJetty extends Phaser.Scene {
           runCallback(() => this.player.animator.playAnimation(Animation.PlayerSleep)),
           runCallback(() => this.player.disableUserInput()),
           runCallback(() => this.ui.showLetterbox()),
-          runCallback(() => this.camera.zoom(2)),
+          runCallback(() => {
+            this.camera.zoom(2);
+
+            const music = getAudioSingleton(this, Sound.MusicAutumn).setVolume(0);
+            music.play();
+            fadeAudioVolume(this, music, 0.4, 8000);
+          }),
           wait(1000),
           runCallback(() => this.ui.fadeIn(2000)),
           wait(4000),

@@ -4,7 +4,7 @@ import { Tilemap } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
 import { MoveToTarget } from 'common/sequenceables/move_to_target';
 import { PlayDialog } from 'common/sequenceables/play_dialog';
-import { fadeAudioVolume, getWindAudio } from 'common/utils/getWindAudio';
+import { fadeAudioVolume, getAudioSingleton, getWindAudio } from 'common/utils/getWindAudio';
 import { Animation, Depth, Flag, Scene, Sound, Sprite } from 'constants';
 import { DialogBox } from 'scenes/dialog_box';
 import { Camera } from 'systems/camera';
@@ -95,6 +95,9 @@ export const createFlower = (
       runCallback(() => player.sprite.anims.playReverse(Animation.PlayerWakeUp)),
       wait(2000),
       runCallback(() => {
+        const music = getAudioSingleton(scene, Sound.MusicSummer);
+        fadeAudioVolume(scene, music, 0, 4000);
+
         player.sprite.anims.play(Animation.PlayerSleep);
         player.sprite.flipX = false;
       }),

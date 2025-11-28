@@ -1,9 +1,9 @@
 import { vec2 } from 'common/factories/phaser';
 import { Typewriter } from 'common/objects/typewriter';
-import { fadeAudioVolume, getWindAudio } from 'common/utils/getWindAudio';
+import { fadeAudioVolume, getAudioSingleton, getWindAudio } from 'common/utils/getWindAudio';
 import { logEvent } from 'common/utils/log';
 import { scaled } from 'common/utils/scaled';
-import { Depth, Scene, Shader, Sprite } from 'constants';
+import { Depth, Scene, Shader, Sound, Sprite } from 'constants';
 import { camera } from 'systems/camera';
 import { runCallback, runTween, sequence, wait } from 'systems/sequence';
 import { ui, UserInterface } from 'systems/ui';
@@ -40,7 +40,13 @@ export class WinterTitle extends Phaser.Scene {
 
     sequence(this)
       .of([
-        runCallback(() => cam.shake(2, 0, -1, 200)),
+        runCallback(() => {
+          cam.shake(2, 0, -1, 200);
+
+          const music = getAudioSingleton(this, Sound.MusicWinter).setVolume(0);
+          music.play();
+          fadeAudioVolume(this, music, 0.4, 3800);
+        }),
         runCallback(() => this.ui.fadeIn(1000, 'Linear')),
         wait(1000),
         runCallback(() => {

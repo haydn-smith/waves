@@ -127,7 +127,7 @@ export class Typewriter extends Phaser.GameObjects.Container {
           },
           onStart: () => {
             this.scene.sound.play(this.sound[Math.floor(Math.random() * this.sound.length)], {
-              volume: 0.1,
+              volume: 0.15,
               detune: 200,
             });
           },

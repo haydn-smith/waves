@@ -50,7 +50,7 @@ export class DialogBox extends Phaser.GameObjects.Container {
 
     this.openAudio = audio(scene, Sound.DialogOpen);
     this.closeAudio = audio(scene, Sound.DialogClose);
-    this.activateAudio = audio(scene, Sound.Activate);
+    this.activateAudio = audio(scene, Sound.Activate).setVolume(0.6);
 
     this.inputs = actionInput(scene);
 

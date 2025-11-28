@@ -3,8 +3,8 @@ import { Storm } from 'common/objects/storm';
 import { Tilemap } from 'common/objects/tilemap';
 import { YSortObjects } from 'common/objects/y_sort_objects';
 import { MoveToTarget } from 'common/sequenceables/move_to_target';
-import { fadeAudioVolume, getWindAudio } from 'common/utils/getWindAudio';
-import { Action, Animation, Depth, Flag, Scene, Sprite } from 'constants';
+import { fadeAudioVolume, getAudioSingleton, getWindAudio } from 'common/utils/getWindAudio';
+import { Action, Animation, Depth, Flag, Scene, Sound, Sprite } from 'constants';
 import { Camera } from 'systems/camera';
 import { collision } from 'systems/collision';
 import { setFlag } from 'systems/flags';
@@ -83,6 +83,9 @@ export const createStorm = (scene: Phaser.Scene, player: Player, map: Tilemap, c
       camera.shake(8, 0, -1, 100);
       camera.zoom(2, 1000);
 
+      const music = getAudioSingleton(scene, Sound.MusicWinter);
+      fadeAudioVolume(scene, music, 0.2, 100);
+
       const wind = getWindAudio(scene);
       fadeAudioVolume(scene, wind, 0.8, 300);
     },
@@ -93,6 +96,9 @@ export const createStorm = (scene: Phaser.Scene, player: Player, map: Tilemap, c
       player.movement.setAcceleration(128);
       camera.shake(2, 0, -1, 200);
       camera.zoom(1, 1000);
+
+      const music = getAudioSingleton(scene, Sound.MusicWinter);
+      fadeAudioVolume(scene, music, 0.4, 100);
 
       const wind = getWindAudio(scene);
       fadeAudioVolume(scene, wind, 0.4, 300);

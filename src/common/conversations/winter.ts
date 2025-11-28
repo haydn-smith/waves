@@ -24,13 +24,13 @@ export const iceCubeWinter3 = [
     image: Animation.ThinkingDialog,
     sound: [Sound.Purple1, Sound.Purple2],
     line1: ['...'],
-    line2: ["They'll be alright... "],
+    line2: ["They'll be alright..."],
   },
   {
     image: Animation.ThinkingDialog,
     sound: [Sound.Purple1, Sound.Purple2],
     line1: ["They're literally an ice cube."],
-    line2: ['...'],
+    line2: [],
   },
 ];
 

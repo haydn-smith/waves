@@ -6,19 +6,19 @@ export const snowmanLeaves1: Dialog = [
     image: Animation.SnowmanDialog,
     sound: [Sound.Snowman1, Sound.Snowman2],
     line1: ['Well then kiddo...'],
-    line2: ['...My friend.'],
+    line2: ['My friend.'],
   },
   {
     image: Animation.SnowmanDialog,
     sound: [Sound.Snowman1, Sound.Snowman2],
     line1: ["It seems it's that time once more..."],
-    line2: ['...Time to leave, ', 'for now.'],
+    line2: ['Time to leave, ', 'for now.'],
   },
   {
     image: Animation.SnowmanDialog,
     sound: [Sound.Snowman1, Sound.Snowman2],
     line1: ['I must say though, it has indeed been'],
-    line2: ['a good time!'],
+    line2: ['a good time.'],
     autoPlaySecondLine: true,
   },
 ];
@@ -27,8 +27,8 @@ export const snowmanLeaves2 = [
   {
     image: Animation.SnowmanDialog,
     sound: [Sound.Snowman1, Sound.Snowman2],
-    line1: ['...'],
-    line2: ["See ya round, ol' chap."],
+    line1: ["I'll see you around, ol' chap."],
+    line2: [],
   },
 ];
 
@@ -36,7 +36,7 @@ export const iceCubeLeaves1: Dialog = [
   {
     image: Animation.IceCubeDialog,
     sound: [Sound.IceCube1, Sound.IceCube2],
-    line1: ['Hiya!'],
+    line1: ['Hi!'],
     line2: ['You know...'],
   },
   {
@@ -81,14 +81,14 @@ export const snowBarrier1 = [
   {
     image: Animation.ThinkingDialog,
     sound: [Sound.Purple1, Sound.Purple2],
-    line1: ['...'],
-    line2: ["There's no way to get through."],
+    line1: ["There's no way to get through."],
+    line2: ['...'],
   },
   {
     image: Animation.ThinkingDialog,
     sound: [Sound.Purple1, Sound.Purple2],
     line1: ['This time...'],
-    line2: ['...not even magic can help.'],
+    line2: ['Not even magic can help.'],
   },
 ];
 
@@ -96,8 +96,8 @@ export const snowBarrier2 = [
   {
     image: Animation.ThinkingDialog,
     sound: [Sound.Purple1, Sound.Purple2],
-    line1: ['...'],
-    line2: ['You wonder if the little plant is doing okay.'],
+    line1: ['You wonder if the little plant is doing okay.'],
+    line2: [],
   },
 ];
 
@@ -105,15 +105,14 @@ export const playerLeaves: Dialog = [
   {
     image: Animation.ThinkingDialog,
     sound: [Sound.Purple1, Sound.Purple2],
-    line1: ['...'],
-    line2: ['It seems your time here is done.'],
+    line1: ['It seems your time here is done.'],
+    line2: ['...'],
   },
   {
     image: Animation.ThinkingDialog,
     sound: [Sound.Purple1, Sound.Purple2],
-    line1: ['Moving through moments, like waves'],
-    line2: ['in an ocean.'],
-    autoPlaySecondLine: true,
+    line1: ['Making waves...'],
+    line2: ['With every small action you take.'],
   },
   {
     image: Animation.ThinkingDialog,

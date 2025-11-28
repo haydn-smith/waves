@@ -6,7 +6,7 @@ export const meltedSnow1_1: Dialog = [
     image: Animation.ThinkingDialog,
     sound: [Sound.Purple1, Sound.Purple2],
     line1: ['This snow has already melted.'],
-    line2: ['Summer is well underway.'],
+    line2: ['Summer is well underway!'],
     autoPlaySecondLine: true,
   },
   {
@@ -23,7 +23,7 @@ export const meltedSnow1_2: Dialog = [
     image: Animation.ThinkingDialog,
     sound: [Sound.Purple1, Sound.Purple2],
     line1: ['Oh boy...'],
-    line2: ['...you sure do like looking at melted snow.'],
+    line2: ['You sure do like looking at melted snow.'],
   },
 ];
 
@@ -46,7 +46,7 @@ export const meltedSnow2_1: Dialog = [
   {
     image: Animation.ThinkingDialog,
     sound: [Sound.Purple1, Sound.Purple2],
-    line1: ["If you were an ice cube you'd be really"],
+    line1: ["If you were an ice cube, you'd be really"],
     line2: ['worried about melting right now.'],
     autoPlaySecondLine: true,
   },
@@ -84,12 +84,12 @@ export const iceCubeIntro: Dialog = [
     image: Animation.IceCubeDialog,
     sound: [Sound.IceCube1, Sound.IceCube2],
     line1: ['... ', 'Well...'],
-    line2: ['Hot for the antarctic, anyway.'],
+    line2: ['Hot for the Antarctic, anyway.'],
   },
   {
     image: Animation.IceCubeDialog,
     sound: [Sound.IceCube1, Sound.IceCube2],
-    line1: ["There's gotta be a way to cool"],
+    line1: ["There's got to be a way to cool"],
     line2: ['down in this heat!'],
     autoPlaySecondLine: true,
   },
@@ -108,7 +108,7 @@ export const iceCubeOnOneFan: Dialog = [
   {
     image: Animation.IceCubeDialog,
     sound: [Sound.IceCube1, Sound.IceCube2],
-    line1: ['...Whoa!'],
+    line1: ['Whoa!'],
     line2: ["That's much cooler!"],
   },
   {
@@ -123,7 +123,7 @@ export const iceCubeOnTwoFans: Dialog = [
   {
     image: Animation.IceCubeDialog,
     sound: [Sound.IceCube1, Sound.IceCube2],
-    line1: ['...Whoa!'],
+    line1: ['Whoa!'],
     line2: ["That's s much cooler!"],
   },
   {
@@ -138,8 +138,8 @@ export const iceCubeOnThreeFans: Dialog = [
   {
     image: Animation.IceCubeDialog,
     sound: [Sound.IceCube1, Sound.IceCube2],
-    line1: ['...Whoa!'],
-    line2: ['...Yesssssssss!'],
+    line1: ['Whoa!'],
+    line2: ['Yesssssssss!'],
   },
   {
     image: Animation.IceCubeDialog,
@@ -151,7 +151,7 @@ export const iceCubeOnThreeFans: Dialog = [
     image: Animation.IceCubeDialog,
     sound: [Sound.IceCube1, Sound.IceCube2],
     line1: ['...!'],
-    line2: ['Uh oh'],
+    line2: ['Uh oh.'],
   },
   {
     image: Animation.IceCubeDialog,
@@ -171,8 +171,8 @@ export const youHopeIceCubeIsOkay: Dialog = [
   {
     image: Animation.ThinkingDialog,
     sound: [Sound.Purple1, Sound.Purple2],
-    line1: ['...', 'You wonder if the ice cube'],
-    line2: ['is sill nice and chilly.'],
+    line1: ['...You wonder if the ice cube'],
+    line2: ['is sill nice and cool.'],
     autoPlaySecondLine: true,
   },
 ];
@@ -242,7 +242,7 @@ export const summerFlower = [
   {
     image: Animation.ThinkingDialog,
     sound: [Sound.Purple1, Sound.Purple2],
-    line1: ['...Even through summer.'],
+    line1: ['Even through summer.'],
     line2: ['It looks a little thirsty though!'],
   },
 ];
@@ -261,7 +261,7 @@ export const snowCaveIn2 = [
   {
     image: Animation.ThinkingDialog,
     sound: [Sound.Purple1, Sound.Purple2],
-    line1: ['Who knows what adventure could lie'],
+    line1: ['Who knows what adventures could lie'],
     line2: ['down this path.'],
     autoPlaySecondLine: true,
   },

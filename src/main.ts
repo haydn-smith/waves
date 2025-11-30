@@ -55,7 +55,7 @@ if (process.env.PHASER_SENTRY_DSN) {
 }
 
 const config: Phaser.Types.Core.GameConfig = {
-  type: Phaser.AUTO,
+  type: Phaser.WEBGL,
   width: 320,
   height: 240,
   parent: 'game-container',
